@@ -1,0 +1,38 @@
+CREATE DATABASE pr2
+
+CREATE TABLE sinhvien(
+    rollno varchar(16) PRIMARY KEY,
+    fullname varchar(50),
+    class_name varchar(50),
+    email varchar(150),
+    address varchar(250),
+    birthday date
+)
+
+CREATE TABLE lichday(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    class_name varchar(5),
+    subject_name varchar(50),
+    teacher_name varchar(50),
+    frametime tinyInt,
+    starttime float,
+    endtime float,
+    startdate date,
+    enddate date,
+    note varchar(50)
+)
+
+CREATE TABLE diemdanh(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    id_lichday int,
+    rollno varchar(16),
+    note varchar(200),
+    status tinyint,
+    created_at datetime,
+    updated_at datetime,
+    CONSTRAINT fk_lichday FOREIGN KEY (id_lichday) REFERENCES lichday (id),
+    CONSTRAINT fk_sinhvien FOREIGN KEY (rollno) REFERENCES sinhvien (rollno)
+)
+
+Fake dữ liệu database: php artisan db:seed
+
