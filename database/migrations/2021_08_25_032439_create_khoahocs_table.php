@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNganhhocTable extends Migration
+class CreateKhoahocsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateNganhhocTable extends Migration
      */
     public function up()
     {
-        Schema::create('nganhhoc', function (Blueprint $table) {
+        Schema::create('khoahocs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name',50);
         });
@@ -26,6 +26,6 @@ class CreateNganhhocTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nganhhoc');
+        Schema::dropIfExists('khoahocs');
     }
 }

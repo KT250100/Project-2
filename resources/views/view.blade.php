@@ -25,7 +25,7 @@
                     <thead>
                         <th>STT</th>
                         <th>Lớp học</th>
-                        <th>RollNo</th>
+                        <th>Mã SV</th>
                         <th>Học sinh</th>
                         <th>Đi học</th>
                         <th>Vắng mặt</th>

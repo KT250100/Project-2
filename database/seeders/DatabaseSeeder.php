@@ -17,25 +17,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        // Thêm trực tiếp 1 bản ghi admin
-        /*
-        Admin::create([
-            'name'=>"TTK",
-            'email'=>'super@gmail.com',
-            'password'=>bcrypt('bkacad123')
-        ]);
-        */
-
-        //User::factory(5)->create();
-        //Pass là 'password'
-
         /*
         $this->call([
             AttendenceSeeder::class
         ]);
         */
-        
         $this->call([
             AdminSeeder::class
         ]);

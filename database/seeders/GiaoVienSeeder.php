@@ -15,7 +15,7 @@ class GiaoVienSeeder extends Seeder
     public function run()
     {
         for ($i=0; $i < 5; $i++){ 
-            DB::table('giaovien')->insert([
+            DB::table('giao_viens')->insert([
                 'name'=>'Giáo viên '.$i,
                 'phone'=> '012345678912',
                 'email'=>$i.'@gmail.com',

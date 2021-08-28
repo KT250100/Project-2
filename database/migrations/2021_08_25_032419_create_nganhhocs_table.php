@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGiaovienTable extends Migration
+class CreateNganhhocsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,9 @@ class CreateGiaovienTable extends Migration
      */
     public function up()
     {
-        Schema::create('giaovien', function (Blueprint $table) {
+        Schema::create('nganhhocs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name',50);
-            $table->string('phone',20);
-            $table->string('email')->unique();
-            $table->text('password');
-            $table->string('address',250);
-            $table->date('birthday');
-            $table->boolean('is_active')->default(true);
         });
     }
 
@@ -32,6 +26,6 @@ class CreateGiaovienTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('giaovien');
+        Schema::dropIfExists('nganhhocs');
     }
 }

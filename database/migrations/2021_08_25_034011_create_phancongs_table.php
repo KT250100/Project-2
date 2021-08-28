@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePhancongTable extends Migration
+class CreatePhancongsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreatePhancongTable extends Migration
      */
     public function up()
     {
-        Schema::create('phancong', function (Blueprint $table) {
+        Schema::create('phancongs', function (Blueprint $table) {
             $table->unsignedInteger('id_giaovien');
             $table->unsignedInteger('id_lophoc');
             $table->unsignedInteger('id_monhoc');
             $table->primary(['id_giaovien', 'id_lophoc', 'id_monhoc']);
-            $table->foreign('id_giaovien')->references('id')->on('giaovien');
-            $table->foreign('id_lophoc')->references('id')->on('lophoc');
-            $table->foreign('id_monhoc')->references('id')->on('monhoc');
+            $table->foreign('id_giaovien')->references('id')->on('giao_viens');
+            $table->foreign('id_lophoc')->references('id')->on('lophocs');
+            $table->foreign('id_monhoc')->references('id')->on('monhocs');
         });
     }
 
@@ -31,6 +31,6 @@ class CreatePhancongTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('phancong');
+        Schema::dropIfExists('phancongs');
     }
 }

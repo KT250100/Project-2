@@ -31,7 +31,6 @@ class AdminLoginController extends Controller
             return redirect()->back()->with('error','Sai email hoặc mật khẩu');
         }
     }
-
     function logout()
     {
         // return view('admin.auth.log');

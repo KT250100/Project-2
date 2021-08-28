@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMonhocTable extends Migration
+class CreateGiaoviensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,15 @@ class CreateMonhocTable extends Migration
      */
     public function up()
     {
-        Schema::create('monhoc', function (Blueprint $table) {
+        Schema::create('giao_viens', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name',50);
-            $table->unsignedInteger('id_nganhhoc');
-            $table->foreign('id_nganhhoc')->references('id')->on('nganhhoc');
+            $table->string('phone',20);
+            $table->string('email')->unique();
+            $table->text('password');
+            $table->string('address',250);
+            $table->date('birthday');
+            $table->boolean('is_active')->default(true);
         });
     }
 
@@ -28,6 +32,6 @@ class CreateMonhocTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('monhoc');
+        Schema::dropIfExists('giao_viens');
     }
 }
