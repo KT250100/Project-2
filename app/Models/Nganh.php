@@ -10,10 +10,10 @@ class Nganh
 {
     use HasFactory;
     static function getAll(){
-        return DB::select("SELECT nganhhocs.id,nganhhocs.name FROM nganhhocs");
+        return DB::select("SELECT id,name FROM nganhhocs ORDER BY id DESC");
     }
     static function get($id){
-        return DB::select("SELECT nganhhocs.id,nganhhocs.name FROM nganhhocs WHERE nganhhocs.id='$id'");
+        return DB::select("SELECT id,name FROM nganhhocs WHERE id='$id'");
     }
     static function save($name){
         return DB::insert("INSERT INTO nganhhocs VALUES(NULL,'$name')");

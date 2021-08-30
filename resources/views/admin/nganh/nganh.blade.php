@@ -8,7 +8,7 @@
             <a href="{{url('admin/nganh/themnganh')}}">Thêm</a>
         </div>
         <div class="panel-body">
-            <table class="table table-bordered">
+            <table border="1px" class="table table-bordered">
                 <thead>
                     <th>ID</th>
                     <th>Tên ngành</th>

@@ -248,43 +248,14 @@
   margin: 0 15px;
   cursor: pointer;
 }
+.home-section .home-content .text{
+  font-size: 26px;
+  font-weight: 600;
+}
 @media (max-width: 420px) {
   .sidebar.close .nav-links li .sub-menu{
     display: none;
   }
-}
-.container{
-  width: 80%;
-  margin: auto;
-  margin-top: 50px;
-}
-.container h2{
-  text-align: center;
-}
-.table{
-  width: 100%;
-  border: 1px solid black;
-  border-collapse: collapse;
-  margin: auto;
-  margin-top: 10px;
-  text-align: left;
-}
-.table th{
-  font-size: 18px;
-  width: 20%;
-}
-.table input, .table select{
-  font-size: 18px;
-  width: 100%;
-  height: 30px;
-}
-.table button{
-  padding: 5px;
-  font-size: 18px;
-  margin-left: 46%;
-}
-.table th, .table td{
-  padding: 10px;
 }
    </style>
 <body>
@@ -296,7 +267,7 @@
     <ul class="nav-links">
       <li>
         <a href="#">
-          <i class='bx bx-user'></i>
+          <i class='bx bx-grid-alt' ></i>
           <span class="link_name">Tài khoản</span>
         </a>
         <ul class="sub-menu blank">
@@ -306,30 +277,35 @@
       <li>
         <div class="iocn-link">
           <a href="{{route('giaovien')}}">
-            <i class='bx bx-user-pin' ></i>
+            <i class='bx bx-collection' ></i>
             <span class="link_name">Giảng viên</span>
           </a>
           <i class='bx bxs-chevron-down arrow' ></i>
         </div>
         <ul class="sub-menu">
-          <li><a class="link_name" href="{{route('giaovien')}}">Giảng viên</a></li>
+          <li><a class="link_name" href="#">Giảng viên</a></li>
           <li><a href="{{route('giaovien')}}">Danh sách</a></li>
           <li><a href="#">Phân công</a></li>
         </ul>
       </li>
       <li>
-        <a href="{{route('sinhvien')}}">
-          <i class='bx bxs-user-pin' ></i>
-          <span class="link_name">Sinh viên</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="{{route('sinhvien')}}">Sinh viên</a></li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='bx bx-book-alt' ></i>
+            <span class="link_name">Sinh viên</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Sinh viên</a></li>
+          <li><a href="#">Danh sách</a></li>
+          <li><a href="#">Phân lớp</a></li>
         </ul>
       </li>
       <li>
         <div class="iocn-link">
           <a href="#">
-            <i class='bx bx-folder-open' ></i>
+            <i class='bx bx-plug' ></i>
             <span class="link_name">Quản lý</span>
           </a>
           <i class='bx bxs-chevron-down arrow' ></i>
@@ -378,3 +354,23 @@
   <section class="home-section">
     <div class="home-content">
       <i class='bx bx-menu' ></i>
+      
+    </div>
+  </section>
+  <script>
+  let arrow = document.querySelectorAll(".arrow");
+  for (var i = 0; i < arrow.length; i++) {
+    arrow[i].addEventListener("click", (e)=>{
+   let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+   arrowParent.classList.toggle("showMenu");
+    });
+  }
+  let sidebar = document.querySelector(".sidebar");
+  let sidebarBtn = document.querySelector(".bx-menu");
+  console.log(sidebarBtn);
+  sidebarBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("close");
+  });
+  </script>
+</body>
+</html>

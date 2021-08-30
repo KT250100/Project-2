@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\GiaoVien;
 use Illuminate\Http\Request;
 use App\Models\Nganh;
 use App\Models\Khoa;
 use App\Models\Mon;
+use App\Models\Lop;
+use App\Models\SinhVien;
 
 class AdminController extends Controller
 {
@@ -110,5 +113,149 @@ class AdminController extends Controller
     function mon(){
         $mons = Mon::getAll();
         return view('admin.mon.mon',['mons'=>$mons]);
+    }
+    function createmon(){
+        $nganhs = Nganh::getAll();
+        return view('admin.mon.themmon',['nganhs'=>$nganhs]);
+    }
+    function storemon(Request $req){
+        $name = $req->input('name');
+        $id_nganh = $req->input('id_nganh');
+        $rs = Mon::save($name,$id_nganh);
+        if($rs == true){
+            return redirect("admin/mon/mon");
+        }
+        else{
+            return "Thêm thất bại";
+        }
+    }
+    function editmon($id){
+        $mon = Mon::get($id)[0];
+        $nganhs = Nganh::getAll();
+        return view('admin.mon.editmon',['mon'=>$mon,'nganhs'=>$nganhs]);
+    }
+    function updatemon(Request $req,$id){
+        $name = $req->input('name');
+        $id_nganh = $req->input('id_nganh');
+        $rs = Mon::update($id,$name,$id_nganh);
+        if($rs == true){
+            return redirect("admin/mon/mon");
+        }
+        else{
+            return "Cập nhật thất bại";
+        }
+    }
+    function destroymon($id){
+        $rs = Mon::delete($id);
+        if($rs == 0){
+            return "Xoá thất bại";
+        }
+        else{
+            return redirect("admin/mon/mon");
+        }
+    }
+
+    // Lớp học
+    function lop(){
+        $lops = Lop::getAll();
+        return view('admin.lop.lop',['lops'=>$lops]);
+    }
+    function createlop(){
+        $nganhs = Nganh::getAll();
+        $khoas = Khoa::getAll();
+        return view('admin.lop.themlop',['nganhs'=>$nganhs],['khoas'=>$khoas]);
+    }
+    function storelop(Request $req){
+        $name = $req->input('name');
+        $id_nganh = $req->input('id_nganh');
+        $id_khoa = $req->input('id_khoa');
+        $rs = Lop::save($name,$id_nganh,$id_khoa);
+        if($rs == true){
+            return redirect("admin/lop/lop");
+        }
+        else{
+            return "Thêm thất bại";
+        }
+    }
+    function editlop($id){
+        $lop = Lop::get($id)[0];
+        $nganhs = Nganh::getAll();
+        $khoas = Khoa::getAll();
+        return view('admin.lop.editlop',['lop'=>$lop,'nganhs'=>$nganhs,'khoas'=>$khoas]);
+    }
+    function updatelop(Request $req,$id){
+        $name = $req->input('name');
+        $id_nganh = $req->input('id_nganh');
+        $id_khoa = $req->input('id_khoa');
+        $rs = Lop::update($id,$name,$id_nganh,$id_khoa);
+        if($rs == true){
+            return redirect("admin/lop/lop");
+        }
+        else{
+            return "Cập nhật thất bại";
+        }
+    }
+    function destroylop($id){
+        $rs = Lop::delete($id);
+        if($rs == 0){
+            return "Xoá thất bại";
+        }
+        else{
+            return redirect("admin/lop/lop");
+        }
+    }
+
+    // Sinh viên
+    function sinhvien(){
+        $sinhviens = SinhVien::getAll();
+        return view('admin.sinhvien.sinhvien',['sinhviens'=>$sinhviens]);
+    }
+    function createsv(){
+        $lops = Lop::getAll();
+        return view('admin.sinhvien.themsv',['lops'=>$lops]);
+    }
+    function storesv(Request $req){
+        $name = $req->input('name');
+        $phone = $req->input('phone');
+        $email = $req->input('email');
+        $address = $req->input('address');
+        $birthday = $req->input('birthday');
+        $id_lophoc = $req->input('id_lophoc');
+        $rs = SinhVien::save($name,$phone,$email,$address,$birthday,$id_lophoc);
+        if($rs == true){
+            return redirect("admin/sinhvien/sinhvien");
+        }
+        else{
+            return "Thêm thất bại";
+        }
+    }
+    function editsv($id){
+        $sinhvien = SinhVien::get($id)[0];
+        $lops = Lop::getAll();
+        return view('admin.sinhvien.editsv',['sinhvien'=>$sinhvien,'lops'=>$lops]);
+    }
+    function updatesv(Request $req,$id){
+        $name = $req->input('name');
+        $phone = $req->input('phone');
+        $email = $req->input('email');
+        $address = $req->input('address');
+        $birthday = $req->input('birthday');
+        $id_lophoc = $req->input('id_lophoc');
+        $rs = SinhVien::update($id,$name,$phone,$email,$address,$birthday,$id_lophoc);
+        if($rs == true){
+            return redirect("admin/sinhvien/sinhvien");
+        }
+        else{
+            return "Cập nhật thất bại";
+        }
+    }
+    function destroysv($id){
+        $rs = SinhVien::delete($id);
+        if($rs == 0){
+            return "Xoá thất bại";
+        }
+        else{
+            return redirect("admin/sinhvien/sinhvien");
+        }
     }
 }

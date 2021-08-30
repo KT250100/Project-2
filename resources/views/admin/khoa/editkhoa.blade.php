@@ -1,15 +1,21 @@
 @include('admin.layouts.header')
-<h1 class="text-center" >Cập nhật khóa</h1>
+<div class="container">
+<h2 class="text-center" >Cập nhật khóa</h2>
+<table border="1px" class="table">
 <form style="margin:auto; text-align:center" method="POST" enctype="multipart/form-data">
     @csrf
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon0">ID</span>
-        <input readonly value="{{$khoa->id}}" name="name" required type="text" class="form-control" aria-describedby="basic-addon0">
-    </div>
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">Name</span>
-        <input value="{{$khoa->name}}" name="name" required type="text" class="form-control" aria-describedby="basic-addon1">
-    </div>
-    <button type="submit" class="btn btn-primary">Sửa</button>
-</form>    
+    <tr>
+        <th><span class="input-group-text" id="basic-addon0">ID</span></th>
+        <td><input readonly value="{{$khoa->id}}" name="name" required type="text" class="form-control" aria-describedby="basic-addon0"></td>
+    </tr>
+    <tr>
+        <th><span class="input-group-text" id="basic-addon1">Tên khóa</span></th>
+        <td><input value="{{$khoa->name}}" name="name" required type="text" class="form-control" aria-describedby="basic-addon1"></td>
+    </tr>
+    <tr>
+        <td colspan="2"><button type="submit" class="btn btn-primary">Sửa</button></td>
+    </tr>
+</form>
+</table>
+</div>   
 @include('admin.layouts.footer')

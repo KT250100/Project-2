@@ -10,10 +10,10 @@ class Khoa
 {
     use HasFactory;
     static function getAll(){
-        return DB::select("SELECT khoahocs.id,khoahocs.name FROM khoahocs");
+        return DB::select("SELECT id,name FROM khoahocs ORDER BY id DESC");
     }
     static function get($id){
-        return DB::select("SELECT khoahocs.id,khoahocs.name FROM khoahocs WHERE khoahocs.id='$id'");
+        return DB::select("SELECT id,name FROM khoahocs WHERE id='$id'");
     }
     static function save($name){
         return DB::insert("INSERT INTO khoahocs VALUES(NULL,'$name')");

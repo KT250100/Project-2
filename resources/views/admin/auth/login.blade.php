@@ -11,7 +11,7 @@
     <form class="box" method="POST" autocomplete="off">
         @csrf
         @if(Session::has('error'))
-            <h3 style="color: white">{{Session::get('error')}}</h2>
+            <h3 style="color: white">{{Session::get('error')}}</h3>
         @endif
         <h1>Login</h1>
         <input name="email" type="email" placeholder="Email"> <br>
