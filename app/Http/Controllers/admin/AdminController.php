@@ -3,26 +3,38 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\GiaoVien;
+use App\Models\Admin2;
 use Illuminate\Http\Request;
 use App\Models\Nganh;
 use App\Models\Khoa;
 use App\Models\Mon;
 use App\Models\Lop;
 use App\Models\SinhVien;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
+    // Admin
     function __construct(){
         $this->middleware('auth.admin');
     }
     function index(){
         return view('admin.index');
     }
-
-    // Đăng ký
-    function register(){
-        return view('admin.register');
+    function edit(){
+        return view('admin.edit');
+    }
+    function update(Request $req,$id){
+        $pass = $req->input('password');
+        $repass = $req->input('repass');
+        $password = Hash::make($pass);
+        $rs = Admin2::update($id,$password);
+        if($rs == true && $pass == $repass){
+            return redirect("admin/");
+        }
+        else{
+            return redirect()->back()->with('error','Mật khẩu không trùng khớp');
+        }
     }
 
     // Ngành

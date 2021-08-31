@@ -19,14 +19,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Người dùng
-Route::get('/',[WebController::class,'index'])->name('home');
-Route::get('/login',[LoginController::class,'showLoginForm'])->name('login');
-Route::post('/login',[LoginController::class,'login']);
-Route::get('/logout',[LoginController::class,'logout'])->name('logout');
-
 // Admin 
 Route::get('admin/',[AdminController::class,'index'])->name('admin.home');
+Route::get('admin/edit/{id}',[AdminController::class,'edit']);
+Route::post('admin/edit/{id}',[AdminController::class,'update']);
 Route::get('admin/login',[AdminLoginController::class,'showLoginForm'])->name('admin.login');
 Route::post('admin/login',[AdminLoginController::class,'login']);
 Route::get('admin/logout',[AdminLoginController::class,'logout'])->name('admin.logout');
@@ -71,6 +67,12 @@ Route::post('admin/sinhvien/themsv',[AdminController::class,'storesv']);
 Route::get('admin/sinhvien/editsv/{id}',[AdminController::class,'editsv']);
 Route::post('admin/sinhvien/editsv/{id}',[AdminController::class,'updatesv']);
 Route::get('/deletesv/{id}',[AdminController::class,'destroysv']);
+
+// Người dùng
+Route::get('/',[WebController::class,'index'])->name('home');
+Route::get('/login',[LoginController::class,'showLoginForm'])->name('login');
+Route::post('/login',[LoginController::class,'login']);
+Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 
 // Điểm danh
 Route::get('/index',[AttendenceController::class,'index'])->name('attendence_index');

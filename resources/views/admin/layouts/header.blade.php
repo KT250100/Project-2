@@ -266,7 +266,7 @@
   border: 1px solid black;
   border-collapse: collapse;
   margin: auto;
-  margin-top: 10px;
+  margin-top: 15px;
   text-align: left;
 }
 .table th{
@@ -295,7 +295,7 @@
     </div>
     <ul class="nav-links">
       <li>
-        <a href="#">
+        <a href="{{route('admin.home')}}">
           <i class='bx bx-user'></i>
           <span class="link_name">Tài khoản</span>
         </a>
