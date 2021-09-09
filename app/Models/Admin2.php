@@ -16,4 +16,7 @@ class Admin2
         $sql = "UPDATE admins SET password='$password' WHERE id='$id'";
         return DB::update($sql);
     }
+    static function getpass($id){
+        return DB::select("SELECT password FROM admins WHERE id='$id'");
+    }
 }

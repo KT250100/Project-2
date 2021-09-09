@@ -14,7 +14,7 @@ class CreatePhancongsTable extends Migration
     public function up()
     {
         Schema::create('phancongs', function (Blueprint $table) {
-            $table->unsignedInteger('id_giaovien');
+            $table->unsignedInteger('id_giaovien')/*->unique()*/;
             $table->unsignedInteger('id_lophoc');
             $table->unsignedInteger('id_monhoc');
             $table->primary(['id_giaovien', 'id_lophoc', 'id_monhoc']);

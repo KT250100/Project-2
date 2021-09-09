@@ -60,6 +60,13 @@ Route::get('admin/giaovien/themgv',[GiaoVienController::class,'creategv']);
 Route::post('admin/giaovien/themgv',[GiaoVienController::class,'storegv']);
 Route::get('admin/giaovien/editgv/{id}',[GiaoVienController::class,'editgv']);
 Route::post('admin/giaovien/editgv/{id}',[GiaoVienController::class,'updategv']);
+// Phân công
+Route::get('admin/giaovien/phancong',[GiaoVienController::class,'phancong'])->name('phancong');
+Route::get('admin/giaovien/pcgv',[GiaoVienController::class,'createpc']);
+Route::post('admin/giaovien/pcgv',[GiaoVienController::class,'storepc']);
+Route::get('admin/giaovien/editpc/{id_giaovien}',[GiaoVienController::class,'editpc'])->name('editpc');
+Route::post('admin/giaovien/editpc/{id_giaovien}',[GiaoVienController::class,'updatepc']);
+Route::get('/deletepc/{id_giaovien}',[GiaoVienController::class,'destroypc']);
 // Sinh viên
 Route::get('admin/sinhvien/sinhvien',[AdminController::class,'sinhvien'])->name('sinhvien');
 Route::get('admin/sinhvien/themsv',[AdminController::class,'createsv']);
@@ -73,8 +80,17 @@ Route::get('/',[WebController::class,'index'])->name('home');
 Route::get('/login',[LoginController::class,'showLoginForm'])->name('login');
 Route::post('/login',[LoginController::class,'login']);
 Route::get('/logout',[LoginController::class,'logout'])->name('logout');
-
 // Điểm danh
+Route::get('/diemdanh',[WebController::class,'diemdanh'])->name('diemdanh');
+Route::get('/createdd',[WebController::class,'createdd'])->name('createdd');
+Route::post('/storedd',[WebController::class,'storedd'])->name('storedd');
+
+
+
+
+
+
+// Điểm danh test
 Route::get('/index',[AttendenceController::class,'index'])->name('attendence_index');
 Route::get('/view',[AttendenceController::class,'view'])->name('attendence_view');
 Route::post('/post',[AttendenceController::class,'post'])->name('attendence_post');

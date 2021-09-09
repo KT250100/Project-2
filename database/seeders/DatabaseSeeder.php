@@ -28,5 +28,14 @@ class DatabaseSeeder extends Seeder
         $this->call([
             GiaoVienSeeder::class
         ]);
+        $this->call([
+            MonHocSeeder::class
+        ]);
+        $this->call([
+            LopHocSeeder::class
+        ]);
+        $this->call([
+            SinhVienSeeder::class
+        ]);
     }
 }

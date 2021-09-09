@@ -63,7 +63,7 @@ class AttendenceController extends Controller{
             ->where('diemdanh.created_at', '>=', $currentDate)
             ->select('diemdanh.*', 'sinhvien.fullname')
             ->get();
-        $studentList = null;    
+        $studentList = null;
         if($edit == null || count($edit) == 0){
             $studentList = DB::table('sinhvien')
                 ->where('class_name', $lichday->class_name)

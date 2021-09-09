@@ -18,9 +18,9 @@ class CreateDiemdanhsTable extends Migration
             $table->unsignedInteger('id_monhoc');
             $table->unsignedInteger('id_giaovien');
             $table->unsignedInteger('id_sinhvien');
-            $table->tinyInteger('status');
+            $table->tinyInteger('status');// 0->vắng, 1->đi học, 2->đi muộn
             $table->dateTime('ngaydiemdanh');
-            $table->string('note',50);//ghi chú lịch học
+            $table->string('note',50);
             $table->primary(['id', 'id_monhoc', 'id_giaovien', 'id_sinhvien']);
             $table->foreign('id_monhoc')->references('id')->on('monhocs');
             $table->foreign('id_giaovien')->references('id')->on('giao_viens');

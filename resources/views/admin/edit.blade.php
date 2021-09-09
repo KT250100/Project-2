@@ -7,12 +7,15 @@
         @if(Session::has('error'))
             <h3 align="center" style="color: #FF0000">{{Session::get('error')}}</h3>
         @endif
+        @if(Session::has('error2'))
+            <h3 align="center" style="color: #FF0000">{{Session::get('error2')}}</h3>
+        @endif
             <tr>
-                <th>Password</th>
+                <th>Mật khẩu mới</th>
                 <td><input name="password" required type="password"></td>
             </tr>
             <tr>
-                <th>Re Passowrd</th>
+                <th>Nhập lại mật khẩu</th>
                 <td><input name="repass" required type="password"></td>
             </tr>
             <tr>

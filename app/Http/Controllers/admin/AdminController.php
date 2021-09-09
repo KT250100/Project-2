@@ -10,6 +10,7 @@ use App\Models\Khoa;
 use App\Models\Mon;
 use App\Models\Lop;
 use App\Models\SinhVien;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -33,7 +34,7 @@ class AdminController extends Controller
             return redirect("admin/");
         }
         else{
-            return redirect()->back()->with('error','Mật khẩu không trùng khớp');
+            return redirect()->back()->with('error','Mật khẩu mới không trùng khớp');
         }
     }
 

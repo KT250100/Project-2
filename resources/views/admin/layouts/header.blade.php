@@ -300,7 +300,7 @@
           <span class="link_name">Tài khoản</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Tài khoản</a></li>
+          <li><a class="link_name" href="{{route('admin.home')}}">Tài khoản</a></li>
         </ul>
       </li>
       <li>
@@ -314,7 +314,7 @@
         <ul class="sub-menu">
           <li><a class="link_name" href="{{route('giaovien')}}">Giảng viên</a></li>
           <li><a href="{{route('giaovien')}}">Danh sách</a></li>
-          <li><a href="#">Phân công</a></li>
+          <li><a href="{{route('phancong')}}">Phân công</a></li>
         </ul>
       </li>
       <li>
@@ -328,14 +328,14 @@
       </li>
       <li>
         <div class="iocn-link">
-          <a href="#">
+          <a href="{{route('lop')}}">
             <i class='bx bx-folder-open' ></i>
             <span class="link_name">Quản lý</span>
           </a>
           <i class='bx bxs-chevron-down arrow' ></i>
         </div>
         <ul class="sub-menu">
-          <li><a class="link_name" href="#">Quản lý</a></li>
+          <li><a class="link_name" href="{{route('lop')}}">Quản lý</a></li>
           <li><a href="{{route('lop')}}">Lớp</a></li>
           <li><a href="{{route('mon')}}">Môn</a></li>
           <li><a href="{{route('khoa')}}">Khóa</a></li>

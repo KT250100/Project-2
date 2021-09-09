@@ -19,5 +19,23 @@ class AdminSeeder extends Seeder
             'email'=>'super@gmail.com',
             'password'=>bcrypt('bkacad123')
         ]);
+        DB::table('khoahocs')->insert([
+            'name'=>'K10'
+        ]);
+        DB::table('khoahocs')->insert([
+            'name'=>'K11'
+        ]);
+        DB::table('khoahocs')->insert([
+            'name'=>'K12'
+        ]);
+        DB::table('nganhhocs')->insert([
+            'name'=>'Lập trình Quốc tế'
+        ]);
+        DB::table('nganhhocs')->insert([
+            'name'=>'Quản trị mạng'
+        ]);
+        DB::table('nganhhocs')->insert([
+            'name'=>'Thiết kế đồ họa'
+        ]);
     }
 }

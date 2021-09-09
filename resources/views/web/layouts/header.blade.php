@@ -243,7 +243,9 @@
     display: none;
   }
 }
-
+.panel-heading, .panel-body{
+  padding-top: 20px;
+}
    </style>
 <body>
   <div class="sidebar">
@@ -259,7 +261,7 @@
          <span class="tooltip">Search</span>
       </li> -->
       <li>
-        <a href="#">
+        <a href="{{route('home')}}">
           <i class='bx bx-grid-alt'></i>
           <span class="links_name">Dashboard</span>
         </a>
@@ -273,7 +275,7 @@
        <span class="tooltip">Tài khoản</span>
      </li>
      <li>
-       <a href="#">
+       <a href="{{route('diemdanh')}}">
          <i class='bx bx-book-content'></i>
          <span class="links_name">Điểm danh</span>
        </a>

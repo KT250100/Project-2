@@ -13,7 +13,7 @@
         @if(Session::has('error'))
             <h3 style="color: white">{{Session::get('error')}}</h3>
         @endif
-        <h1>Login</h1>
+        <h1>Admin Login</h1>
         <input name="email" type="email" placeholder="Email"> <br>
         <input name="password" type="password" placeholder="Password"> <br>
         <button type="submit">Login</button>
