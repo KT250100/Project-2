@@ -83,7 +83,7 @@ Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 // Điểm danh
 Route::get('/diemdanh',[WebController::class,'diemdanh'])->name('diemdanh');
 Route::get('/createdd',[WebController::class,'createdd'])->name('createdd');
-Route::post('/storedd',[WebController::class,'storedd'])->name('storedd');
+Route::post('/createdd',[WebController::class,'storedd'])->name('storedd');
 
 
 

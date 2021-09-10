@@ -22,15 +22,16 @@
 				<h2 class="text-center">Điểm danh</h2>
 			</div>
 			<div class="panel-body">
-            <form style="margin:auto; margin-top:10px" method="POST" enctype="multipart/form-data">
+            <form style="margin:auto; margin-top:10px" action="{{route('storedd')}}" method="POST" enctype="multipart/form-data">
+            @csrf
             @foreach($phancong as $item)
                 <input style="background-color:#E4E9F7; border:none; font-size:20px" name="lop" readonly value="Lớp: {{$item->lop}}{{$item->khoa}}">
                 <br>
                 <input style="background-color:#E4E9F7; border:none; font-size:20px" name="mon" readonly value="Môn: {{$item->mon}}">
                 <br>
                 <input style="background-color:#E4E9F7; border:none; font-size:20px" name="giaovien" readonly value="Giáo viên: {{$item->gv}}" hidden>
-                <input name="id_monhoc" value="{{$item->id_monhoc}}" hidden>
-                <input name="id_giaovien" value="{{$item->id_giaovien}}" hidden>
+                <input readonly name="id_monhoc" value="{{$item->id_monhoc}}" hidden>
+                <input readonly name="id_giaovien" value="{{$item->id_giaovien}}" hidden>
             @endforeach
                 <table class="table table-bordered">
                     <thead>
@@ -45,14 +46,14 @@
                     <tbody>
                         @forelse($sv as $item)
                         <tr>
-                            <td hidden><input name="id_sinhvien" value="{{$item->id}}"></td>
+                            <td hidden><input name="id_sinhvien[]" value="{{$item->id}}"></td>
                             <td>{{$index++}}</td>
                             <td>{{$item->name}}</td>
-                            <td><input type="radio" name="status_{{$item->id}}" value="1" class="form-control"></input></td>
-                            <td><input type="radio" name="status_{{$item->id}}" value="0" class="form-control" checked="true"></input></td>
-                            <td><input type="radio" name="status_{{$item->id}}" value="-1" class="form-control"></input></td>
-                            <td><input type="radio" name="status_{{$item->id}}" value="2" class="form-control"></input></td>
-                            <td><input type="text" name="note_{{$item->id}}" class="form-control"></td>
+                            <td><input type="radio" name="status[]_{{$item->id}}" value="1" class="form-control"></input></td>
+                            <td><input type="radio" name="status[]_{{$item->id}}" value="0" class="form-control" checked="true"></input></td>
+                            <td><input type="radio" name="status[]_{{$item->id}}" value="-1" class="form-control"></input></td>
+                            <td><input type="radio" name="status[]_{{$item->id}}" value="2" class="form-control"></input></td>
+                            <td><input type="text" name="note[]_{{$item->id}}" class="form-control"></td>
                         </tr>
                         @empty
                         <tr><td colspan="7" style="text-align:center">Danh sách rỗng</td></tr>

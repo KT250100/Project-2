@@ -45,42 +45,63 @@ class WebController extends Controller
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
             ->where('id_giaovien', Auth::user()->id)
             ->get();
-        return view('web.createdd',['sv'=>$sv,'index'=>1,'phancong'=>$phancong]);
+        return view('web.createdd')->with([
+                'index'=>1,
+                'phancong'=>$phancong,
+                'sv'=>$sv
+            ]);
+        //return view('web.createdd',['sv'=>$sv,'index'=>1,'phancong'=>$phancong]);
     }
     public function storedd(Request $req){
         $id_monhoc = $req->input('id_monhoc');
-        $id_giaovien = $req->input('id_giaoven');
-        $id_sinhvien = $req->input('id_sinhvien');
+        $id_giaovien = Auth::user()->id;
+        $id_sinhvien = $req->id_sinhvien;
+        $id_sinhvien = array($id_sinhvien);
         $status = $req->input('status');
-        $ngaydiemdanh = new \DateTime();
+        $status = array($status);
+        $mydate = new \DateTime();
+        $mydate -> modify('+7 hours');
+        $currentTime = $mydate->format('Y-m-d H:i:s');
         $note = $req->input('note');
-        $array = array([
-            'id_monhoc' => $id_monhoc,
-            'id_giaovien' => $id_giaovien,
-            'id_sinhvien' => $id_sinhvien,
-            'status' => $status,
-            'ngaydiemdanh' => $ngaydiemdanh,
-            'note' => $note
-        ]);
-        foreach($array as $key){
+        $note = array($note);
+        for($i = 0; $i < count($id_sinhvien); $i++){
+            $data = [
+                'id_monhoc'    => $id_monhoc,
+                'id_giaovien'  => $id_giaovien,
+                'id_sinhvien'  => $id_sinhvien[$i],
+                'status'       => $status[$i],
+                'ngaydiemdanh' => $currentTime,
+                'note'         => $note[$i]
+            ];
+            DB::table('diemdanhs')->insert($data);
+        }
+        return "Điểm danh thành công";
+        //return dd($data);
+        /*
+        foreach($data as $item){
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>$id_monhoc,
+                'id_giaovien'=>$id_giaovien,
+                'id_sinhvien'=>$item['id_sinhvien'],
+                'status'=>$item['status'],
+                'ngaydiemdanh'=>$currentTime,
+                'note'=>$item['note']
+            ]);
+        }
+        */
+        /*
+        foreach($id_sinhvien as $key){
+            //DiemDanh::save($id_monhoc,$id_giaovien,$id_sinhvien,$status,$ngaydiemdanh,$note);
             DB::table('diemdanhs')->insert([
                 'id_monhoc'=>$id_monhoc,
                 'id_giaovien'=>$id_giaovien,
                 'id_sinhvien'=>$key[$id_sinhvien],
                 'status'=>$key[$status],
-                'ngaydiemdanh'=>$ngaydiemdanh,
+                'ngaydiemdanh'=>$currentTime,
                 'note'=>$key[$note]
             ]);
         }
         return redirect("/diemdanh");
-        /*
-        $rs = DiemDanh::save($id_monhoc,$id_giaovien,$id_sv,$status,$ngaydiemdanh,$note);
-        if($rs == true){
-            return redirect("/diemdanh");
-        }
-        else{
-            return "Điểm danh thất bại";
-        }
         */
     }
 }

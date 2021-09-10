@@ -21,7 +21,7 @@ class DiemDanh
         INNER JOIN monhocs ON phancongs.id_monhoc = monhocs.id
         INNER JOIN khoahocs ON lophocs.id_khoahoc = khoahocs.id");
     }
-    static function save($id_monhoc,$id_giaovien,$id_sv,$status,$ngaydiemdanh,$note){
-        return DB::insert("INSERT INTO diemdanhs VALUES('$id_monhoc','$id_giaovien','$id_sv','$status','$ngaydiemdanh','$note')");
+    static function save($id_monhoc,$id_giaovien,$id_sinhvien,$status,$ngaydiemdanh,$note){
+        return DB::insert("INSERT INTO diemdanhs VALUES('$id_monhoc','$id_giaovien','$id_sinhvien','$status','$ngaydiemdanh','$note')");
     }
 }
