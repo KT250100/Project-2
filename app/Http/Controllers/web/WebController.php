@@ -50,20 +50,16 @@ class WebController extends Controller
                 'phancong'=>$phancong,
                 'sv'=>$sv
             ]);
-        //return view('web.createdd',['sv'=>$sv,'index'=>1,'phancong'=>$phancong]);
     }
     public function storedd(Request $req){
         $id_monhoc = $req->input('id_monhoc');
         $id_giaovien = Auth::user()->id;
         $id_sinhvien = $req->id_sinhvien;
-        $id_sinhvien = array($id_sinhvien);
         $status = $req->input('status');
-        $status = array($status);
         $mydate = new \DateTime();
         $mydate -> modify('+7 hours');
         $currentTime = $mydate->format('Y-m-d H:i:s');
         $note = $req->input('note');
-        $note = array($note);
         for($i = 0; $i < count($id_sinhvien); $i++){
             $data = [
                 'id_monhoc'    => $id_monhoc,
@@ -75,33 +71,6 @@ class WebController extends Controller
             ];
             DB::table('diemdanhs')->insert($data);
         }
-        return "Điểm danh thành công";
-        //return dd($data);
-        /*
-        foreach($data as $item){
-            DB::table('diemdanhs')->insert([
-                'id_monhoc'=>$id_monhoc,
-                'id_giaovien'=>$id_giaovien,
-                'id_sinhvien'=>$item['id_sinhvien'],
-                'status'=>$item['status'],
-                'ngaydiemdanh'=>$currentTime,
-                'note'=>$item['note']
-            ]);
-        }
-        */
-        /*
-        foreach($id_sinhvien as $key){
-            //DiemDanh::save($id_monhoc,$id_giaovien,$id_sinhvien,$status,$ngaydiemdanh,$note);
-            DB::table('diemdanhs')->insert([
-                'id_monhoc'=>$id_monhoc,
-                'id_giaovien'=>$id_giaovien,
-                'id_sinhvien'=>$key[$id_sinhvien],
-                'status'=>$key[$status],
-                'ngaydiemdanh'=>$currentTime,
-                'note'=>$key[$note]
-            ]);
-        }
         return redirect("/diemdanh");
-        */
     }
 }
