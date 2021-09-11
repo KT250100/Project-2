@@ -44,6 +44,22 @@
                         <th>Note</th>
                     </thead>
                     <tbody>
+                        @if($edit != null && count($edit) > 0)
+                        @forelse($edit as $item)
+                        <tr>
+                            <td hidden><input name="id_sinhvien[]" value="{{$item->id}}"></td>
+                            <td>{{$index++}}</td>
+                            <td>{{$item->name}}</td>
+                            <td><input type="radio" name="status[]_{{$item->id}}" value="1" class="form-control" {{($item->status == 1)?'checked':''}}></input></td>
+                            <td><input type="radio" name="status[]_{{$item->id}}" value="0" class="form-control" {{($item->status == 0)?'checked':''}}></input></td>
+                            <td><input type="radio" name="status[]_{{$item->id}}" value="-1" class="form-control" {{($item->status == -1)?'checked':''}}></input></td>
+                            <td><input type="radio" name="status[]_{{$item->id}}" value="2" class="form-control" {{($item->status == 2)?'checked':''}}></input></td>
+                            <td><input type="text" name="note[]_{{$item->id}}" class="form-control" value="{{$item->note}}"></td>
+                        </tr>
+                        @empty
+                        <tr><td colspan="7" style="text-align:center">Danh sách rỗng</td></tr>
+                        @endforelse
+                        @else
                         @forelse($sv as $item)
                         <tr>
                             <td hidden><input name="id_sinhvien[]" value="{{$item->id}}"></td>
@@ -58,6 +74,7 @@
                         @empty
                         <tr><td colspan="7" style="text-align:center">Danh sách rỗng</td></tr>
                         @endforelse
+                        @endif
                     </tbody>
                 </table>
                 <button style="margin-bottom: 20px;" class="btn btn-warning">Save</button>
