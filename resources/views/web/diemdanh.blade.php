@@ -36,7 +36,7 @@
                             <td><button class="btn btn-warning" onclick="window.open('{{route('createdd')}}?id={{$item->id_lophoc}}', '_self')">Điểm danh</button></td>
                         </tr>
                     @empty
-                        <tr><td colspan="8" style="text-align:center">Danh sách rỗng</td></tr>
+                        <tr><td colspan="3" style="text-align:center">Danh sách rỗng</td></tr>
                     @endforelse
                     </tbody>
                 </table>

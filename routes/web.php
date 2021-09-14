@@ -74,9 +74,16 @@ Route::post('admin/sinhvien/themsv',[AdminController::class,'storesv']);
 Route::get('admin/sinhvien/editsv/{id}',[AdminController::class,'editsv']);
 Route::post('admin/sinhvien/editsv/{id}',[AdminController::class,'updatesv']);
 Route::get('/deletesv/{id}',[AdminController::class,'destroysv']);
+// Lịch sử điểm danh
+Route::get('admin/ddhistory/view',[AdminController::class,'view'])->name('view');
+Route::get('admin/ddhistory/details/{ngaydiemdanh}',[AdminController::class,'details'])->name('details');
 
 // Người dùng
 Route::get('/',[WebController::class,'index'])->name('home');
+Route::get('edit/{id}',[WebController::class,'edit']);
+Route::post('edit/{id}',[WebController::class,'update']);
+Route::get('editpass/{id}',[WebController::class,'editpass']);
+Route::post('editpass/{id}',[WebController::class,'updatepass']);
 Route::get('/login',[LoginController::class,'showLoginForm'])->name('login');
 Route::post('/login',[LoginController::class,'login']);
 Route::get('/logout',[LoginController::class,'logout'])->name('logout');
@@ -84,14 +91,4 @@ Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 Route::get('/diemdanh',[WebController::class,'diemdanh'])->name('diemdanh');
 Route::get('/createdd',[WebController::class,'createdd'])->name('createdd');
 Route::post('/createdd',[WebController::class,'storedd'])->name('storedd');
-
-
-
-
-
-
-// Điểm danh test
-Route::get('/index',[AttendenceController::class,'index'])->name('attendence_index');
-Route::get('/view',[AttendenceController::class,'view'])->name('attendence_view');
-Route::post('/post',[AttendenceController::class,'post'])->name('attendence_post');
 

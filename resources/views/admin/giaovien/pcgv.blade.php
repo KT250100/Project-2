@@ -4,37 +4,44 @@
 @if(Session::has('error'))
     <h3 style="color: white">{{Session::get('error')}}</h3>
 @endif
-<table border="1px" class="table">
 <form style="margin:auto; text-align:center" method="POST" enctype="multipart/form-data">
     @csrf
-    <tr>
-        <th><span>Tên giảng viên</span></th>
-        <td><select name="id_giaovien">
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i></span>
+		</div>
+		<select name="id_giaovien" class="form-control">
+            <option disabled>Chọn giảng viên</option>
             @foreach ($giaoviens as $item)
             <option value="{{$item->id}}">{{$item->name}}</option>
             @endforeach
-        </select></td>
-    </tr>
-    <tr>
-        <th><span>Chọn lớp</span></th>
-        <td><select name="id_lop">
+		</select>
+	</div>
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fas fa-chalkboard-teacher"></i> </span>
+		</div>
+		<select name="id_lop" class="form-control">
+            <option disabled>Chọn lớp</option>
             @foreach ($lops as $item)
             <option value="{{$item->id}}">{{$item->name}}{{$item->khoa}}</option>
             @endforeach
-        </select></td>
-    </tr>
-    <tr>
-        <th><span>Chọn môn</span></th>
-        <td><select name="id_mon">
+		</select>
+	</div>
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fas fa-desktop"></i> </span>
+		</div>
+		<select name="id_mon" class="form-control">
+            <option disabled>Chọn môn</option>
             @foreach ($mons as $item)
             <option value="{{$item->id}}">{{$item->name}}</option>
             @endforeach
-        </select></td>
-    </tr>
-    <tr>
-        <td colspan="2"><button type="submit" class="btn btn-primary">Thêm</button></td>
-    </tr>
+		</select>
+	</div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block">Thêm</button>
+    </div>
 </form>
-</table>
 </div>
 @include('admin.layouts.footer')

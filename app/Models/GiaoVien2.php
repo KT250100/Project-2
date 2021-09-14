@@ -25,4 +25,12 @@ class GiaoVien2
     static function delete($id){
         return DB::delete("DELETE FROM giao_viens WHERE id='$id'");
     }
+    static function updatepass($id,$password){
+        $sql = "UPDATE giao_viens SET password='$password' WHERE id='$id'";
+        return DB::update($sql);
+    }
+    static function updateacc($id,$name,$phone,$email,$address,$birthday){
+        $sql = "UPDATE giao_viens SET name='$name',phone='$phone',email='$email',address='$address',birthday='$birthday' WHERE id='$id'";
+        return DB::update($sql);
+    }
 }

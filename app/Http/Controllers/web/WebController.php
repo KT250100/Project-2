@@ -4,10 +4,12 @@ namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
 use App\Models\DiemDanh;
+use App\Models\GiaoVien2;
 use App\Models\SinhVien;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class WebController extends Controller
 {
@@ -16,6 +18,38 @@ class WebController extends Controller
     }
     function index(){
         return view('web.home');
+    }
+    function edit(){
+        return view('web.edit');
+    }
+    function update(Request $req,$id){
+        $name = $req->input('name');
+        $phone = $req->input('phone');
+        $email = $req->input('email');
+        $address = $req->input('address');
+        $birthday = $req->input('birthday');
+        $rs = GiaoVien2::updateacc($id,$name,$phone,$email,$address,$birthday);
+        if($rs == true){
+            return redirect("/");
+        }
+        else{
+            return redirect()->back()->with('error','Không có thay đổi nào cả');
+        }
+    }
+    function editpass(){
+        return view('web.editpass');
+    }
+    function updatepass(Request $req,$id){
+        $pass = $req->input('password');
+        $repass = $req->input('repass');
+        $password = Hash::make($pass);
+        $rs = GiaoVien2::updatepass($id,$password);
+        if($rs == true && $pass == $repass){
+            return redirect("/");
+        }
+        else{
+            return redirect()->back()->with('error','Mật khẩu mới không trùng khớp');
+        }
     }
     function diemdanh(){
         // Kiểm tra đang dùng tài khoản giáo viên nào -> lọc ra lớp đc phân công
@@ -29,7 +63,7 @@ class WebController extends Controller
             ->get();
         return view('web.diemdanh',['index'=>$index]);
     }
-    public function createdd(Request $req){
+    public function createdd(){
         // Sinh viên trong lớp nào thì chỉ hiện lớp ấy
         $mydate = new \DateTime();
         $mydate -> modify('+7 hours');
@@ -53,6 +87,7 @@ class WebController extends Controller
             ->select('diemdanhs.*', 'sinhviens.name as name', 'sinhviens.id as id')
             ->join('sinhviens', 'sinhviens.id', '=', 'diemdanhs.id_sinhvien')
             ->where('diemdanhs.ngaydiemdanh', '>=', $currentDate)
+            ->where('diemdanhs.id_giaovien', Auth::user()->id)
             ->get();
         return view('web.createdd')->with([
                 'index'=>1,
@@ -76,6 +111,7 @@ class WebController extends Controller
             ->select('diemdanhs.*', 'sinhviens.name as name', 'sinhviens.id as id')
             ->join('sinhviens', 'sinhviens.id', '=', 'diemdanhs.id_sinhvien')
             ->where('diemdanhs.ngaydiemdanh', '>=', $currentDate)
+            ->where('diemdanhs.id_giaovien', Auth::user()->id)
             ->get();
         // Điểm danh rồi thì update
         if($edit != null && count($edit) > 0 ){

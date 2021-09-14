@@ -34,5 +34,8 @@
             </table>
         </div>
     </div>
+    <div class="d-flex justify-content-center">
+        {!! $lops->links() !!}
+    </div>
 </div>
 @include('admin.layouts.footer')

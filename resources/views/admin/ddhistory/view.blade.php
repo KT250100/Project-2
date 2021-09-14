@@ -2,29 +2,25 @@
 <div class="container">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h2 class="text-center">Danh sách phân công</h2>
-        </div>
-        <div>
-            <a href="{{url('admin/giaovien/pcgv')}}">Thêm</a>
-            <a style="float:right" href="{{url('admin/giaovien/giaovien')}}">Danh sách giảng viên</a>
+            <h2 class="text-center">Lịch sử điểm danh</h2>
         </div>
         <div class="panel-body">
             <table border="1px" class="table table-bordered">
                 <thead>
-                    <th>Giảng viên</th>
+                    <th>Ngày điểm danh</th>
                     <th>Lớp</th>
                     <th>Môn</th>
-                    <th>Sửa</th>
-                    <th>Xóa</th>
+                    <th>Giảng viên</th>
+                    <th>Chi tiết</th>
                 </thead>
                 <tbody>
-                @forelse ($phancongs as $item)
+                @forelse ($diemdanhs as $item)
                     <tr>
-                        <td>{{$item->giaovien}}</td>
+                        <td>{{$item->ngaydiemdanh}}</td>
                         <td>{{$item->lop}}{{$item->khoa}}</td>
                         <td>{{$item->mon}}</td>
-                        <td><a href="{{url('admin/giaovien/editpc/'.$item->id_giaovien)}}">Sửa</a></td>
-                        <td><a href="{{url('/deletepc/'.$item->id_giaovien)}}">Xoá</a></td>
+                        <td>{{$item->giaovien}}</td>
+                        <td><a href="{{url('admin/ddhistory/details/'.$item->ngaydiemdanh)}}">Xem</a></td>
                     </tr>
                 @empty
                     <tr><td colspan="5" style="text-align:center">Danh sách rỗng</td></tr>
@@ -34,7 +30,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        {!! $phancongs->links() !!}
+        {!! $diemdanhs->links() !!}
     </div>
 </div>
 @include('admin.layouts.footer')

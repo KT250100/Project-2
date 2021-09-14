@@ -15,7 +15,11 @@ class GiaoVienController extends Controller
 {
     // Giảng viên
     function giaovien(){
-        $giaoviens = GiaoVien2::getAll();
+        //$giaoviens = GiaoVien2::getAll();
+        $giaoviens = DB::table('giao_viens')
+            ->select('giao_viens.*')
+            ->orderByDesc('id')
+            ->paginate(8);
         return view('admin.giaovien.giaovien',['giaoviens'=>$giaoviens]);
     }
     function creategv(){
@@ -62,7 +66,14 @@ class GiaoVienController extends Controller
 
     // Phân công
     function phancong(){
-        $phancongs = PhanCong::getAll();
+        //$phancongs = PhanCong::getAll();
+        $phancongs = DB::table('phancongs')
+            ->select('phancongs.*','lophocs.name as lop','khoahocs.name as khoa','monhocs.name as mon','giao_viens.name as giaovien')
+            ->join('lophocs', 'lophocs.id', '=', 'phancongs.id_lophoc')
+            ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
+            ->join('monhocs', 'monhocs.id', '=', 'phancongs.id_monhoc')
+            ->join('giao_viens', 'giao_viens.id', '=', 'phancongs.id_giaovien')
+            ->paginate(8);
         return view('admin.giaovien.phancong',['phancongs'=>$phancongs]);
     }
     function createpc(){

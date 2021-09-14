@@ -12,7 +12,11 @@ class SinhVien
     static function getAll(){
         return DB::select("SELECT sinhviens.id,sinhviens.name,sinhviens.phone,sinhviens.email,sinhviens.address,sinhviens.birthday,
         lophocs.name as 'lop',
-        sinhviens.id_lophoc FROM sinhviens INNER JOIN lophocs ON sinhviens.id_lophoc = lophocs.id");
+        khoahocs.name as 'khoa',
+        sinhviens.id_lophoc 
+        FROM sinhviens
+        INNER JOIN lophocs ON sinhviens.id_lophoc = lophocs.id
+        INNER JOIN khoahocs ON lophocs.id_khoahoc = khoahocs.id");
     }
     static function get($id){
         return DB::select("SELECT sinhviens.id,sinhviens.name,sinhviens.phone,sinhviens.email,sinhviens.address,sinhviens.birthday,

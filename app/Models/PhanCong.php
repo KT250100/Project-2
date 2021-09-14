@@ -29,7 +29,8 @@ class PhanCong
         FROM phancongs
         INNER JOIN giao_viens ON phancongs.id_giaovien = giao_viens.id 
         INNER JOIN lophocs ON phancongs.id_lophoc = lophocs.id
-        INNER JOIN monhocs ON phancongs.id_monhoc = monhocs.id WHERE id_giaovien='$id_giaovien'");
+        INNER JOIN monhocs ON phancongs.id_monhoc = monhocs.id 
+        WHERE id_giaovien='$id_giaovien'");
     }
     static function save($id_giaovien,$id_lop,$id_mon){
         return DB::insert("INSERT INTO phancongs VALUES('$id_giaovien','$id_lop','$id_mon')");

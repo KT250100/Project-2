@@ -1,25 +1,28 @@
 @include('admin.layouts.header')
 <div class="container">
 <h2 class="text-center" >Thêm môn</h2>
-<table border="1px" class="table">
 <form style="margin:auto; text-align:center" method="POST" enctype="multipart/form-data">
     @csrf
-    <tr>
-        <th><span class="input-group-text" id="basic-addon1">Tên môn</span></th>
-        <td><input name="name" required type="text" class="form-control" aria-describedby="basic-addon1"></td>
-    </tr>
-    <tr>
-        <th><span class="input-group-text" id="basic-addon1">Chọn ngành</span></th>
-        <td><select name="id_nganh" class="form-select form-select-sm" >
+    <div class="form-group input-group">
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fas fa-desktop"></i> </span>
+		 </div>
+        <input name="name" class="form-control" placeholder="Tên môn" required type="text">
+    </div>
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fas fa-graduation-cap"></i> </span>
+		</div>
+		<select class="form-control" name="id_nganh">
+			<option disabled>Chọn ngành</option>
             @foreach ($nganhs as $item)
             <option value="{{$item->id}}">{{$item->name}}</option>
             @endforeach
-        </select></td>
-    </tr>
-    <tr>
-        <td colspan="2"><button type="submit" class="btn btn-primary">Thêm</button></td>
-    </tr>
+		</select>
+	</div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block">Thêm</button>
+    </div>
 </form>
-</table>
 </div>
 @include('admin.layouts.footer')

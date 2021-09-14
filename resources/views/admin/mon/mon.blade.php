@@ -32,5 +32,8 @@
             </table>
         </div>
     </div>
+    <div class="d-flex justify-content-center">
+        {!! $mons->links() !!}
+    </div>
 </div>
 @include('admin.layouts.footer')

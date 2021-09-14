@@ -9,7 +9,7 @@
             <a style="float:right" href="{{url('admin/giaovien/phancong')}}">Phân công</a>
         </div>
         <div class="panel-body">
-            <table border="1px" class="table">
+            <table border="1px" class="table table-bordered">
                 <thead>
                     <th style="width:5%">ID</th>
                     <th style="width:17%">Tên</th>
@@ -42,6 +42,9 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        {!! $giaoviens->links() !!}
     </div>
 </div>
 @include('admin.layouts.footer')

@@ -1,11 +1,11 @@
-@include('admin.layouts.header')
-<div class="container">
+@include('web.layouts.header')
+<div class="user-container">
     <h2 class="text-center">Đổi mật khẩu</h2>
     <form style="margin:auto; text-align:center" method="POST" enctype="multipart/form-data">
-        @csrf
-        @if(Session::has('error'))
-            <h3 align="center" style="color: #FF0000">{{Session::get('error')}}</h3>
-        @endif
+    @csrf
+    @if(Session::has('error'))
+        <h3 align="center" style="color: #FF0000">{{Session::get('error')}}</h3>
+    @endif
         <div class="form-group input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
@@ -23,4 +23,4 @@
         </div>
     </form>
 </div>
-@include('admin.layouts.footer')
+@include('web.layouts.footer')

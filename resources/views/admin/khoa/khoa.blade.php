@@ -30,5 +30,8 @@
             </table>
         </div>
     </div>
+    <div class="d-flex justify-content-center">
+        {!! $khoas->links() !!}
+    </div>
 </div>
 @include('admin.layouts.footer')

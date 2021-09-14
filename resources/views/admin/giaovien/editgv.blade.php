@@ -4,42 +4,61 @@
 <table border="1px" class="table">
 <form style="margin:auto; text-align:center" method="POST" enctype="multipart/form-data">
     @csrf
-    <tr>
-        <th><span class="input-group-text" id="basic-addon0">ID</span></th>
-        <td><input readonly value="{{$giaovien->id}}" name="name" required type="text" class="form-control" aria-describedby="basic-addon0"></td>
-    </tr>
-    <tr>
-        <th><span class="input-group-text" id="basic-addon1">Tên</span></th>
-        <td><input value="{{$giaovien->name}}" name="name" required type="text" class="form-control" aria-describedby="basic-addon1"></td>
-    </tr>
-    <tr>
-        <th><span class="input-group-text" id="basic-addon1">SĐT</span></th>
-        <td><input value="{{$giaovien->phone}}" name="phone" required type="number" class="form-control" aria-describedby="basic-addon1"></td>
-    </tr>
-    <tr>
-        <th><span class="input-group-text" id="basic-addon1">Email</span></th>
-        <td><input value="{{$giaovien->email}}" name="email" required type="email" class="form-control" aria-describedby="basic-addon1"></td>
-    </tr>
-    <tr>
-        <th><span class="input-group-text" id="basic-addon1">Mật khẩu</span></th>
-        <td><input value="{{$giaovien->password}}" name="password" required type="password" class="form-control" aria-describedby="basic-addon1"></td>
-    </tr>
-    <tr>
-        <th><span class="input-group-text" id="basic-addon1">Địa chỉ</span></th>
-        <td><input value="{{$giaovien->address}}" name="address" required type="text" class="form-control" aria-describedby="basic-addon1"></td>
-    </tr>
-    <tr>
-        <th><span class="input-group-text" id="basic-addon1">Ngày sinh</span></th>
-        <td><input value="{{$giaovien->birthday}}" name="birthday" required type="date" class="form-control" aria-describedby="basic-addon1"></td>
-    </tr>
-    <tr>
-        <th><span class="input-group-text" id="basic-addon1">Tình trạng</span></th>
-        <td><input style="width: 30%" type="radio" name="is_active" value="1" class="form-control" {{($giaovien->is_active == 1)?'checked':'' }}>Hoạt động</input>
-        <input style="width: 30%" type="radio" name="is_active" value="0" class="form-control" {{($giaovien->is_active == 0)?'checked':'' }}>Vô hiệu</input></td>
-    </tr>
-    <tr>
-        <td colspan="2"><button type="submit" class="btn btn-primary">Sửa</button></td>
-    </tr>
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="far fa-user"></i> </span>
+		 </div>
+        <input readonly value="{{$giaovien->id}}" name="id" class="form-control" placeholder="ID" type="text">
+    </div>
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 </div>
+        <input value="{{$giaovien->name}}" name="name" class="form-control" placeholder="Tên" required type="text">
+    </div>
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+		 </div>
+        <input value="{{$giaovien->phone}}" name="phone" class="form-control" placeholder="SĐT" required type="number">
+    </div>
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+		 </div>
+        <input value="{{$giaovien->email}}" name="email" class="form-control" placeholder="Email" required type="text">
+    </div>
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+		 </div>
+        <input value="{{$giaovien->password}}" name="password" class="form-control" placeholder="Mật khẩu" required type="password">
+    </div>
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+		 </div>
+        <input value="{{$giaovien->address}}" name="address" class="form-control" placeholder="Địa chỉ" required type="text">
+    </div>
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-birthday-cake"></i> </span>
+		 </div>
+        <input value="{{$giaovien->birthday}}" name="birthday" class="form-control" placeholder="Ngày sinh" required type="date">
+    </div>  
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fas fa-user-lock"></i> </span>
+		</div>
+		<select name="is_active" class="form-control">
+            <option disabled>Tình trạng</option>
+			<option value="1" {{($giaovien->is_active == 1)?'selected':'' }}>Hoạt động</option>
+			<option value="0" {{($giaovien->is_active == 0)?'selected':'' }}>Vô hiệu</option>
+		</select>
+	</div>                  
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block">Sửa</button>
+    </div>
 </form>
 </table>
 </div> 

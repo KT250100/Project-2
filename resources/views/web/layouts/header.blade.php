@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
    </head>
    <style>
        /* Google Font Link */
@@ -79,6 +81,11 @@
 .sidebar .nav-list{
   margin-top: 20px;
   height: 100%;
+  padding: 0 0 150px 0;
+  overflow: auto;
+}
+.sidebar .nav-list::-webkit-scrollbar{
+  display: none;
 }
 .sidebar li{
   position: relative;
@@ -246,44 +253,64 @@
 .panel-heading, .panel-body{
   padding-top: 20px;
 }
+.user-container{
+  width: 80%;
+  margin: auto;
+  padding-top: 50px;
+}
+.user-container h2{
+  text-align: center;
+}
+.user-container .table{
+  width: 100%;
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin: auto;
+  margin-top: 15px;
+  text-align: left;
+}
+.user-container .table th{
+  font-size: 18px;
+  width: 20%;
+}
+.user-container .table input, .table select{
+  font-size: 18px;
+  width: 100%;
+  height: 30px;
+}
+.user-container .table button{
+  padding: 5px;
+  font-size: 18px;
+  margin-left: 46%;
+}
+.user-container .table th, .table td{
+  padding: 10px;
+}
    </style>
 <body>
   <div class="sidebar">
     <div class="logo-details">
-      <i class='bx bxl-c-plus-plus icon'></i>
-        <div class="logo_name">CodingLab</div>
+        <i class='bx bxl-dev-to icon'></i>
+        <div class="logo_name">BKACAD Lab</div>
         <i class='bx bx-menu' id="btn" ></i>
     </div>
     <ul class="nav-list">
-      <!-- <li>
-          <i class='bx bx-search' ></i>
-         <input type="text" placeholder="Search...">
-         <span class="tooltip">Search</span>
-      </li> -->
       <li>
         <a href="{{route('home')}}">
-          <i class='bx bx-grid-alt'></i>
-          <span class="links_name">Dashboard</span>
+          <i class='bx bx-user' ></i>
+          <span class="links_name">Tài khoản</span>
         </a>
-         <span class="tooltip">Dashboard</span>
+         <span class="tooltip">Tài khoản</span>
       </li>
-      <li>
-       <a href="#">
-         <i class='bx bx-user' ></i>
-         <span class="links_name">Tài khoản</span>
-       </a>
-       <span class="tooltip">Tài khoản</span>
-     </li>
      <li>
        <a href="{{route('diemdanh')}}">
-         <i class='bx bx-book-content'></i>
+         <i class="fas fa-clipboard-list"></i>
          <span class="links_name">Điểm danh</span>
        </a>
        <span class="tooltip">Điểm danh</span>
      </li>
      <li class="profile">
          <div class="profile-details">
-           <!-- <img src="profile.jpg" alt="profileImg"> -->
            <div class="name_job">
             @if(Auth::user() != null)
                 <div class="name">{{Auth::user()->name}}</div>
