@@ -7,6 +7,12 @@
         <div>
             <a href="{{url('admin/sinhvien/themsv')}}">Thêm</a>
         </div>
+        <div class="search">
+            <form method="GET">
+                <input type="text" name="keyword" placeholder="Từ khóa ...">
+                <button type="submit" class="btn btn-primary">Tìm</button>
+            </form>
+        </div>
         <div class="panel-body">
             <table border="1px" class="table table-bordered">
                 <thead>
@@ -41,7 +47,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        {!! $sinhviens->links() !!}
+        {{ $sinhviens->withQueryString()->links() }}
     </div>
 </div>
 @include('admin.layouts.footer')

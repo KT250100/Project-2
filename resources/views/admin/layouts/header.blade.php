@@ -289,6 +289,19 @@
 .d-flex{
   margin-top: 7px;
 }
+.search{
+  position: relative;
+  float: right;
+  margin-bottom: 10px;
+}
+.search input{
+  height: 36px;
+}
+.search button{
+  position: relative;
+  margin-top: -3px;
+  height: 36px;
+}
    </style>
 <body>
   <div class="sidebar">

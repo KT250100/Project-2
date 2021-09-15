@@ -18,6 +18,27 @@ class SinhVien
         INNER JOIN lophocs ON sinhviens.id_lophoc = lophocs.id
         INNER JOIN khoahocs ON lophocs.id_khoahoc = khoahocs.id");
     }
+    static function getAllSearch($keyword){
+        if(empty($keyword)){
+            return DB::table('sinhviens')
+            ->select('sinhviens.*', 'lophocs.name as lop','khoahocs.name as khoa')
+            ->join('lophocs', 'lophocs.id', '=', 'sinhviens.id_lophoc')
+            ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
+            ->paginate(7);
+        }
+        else{
+            return DB::table('sinhviens')
+            ->select('sinhviens.*','lophocs.name as lop','khoahocs.name as khoa')
+            ->join('lophocs', 'lophocs.id', '=', 'sinhviens.id_lophoc')
+            ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
+            ->where('sinhviens.name', 'LIKE', '%'.$keyword.'%')
+            ->orWhere('phone', 'LIKE', '%'.$keyword.'%')
+            ->orWhere('email', 'LIKE', '%'.$keyword.'%')
+            ->orWhere('lophocs.name', 'LIKE', '%'.$keyword.'%')
+            ->orWhere('khoahocs.name', 'LIKE', '%'.$keyword.'%')
+            ->paginate(7);
+        }
+    }
     static function get($id){
         return DB::select("SELECT sinhviens.id,sinhviens.name,sinhviens.phone,sinhviens.email,sinhviens.address,sinhviens.birthday,
         lophocs.name as 'lop',

@@ -16,6 +16,7 @@ class CreateMonhocsTable extends Migration
         Schema::create('monhocs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name',50);
+            $table->float('thoiluong', 8, 2);
             $table->unsignedInteger('id_nganhhoc');
             $table->foreign('id_nganhhoc')->references('id')->on('nganhhocs');
         });

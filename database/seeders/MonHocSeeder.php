@@ -16,14 +16,17 @@ class MonHocSeeder extends Seeder
     {
         DB::table('monhocs')->insert([
             'name'=>'Database',
+            'thoiluong'=>60,
             'id_nganhhoc'=>'1'
         ]);
         DB::table('monhocs')->insert([
             'name'=>'Mạng máy tính',
+            'thoiluong'=>72,
             'id_nganhhoc'=>'2'
         ]);
         DB::table('monhocs')->insert([
             'name'=>'Photoshop',
+            'thoiluong'=>45,
             'id_nganhhoc'=>'3'
         ]);
     }

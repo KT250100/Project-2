@@ -29,7 +29,7 @@ class SinhVienSeeder extends Seeder
                 'name'=>'SV '.$i,
                 'phone'=> '012398745619',
                 'email'=>$i.'@gmail.com',
-                'address'=>'HN '.$i,
+                'address'=>'SG '.$i,
                 'birthday'=>'2000-01-01',
                 'id_lophoc'=>2
             ]);
@@ -39,7 +39,7 @@ class SinhVienSeeder extends Seeder
                 'name'=>'SV '.$i,
                 'phone'=> '012398745619',
                 'email'=>$i.'@gmail.com',
-                'address'=>'HN '.$i,
+                'address'=>'ND '.$i,
                 'birthday'=>'2000-01-01',
                 'id_lophoc'=>3
             ]);

@@ -19,7 +19,7 @@ class GiaoVienController extends Controller
         $giaoviens = DB::table('giao_viens')
             ->select('giao_viens.*')
             ->orderByDesc('id')
-            ->paginate(8);
+            ->paginate(7);
         return view('admin.giaovien.giaovien',['giaoviens'=>$giaoviens]);
     }
     function creategv(){
@@ -73,7 +73,7 @@ class GiaoVienController extends Controller
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
             ->join('monhocs', 'monhocs.id', '=', 'phancongs.id_monhoc')
             ->join('giao_viens', 'giao_viens.id', '=', 'phancongs.id_giaovien')
-            ->paginate(8);
+            ->paginate(7);
         return view('admin.giaovien.phancong',['phancongs'=>$phancongs]);
     }
     function createpc(){

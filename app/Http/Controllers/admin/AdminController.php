@@ -44,7 +44,7 @@ class AdminController extends Controller
         $nganhs = DB::table('nganhhocs')
             ->select('nganhhocs.*')
             ->orderByDesc('id')
-            ->paginate(8);
+            ->paginate(7);
         return view('admin.nganh.nganh',['nganhs'=>$nganhs]);
     }
     function createnganh(){
@@ -90,7 +90,7 @@ class AdminController extends Controller
         $khoas = DB::table('khoahocs')
             ->select('khoahocs.*')
             ->orderByDesc('id')
-            ->paginate(8);
+            ->paginate(7);
         return view('admin.khoa.khoa',['khoas'=>$khoas]);
     }
     function createkhoa(){
@@ -137,7 +137,7 @@ class AdminController extends Controller
             ->select('monhocs.*','nganhhocs.name as nganh')
             ->join('nganhhocs', 'nganhhocs.id', '=', 'monhocs.id_nganhhoc')
             ->orderByDesc('monhocs.id')
-            ->paginate(8);
+            ->paginate(7);
         return view('admin.mon.mon',['mons'=>$mons]);
     }
     function createmon(){
@@ -189,7 +189,7 @@ class AdminController extends Controller
             ->join('nganhhocs', 'nganhhocs.id', '=', 'lophocs.id_nganhhoc')
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
             ->orderByDesc('lophocs.id')
-            ->paginate(8);
+            ->paginate(7);
         return view('admin.lop.lop',['lops'=>$lops]);
     }
     function createlop(){
@@ -238,13 +238,29 @@ class AdminController extends Controller
     }
 
     // Sinh viên
-    function sinhvien(){
+    function sinhvien(Request $req){
         //$sinhviens = SinhVien::getAll();
-        $sinhviens = DB::table('sinhviens')
+        $keyword = $req->input('keyword','');
+        //$sinhviens = SinhVien::getAllSearch($keyword);
+        if(empty($keyword)){
+            $sinhviens = DB::table('sinhviens')
+            ->select('sinhviens.*', 'lophocs.name as lop','khoahocs.name as khoa')
+            ->join('lophocs', 'lophocs.id', '=', 'sinhviens.id_lophoc')
+            ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
+            ->paginate(7);
+        }
+        else{
+            $sinhviens = DB::table('sinhviens')
             ->select('sinhviens.*','lophocs.name as lop','khoahocs.name as khoa')
             ->join('lophocs', 'lophocs.id', '=', 'sinhviens.id_lophoc')
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
-            ->paginate(8);
+            ->where('sinhviens.name', 'LIKE', '%'.$keyword.'%')
+            ->orWhere('phone', 'LIKE', '%'.$keyword.'%')
+            ->orWhere('email', 'LIKE', '%'.$keyword.'%')
+            ->orWhere('lophocs.name', 'LIKE', '%'.$keyword.'%')
+            ->orWhere('khoahocs.name', 'LIKE', '%'.$keyword.'%')
+            ->paginate(7);
+        }
         return view('admin.sinhvien.sinhvien',['sinhviens'=>$sinhviens]);
     }
     function createsv(){
@@ -307,7 +323,7 @@ class AdminController extends Controller
             ->join('giao_viens', 'giao_viens.id', '=', 'diemdanhs.id_giaovien')
             ->distinct()
             ->orderByDesc('diemdanhs.id')
-            ->paginate(8,['ngaydiemdanh','lophocs.name','khoahocs.name','monhocs.name','giao_viens.name']);
+            ->paginate(7,['ngaydiemdanh','lophocs.name','khoahocs.name','monhocs.name','giao_viens.name']);
         return view('admin.ddhistory.view',['diemdanhs'=>$diemdanhs]);
     }
     function details($ngaydiemdanh){
