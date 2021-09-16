@@ -12,6 +12,20 @@ class Nganh
     static function getAll(){
         return DB::select("SELECT id,name FROM nganhhocs ORDER BY id DESC");
     }
+    static function getAllSearch($keyword){
+        if(empty($keyword)){
+            return DB::table('nganhhocs')
+            ->select('nganhhocs.*')
+            ->orderByDesc('id')
+            ->paginate(7);
+        }
+        else{
+            return DB::table('nganhhocs')
+            ->select('nganhhocs.*')
+            ->where('name', 'LIKE', '%'.$keyword.'%')
+            ->paginate(7);
+        }
+    }
     static function get($id){
         return DB::select("SELECT id,name FROM nganhhocs WHERE id='$id'");
     }

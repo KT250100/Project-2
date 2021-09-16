@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin2;
+use App\Models\DiemDanh;
 use Illuminate\Http\Request;
 use App\Models\Nganh;
 use App\Models\Khoa;
@@ -39,12 +40,10 @@ class AdminController extends Controller
     }
 
     // Ngành
-    function nganh(){
+    function nganh(Request $req){
         //$nganhs = Nganh::getAll();
-        $nganhs = DB::table('nganhhocs')
-            ->select('nganhhocs.*')
-            ->orderByDesc('id')
-            ->paginate(7);
+        $keyword = $req->input('keyword','');
+        $nganhs = Nganh::getAllSearch($keyword);
         return view('admin.nganh.nganh',['nganhs'=>$nganhs]);
     }
     function createnganh(){
@@ -85,12 +84,10 @@ class AdminController extends Controller
     }
 
     // Khóa
-    function khoa(){
+    function khoa(Request $req){
         //$khoas = Khoa::getAll();
-        $khoas = DB::table('khoahocs')
-            ->select('khoahocs.*')
-            ->orderByDesc('id')
-            ->paginate(7);
+        $keyword = $req->input('keyword','');
+        $khoas = Khoa::getAllSearch($keyword);
         return view('admin.khoa.khoa',['khoas'=>$khoas]);
     }
     function createkhoa(){
@@ -131,13 +128,10 @@ class AdminController extends Controller
     }
 
     // Môn học
-    function mon(){
+    function mon(Request $req){
         //$mons = Mon::getAll();
-        $mons = DB::table('monhocs')
-            ->select('monhocs.*','nganhhocs.name as nganh')
-            ->join('nganhhocs', 'nganhhocs.id', '=', 'monhocs.id_nganhhoc')
-            ->orderByDesc('monhocs.id')
-            ->paginate(7);
+        $keyword = $req->input('keyword','');
+        $mons = Mon::getAllSearch($keyword);
         return view('admin.mon.mon',['mons'=>$mons]);
     }
     function createmon(){
@@ -182,14 +176,10 @@ class AdminController extends Controller
     }
 
     // Lớp học
-    function lop(){
+    function lop(Request $req){
         //$lops = Lop::getAll();
-        $lops = DB::table('lophocs')
-            ->select('lophocs.*','khoahocs.name as khoa','nganhhocs.name as nganh')
-            ->join('nganhhocs', 'nganhhocs.id', '=', 'lophocs.id_nganhhoc')
-            ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
-            ->orderByDesc('lophocs.id')
-            ->paginate(7);
+        $keyword = $req->input('keyword','');
+        $lops = Lop::getAllSearch($keyword);
         return view('admin.lop.lop',['lops'=>$lops]);
     }
     function createlop(){
@@ -241,26 +231,7 @@ class AdminController extends Controller
     function sinhvien(Request $req){
         //$sinhviens = SinhVien::getAll();
         $keyword = $req->input('keyword','');
-        //$sinhviens = SinhVien::getAllSearch($keyword);
-        if(empty($keyword)){
-            $sinhviens = DB::table('sinhviens')
-            ->select('sinhviens.*', 'lophocs.name as lop','khoahocs.name as khoa')
-            ->join('lophocs', 'lophocs.id', '=', 'sinhviens.id_lophoc')
-            ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
-            ->paginate(7);
-        }
-        else{
-            $sinhviens = DB::table('sinhviens')
-            ->select('sinhviens.*','lophocs.name as lop','khoahocs.name as khoa')
-            ->join('lophocs', 'lophocs.id', '=', 'sinhviens.id_lophoc')
-            ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
-            ->where('sinhviens.name', 'LIKE', '%'.$keyword.'%')
-            ->orWhere('phone', 'LIKE', '%'.$keyword.'%')
-            ->orWhere('email', 'LIKE', '%'.$keyword.'%')
-            ->orWhere('lophocs.name', 'LIKE', '%'.$keyword.'%')
-            ->orWhere('khoahocs.name', 'LIKE', '%'.$keyword.'%')
-            ->paginate(7);
-        }
+        $sinhviens = SinhVien::getAllSearch($keyword);
         return view('admin.sinhvien.sinhvien',['sinhviens'=>$sinhviens]);
     }
     function createsv(){
@@ -313,17 +284,10 @@ class AdminController extends Controller
     }
 
     // Lịch sử điểm danh
-    function view(){
-        $diemdanhs = DB::table('diemdanhs')
-            ->select('diemdanhs.ngaydiemdanh','lophocs.name as lop','khoahocs.name as khoa','monhocs.name as mon','giao_viens.name as giaovien')
-            ->join('sinhviens', 'sinhviens.id', '=', 'diemdanhs.id_sinhvien')
-            ->join('lophocs', 'lophocs.id', '=', 'sinhviens.id_lophoc')
-            ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
-            ->join('monhocs', 'monhocs.id', '=', 'diemdanhs.id_monhoc')
-            ->join('giao_viens', 'giao_viens.id', '=', 'diemdanhs.id_giaovien')
-            ->distinct()
-            ->orderByDesc('diemdanhs.id')
-            ->paginate(7,['ngaydiemdanh','lophocs.name','khoahocs.name','monhocs.name','giao_viens.name']);
+    function view(Request $req){
+        $keyword = $req->input('keyword','');
+        $keyword2 = $req->input('keyword2','');
+        $diemdanhs = DiemDanh::getAllSearch($keyword, $keyword2);
         return view('admin.ddhistory.view',['diemdanhs'=>$diemdanhs]);
     }
     function details($ngaydiemdanh){

@@ -18,6 +18,26 @@ class Lop
         INNER JOIN nganhhocs ON lophocs.id_nganhhoc = nganhhocs.id 
         INNER JOIN khoahocs ON lophocs.id_khoahoc = khoahocs.id ORDER BY id DESC");
     }
+    static function getAllSearch($keyword){
+        if(empty($keyword)){
+            return DB::table('lophocs')
+            ->select('lophocs.*','khoahocs.name as khoa','nganhhocs.name as nganh')
+            ->join('nganhhocs', 'nganhhocs.id', '=', 'lophocs.id_nganhhoc')
+            ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
+            ->orderByDesc('lophocs.id')
+            ->paginate(7);
+        }
+        else{
+            return DB::table('lophocs')
+            ->select('lophocs.*','khoahocs.name as khoa','nganhhocs.name as nganh')
+            ->join('nganhhocs', 'nganhhocs.id', '=', 'lophocs.id_nganhhoc')
+            ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
+            ->where('lophocs.name', 'LIKE', '%'.$keyword.'%')
+            ->orWhere('khoahocs.name', 'LIKE', '%'.$keyword.'%')
+            ->orWhere('nganhhocs.name', 'LIKE', '%'.$keyword.'%')
+            ->paginate(7);
+        }
+    }
     static function get($id){
         return DB::select("SELECT lophocs.id,lophocs.name,
         nganhhocs.name as 'nganh',

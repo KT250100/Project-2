@@ -6,7 +6,13 @@
         </div>
         <div>
             <a href="{{url('admin/giaovien/pcgv')}}">Thêm</a>
-            <a style="float:right" href="{{url('admin/giaovien/giaovien')}}">Danh sách giảng viên</a>
+            <a style="float:right; margin-top:-3px" href="{{url('admin/giaovien/giaovien')}}">Danh sách giảng viên</a>
+        </div>
+        <div class="search">
+            <form method="GET">
+                <input type="text" name="keyword" placeholder="Từ khóa ...">
+                <button type="submit" class="btn btn-primary">Tìm</button>
+            </form>
         </div>
         <div class="panel-body">
             <table border="1px" class="table table-bordered">

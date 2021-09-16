@@ -12,6 +12,23 @@ class Mon
     static function getAll(){
         return DB::select("SELECT monhocs.id,monhocs.name,nganhhocs.name as 'nganh', monhocs.id_nganhhoc FROM monhocs INNER JOIN nganhhocs ON monhocs.id_nganhhoc = nganhhocs.id ORDER BY id DESC");
     }
+    static function getAllSearch($keyword){
+        if(empty($keyword)){
+            return DB::table('monhocs')
+            ->select('monhocs.*','nganhhocs.name as nganh')
+            ->join('nganhhocs', 'nganhhocs.id', '=', 'monhocs.id_nganhhoc')
+            ->orderByDesc('monhocs.id')
+            ->paginate(7);
+        }
+        else{
+            return DB::table('monhocs')
+            ->select('monhocs.*','nganhhocs.name as nganh')
+            ->join('nganhhocs', 'nganhhocs.id', '=', 'monhocs.id_nganhhoc')
+            ->where('monhocs.name', 'LIKE', '%'.$keyword.'%')
+            ->orWhere('nganhhocs.name', 'LIKE', '%'.$keyword.'%')
+            ->paginate(7);
+        }
+    }
     static function get($id){
         return DB::select("SELECT monhocs.id,monhocs.name,nganhhocs.name as 'nganh', monhocs.id_nganhhoc FROM monhocs INNER JOIN nganhhocs ON monhocs.id_nganhhoc = nganhhocs.id WHERE monhocs.id='$id'");
     }

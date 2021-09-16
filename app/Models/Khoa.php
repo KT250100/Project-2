@@ -12,6 +12,20 @@ class Khoa
     static function getAll(){
         return DB::select("SELECT id,name FROM khoahocs ORDER BY id DESC");
     }
+    static function getAllSearch($keyword){
+        if(empty($keyword)){
+            return DB::table('khoahocs')
+            ->select('khoahocs.*')
+            ->orderByDesc('id')
+            ->paginate(7);
+        }
+        else{
+            return DB::table('khoahocs')
+            ->select('khoahocs.*')
+            ->where('name', 'LIKE', '%'.$keyword.'%')
+            ->paginate(7);
+        }
+    }
     static function get($id){
         return DB::select("SELECT id,name FROM khoahocs WHERE id='$id'");
     }

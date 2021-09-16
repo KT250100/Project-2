@@ -12,6 +12,22 @@ class GiaoVien2
     static function getAll(){
         return DB::select("SELECT id,name,phone,email,password,address,birthday,is_active FROM giao_viens ORDER BY id DESC");
     }
+    static function getAllSearch($keyword){
+        if(empty($keyword)){
+            return DB::table('giao_viens')
+            ->select('giao_viens.*')
+            ->orderByDesc('id')
+            ->paginate(7);
+        }
+        else{
+            return DB::table('giao_viens')
+            ->select('giao_viens.*')
+            ->where('name', 'LIKE', '%'.$keyword.'%')
+            ->orWhere('phone', 'LIKE', '%'.$keyword.'%')
+            ->orWhere('email', 'LIKE', '%'.$keyword.'%')
+            ->paginate(7);
+        }
+    }
     static function get($id){
         return DB::select("SELECT id,name,phone,email,password,address,birthday,is_active FROM giao_viens WHERE id='$id'");
     }

@@ -21,6 +21,30 @@ class PhanCong
         INNER JOIN monhocs ON phancongs.id_monhoc = monhocs.id
         INNER JOIN khoahocs ON lophocs.id_khoahoc = khoahocs.id");
     }
+    static function getAllSearch($keyword){
+        if(empty($keyword)){
+            return DB::table('phancongs')
+            ->select('phancongs.*','lophocs.name as lop','khoahocs.name as khoa','monhocs.name as mon','giao_viens.name as giaovien')
+            ->join('lophocs', 'lophocs.id', '=', 'phancongs.id_lophoc')
+            ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
+            ->join('monhocs', 'monhocs.id', '=', 'phancongs.id_monhoc')
+            ->join('giao_viens', 'giao_viens.id', '=', 'phancongs.id_giaovien')
+            ->paginate(7);
+        }
+        else{
+            return DB::table('phancongs')
+            ->select('phancongs.*','lophocs.name as lop','khoahocs.name as khoa','monhocs.name as mon','giao_viens.name as giaovien')
+            ->join('lophocs', 'lophocs.id', '=', 'phancongs.id_lophoc')
+            ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
+            ->join('monhocs', 'monhocs.id', '=', 'phancongs.id_monhoc')
+            ->join('giao_viens', 'giao_viens.id', '=', 'phancongs.id_giaovien')
+            ->where('giao_viens.name', 'LIKE', '%'.$keyword.'%')
+            ->orWhere('lophocs.name', 'LIKE', '%'.$keyword.'%')
+            ->orWhere('khoahocs.name', 'LIKE', '%'.$keyword.'%')
+            ->orWhere('monhocs.name', 'LIKE', '%'.$keyword.'%')
+            ->paginate(7);
+        }
+    }
     static function get($id_giaovien){
         return DB::select("SELECT phancongs.id_giaovien,phancongs.id_lophoc,phancongs.id_monhoc,
         giao_viens.name as 'giaovien',

@@ -4,6 +4,13 @@
         <div class="panel-heading">
             <h2 class="text-center">Lịch sử điểm danh</h2>
         </div>
+        <div class="search">
+            <form method="GET">
+                <input type="text" name="keyword2" placeholder="Từ khóa ...">
+                <input type="date" name="keyword">
+                <button type="submit" class="btn btn-primary">Tìm</button>
+            </form>
+        </div>
         <div class="panel-body">
             <table border="1px" class="table table-bordered">
                 <thead>
