@@ -20,12 +20,27 @@ class LopHocSeeder extends Seeder
             'id_khoahoc'=>'1'
         ]);
         DB::table('lophocs')->insert([
-            'name'=>'BKN02',
-            'id_nganhhoc'=>'2',
+            'name'=>'BKD02',
+            'id_nganhhoc'=>'1',
             'id_khoahoc'=>'2'
         ]);
         DB::table('lophocs')->insert([
-            'name'=>'BKM03',
+            'name'=>'BKN02',
+            'id_nganhhoc'=>'2',
+            'id_khoahoc'=>'3'
+        ]);
+        DB::table('lophocs')->insert([
+            'name'=>'BKN03',
+            'id_nganhhoc'=>'2',
+            'id_khoahoc'=>'1'
+        ]);
+        DB::table('lophocs')->insert([
+            'name'=>'BKG03',
+            'id_nganhhoc'=>'3',
+            'id_khoahoc'=>'2'
+        ]);
+        DB::table('lophocs')->insert([
+            'name'=>'BKG01',
             'id_nganhhoc'=>'3',
             'id_khoahoc'=>'3'
         ]);

@@ -46,7 +46,7 @@ class PhanCong
         }
     }
     static function get($id_giaovien){
-        return DB::select("SELECT phancongs.id_giaovien,phancongs.id_lophoc,phancongs.id_monhoc,
+        return DB::select("SELECT phancongs.*,
         giao_viens.name as 'giaovien',
         lophocs.name as 'lop',
         monhocs.name as 'mon'
@@ -56,11 +56,11 @@ class PhanCong
         INNER JOIN monhocs ON phancongs.id_monhoc = monhocs.id 
         WHERE id_giaovien='$id_giaovien'");
     }
-    static function save($id_giaovien,$id_lop,$id_mon){
-        return DB::insert("INSERT INTO phancongs VALUES('$id_giaovien','$id_lop','$id_mon')");
+    static function save($id_giaovien,$id_lop,$id_mon,$ca_day){
+        return DB::insert("INSERT INTO phancongs VALUES('$id_giaovien','$id_lop','$id_mon','$ca_day')");
     }
-    static function update($id_giaovien,$id_lophoc,$id_monhoc){
-        $sql = "UPDATE phancongs SET id_lophoc='$id_lophoc',id_monhoc='$id_monhoc' WHERE id_giaovien='$id_giaovien'";
+    static function update($id_giaovien,$id_lophoc,$id_monhoc,$ca_day){
+        $sql = "UPDATE phancongs SET id_lophoc='$id_lophoc',id_monhoc='$id_monhoc',ca_day='$ca_day' WHERE id_giaovien='$id_giaovien'";
         return DB::update($sql);
     }
     static function delete($id_giaovien){

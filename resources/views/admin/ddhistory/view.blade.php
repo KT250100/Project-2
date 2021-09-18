@@ -6,7 +6,7 @@
         </div>
         <div class="search">
             <form method="GET">
-                <input type="text" name="keyword2" placeholder="Từ khóa ...">
+                <input style="height: 35px;" type="text" name="keyword2" placeholder="Từ khóa ...">
                 <input type="date" name="keyword">
                 <button type="submit" class="btn btn-primary">Tìm</button>
             </form>

@@ -39,6 +39,59 @@
             @endforeach
 		</select>
 	</div>
+    <div class="checkboxs">
+        <span><b>Ca dạy thứ: </b></span>
+        <ul>
+            <li>
+                <label>
+                    <input type="checkbox" value="2" name="t2">
+                    <div class="inside-cb">
+                        <span class="cb-content">2</span>
+                    </div>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" value="3" name="t3">
+                    <div class="inside-cb">
+                        <span class="cb-content">3</span>
+                    </div>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" value="4" name="t4">
+                    <div class="inside-cb">
+                        <span class="cb-content">4</span>
+                    </div>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" value="5" name="t5">
+                    <div class="inside-cb">
+                        <span class="cb-content">5</span>
+                    </div>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" value="6" name="t6">
+                    <div class="inside-cb">
+                        <span class="cb-content">6</span>
+                    </div>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" value="7" name="t7">
+                    <div class="inside-cb">
+                        <span class="cb-content">7</span>
+                    </div>
+                </label>
+            </li>
+        </ul>
+    </div>
     <div class="form-group">
         <button type="submit" class="btn btn-primary btn-block">Thêm</button>
     </div>

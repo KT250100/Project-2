@@ -2,7 +2,7 @@
 <div class="container">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h2 class="text-center">Lịch sử điểm danh</h2>
+            <h2 class="text-center">Chi tiết điểm danh</h2>
         </div>
         <div class="panel-body">
             <table border="1px" class="table table-bordered">

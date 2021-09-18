@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
 <html lang="en" dir="ltr">
-  <head>
+<head>
     <meta charset="UTF-8">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="style.css">
@@ -10,8 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
-   </head>
-   <style>
+</head>
+<style>
        /* Google Font Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
@@ -295,14 +295,79 @@
   margin-bottom: 10px;
 }
 .search input{
+  position: relative;
   height: 36px;
 }
 .search button{
   position: relative;
-  margin-top: -3px;
+  margin-top: -2px;
   height: 36px;
 }
-   </style>
+.checkboxs{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.checkboxs ul{
+  position: relative;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  border-radius: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.checkboxs ul:before{
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  bottom: -50%;
+  pointer-events: none;
+  z-index: 1;
+}
+.checkboxs ul li{
+  position: relative;
+  list-style: none;
+  text-align: center;
+  margin: 10px;
+}
+.checkboxs ul li label{
+  position: relative;
+}
+.checkboxs ul li label input[type="checkbox"]{
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.checkboxs ul li label .inside-cb{
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid black;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+.checkboxs ul li label .inside-cb .cb-content{
+  font-size: 20px;
+  color: black;
+  transition: 0.5s;
+}
+.checkboxs ul li label input[type="checkbox"]:checked ~ .inside-cb{
+  background: black;
+  border: 3px solid white;
+}
+.checkboxs ul li label input[type="checkbox"]:checked ~ .inside-cb .cb-content{
+  color: white;
+}
+</style>
 <body>
   <div class="sidebar">
     <div class="logo-details">

@@ -1,6 +1,9 @@
 @include('admin.layouts.header')
 <div class="container">
 <h2 class="text-center" >Thêm lớp</h2>
+@if(Session::has('error'))
+    <h3 style="color: red; text-align: center;">{{Session::get('error')}}</h3>
+@endif
 <form style="margin:auto; text-align:center" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="form-group input-group">

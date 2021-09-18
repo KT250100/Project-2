@@ -141,12 +141,24 @@ class AdminController extends Controller
     function storemon(Request $req){
         $name = $req->input('name');
         $id_nganh = $req->input('id_nganh');
-        $rs = Mon::save($name,$id_nganh);
-        if($rs == true){
-            return redirect("admin/mon/mon");
+        // Check trong ngành đã có môn này chưa
+        $check = DB::table('monhocs')
+            ->join('nganhhocs', 'nganhhocs.id', '=', 'monhocs.id_nganhhoc')
+            ->where([['id_nganhhoc', $id_nganh],['monhocs.name', $name]])
+            ->select('monhocs.*')
+            ->get();
+        // Có rồi thì error
+        if($check != null && count($check) > 0){
+            return redirect()->back()->with('error','Đã có môn này trong ngành');
         }
         else{
-            return "Thêm thất bại";
+            $rs = Mon::save($name,$id_nganh);
+            if($rs == true){
+                return redirect("admin/mon/mon");
+            }
+            else{
+                return "Thêm thất bại";
+            }
         }
     }
     function editmon($id){
@@ -191,12 +203,25 @@ class AdminController extends Controller
         $name = $req->input('name');
         $id_nganh = $req->input('id_nganh');
         $id_khoa = $req->input('id_khoa');
-        $rs = Lop::save($name,$id_nganh,$id_khoa);
-        if($rs == true){
-            return redirect("admin/lop/lop");
+        // Check trong khóa đã có lớp này chưa
+        $check = DB::table('lophocs')
+            ->join('nganhhocs', 'nganhhocs.id', '=', 'lophocs.id_nganhhoc')
+            ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
+            ->where([['id_khoahoc', $id_khoa],['lophocs.name', $name]])
+            ->select('lophocs.*')
+            ->get();
+        // Có rồi thì error
+        if($check != null && count($check) > 0){
+            return redirect()->back()->with('error','Đã có lớp này trong khóa');
         }
         else{
-            return "Thêm thất bại";
+            $rs = Lop::save($name,$id_nganh,$id_khoa);
+            if($rs == true){
+                return redirect("admin/lop/lop");
+            }
+            else{
+                return "Thêm thất bại";
+            }
         }
     }
     function editlop($id){

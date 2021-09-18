@@ -30,7 +30,7 @@ class DiemDanh
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
             ->join('monhocs', 'monhocs.id', '=', 'diemdanhs.id_monhoc')
             ->join('giao_viens', 'giao_viens.id', '=', 'diemdanhs.id_giaovien')
-            ->distinct()
+            ->groupBy('diemdanhs.ngaydiemdanh')
             ->orderByDesc('diemdanhs.id')
             ->paginate(7);
         }
@@ -42,10 +42,10 @@ class DiemDanh
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
             ->join('monhocs', 'monhocs.id', '=', 'diemdanhs.id_monhoc')
             ->join('giao_viens', 'giao_viens.id', '=', 'diemdanhs.id_giaovien')
-            ->distinct()
             ->where([['ngaydiemdanh', 'LIKE', '%'.$keyword.'%'],['lophocs.name', 'LIKE', '%'.$keyword2.'%']])
             ->orWhere([['ngaydiemdanh', 'LIKE', '%'.$keyword.'%'],['monhocs.name', 'LIKE', '%'.$keyword2.'%']])
             ->orWhere([['ngaydiemdanh', 'LIKE', '%'.$keyword.'%'],['giao_viens.name', 'LIKE', '%'.$keyword2.'%']])
+            ->groupBy('diemdanhs.ngaydiemdanh')
             ->paginate(7);
         }
     }
