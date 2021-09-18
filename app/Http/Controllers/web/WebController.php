@@ -53,6 +53,30 @@ class WebController extends Controller
     }
     function diemdanh(){
         // Kiểm tra đang dùng tài khoản giáo viên nào -> lọc ra lớp đc phân công
+        $mydate = new \DateTime();
+        $mydate -> modify('+7 hours');
+        $day = $mydate->format('N'); // 1 -> thứ 2, 7 -> CN
+        if($day == 1){
+            $frametime = 2;
+        }
+        if($day == 2){
+            $frametime = 3;
+        }
+        if($day == 3){
+            $frametime = 4;
+        }
+        if($day == 4){
+            $frametime = 5;
+        }
+        if($day == 5){
+            $frametime = 6;
+        }
+        if($day == 6){
+            $frametime = 7;
+        }
+        else{
+            $frametime = 'CN';
+        }
         $index = DB::table('phancongs')
             ->select('phancongs.*','lophocs.name as lop','monhocs.name as mon','khoahocs.name as khoa')
             ->join('giao_viens', 'giao_viens.id', '=', 'phancongs.id_giaovien')
@@ -60,6 +84,7 @@ class WebController extends Controller
             ->join('monhocs', 'monhocs.id', '=', 'phancongs.id_monhoc')
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
             ->where('id_giaovien', Auth::user()->id)
+            ->where('ca_day', 'LIKE', '%'.$frametime.'%')
             ->get();
         return view('web.diemdanh',['index'=>$index]);
     }
