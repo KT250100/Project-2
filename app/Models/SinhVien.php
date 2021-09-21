@@ -24,6 +24,7 @@ class SinhVien
             ->select('sinhviens.*', 'lophocs.name as lop','khoahocs.name as khoa')
             ->join('lophocs', 'lophocs.id', '=', 'sinhviens.id_lophoc')
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
+            ->orderByDesc('sinhviens.id')
             ->paginate(7);
         }
         else{
@@ -36,13 +37,13 @@ class SinhVien
             ->orWhere('email', 'LIKE', '%'.$keyword.'%')
             ->orWhere('lophocs.name', 'LIKE', '%'.$keyword.'%')
             ->orWhere('khoahocs.name', 'LIKE', '%'.$keyword.'%')
+            ->orderBy('sinhviens.id')
             ->paginate(7);
         }
     }
     static function get($id){
-        return DB::select("SELECT sinhviens.id,sinhviens.name,sinhviens.phone,sinhviens.email,sinhviens.address,sinhviens.birthday,
-        lophocs.name as 'lop',
-        sinhviens.id_lophoc FROM sinhviens INNER JOIN lophocs ON sinhviens.id_lophoc = lophocs.id
+        return DB::select("SELECT sinhviens.*, lophocs.name as 'lop' 
+        FROM sinhviens INNER JOIN lophocs ON sinhviens.id_lophoc = lophocs.id
         WHERE sinhviens.id='$id'");
     }
     static function save($name,$phone,$email,$address,$birthday,$id_lophoc){

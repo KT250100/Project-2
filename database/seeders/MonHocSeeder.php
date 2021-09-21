@@ -44,5 +44,10 @@ class MonHocSeeder extends Seeder
             'thoiluong'=>60,
             'id_nganhhoc'=>'3'
         ]);
+        DB::table('monhocs')->insert([
+            'name'=>'TEST CODE',
+            'thoiluong'=>432,
+            'id_nganhhoc'=>'1'
+        ]);
     }
 }

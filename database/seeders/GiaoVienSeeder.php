@@ -14,7 +14,7 @@ class GiaoVienSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=1; $i < 7; $i++){ 
+        for ($i=1; $i < 8; $i++){ 
             DB::table('giao_viens')->insert([
                 'name'=>'Giáo viên '.$i,
                 'phone'=> '012345678912',

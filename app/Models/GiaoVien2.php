@@ -29,7 +29,7 @@ class GiaoVien2
         }
     }
     static function get($id){
-        return DB::select("SELECT id,name,phone,email,password,address,birthday,is_active FROM giao_viens WHERE id='$id'");
+        return DB::select("SELECT * FROM giao_viens WHERE id='$id'");
     }
     static function save($name,$phone,$email,$password,$address,$birthday,$is_active){
         return DB::insert("INSERT INTO giao_viens VALUES(NULL,'$name','$phone','$email','$password','$address','$birthday','$is_active')");

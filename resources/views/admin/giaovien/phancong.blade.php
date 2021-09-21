@@ -21,6 +21,7 @@
                     <th>Lớp</th>
                     <th>Môn</th>
                     <th>Dạy thứ</th>
+                    <th>Giờ dạy</th>
                     <th>Sửa</th>
                     <th>Xóa</th>
                 </thead>
@@ -31,6 +32,7 @@
                         <td>{{$item->lop}}{{$item->khoa}}</td>
                         <td>{{$item->mon}}</td>
                         <td>{{$item->ca_day}}</td>
+                        <td>{{$item->starttime}} - {{$item->endtime}}</td>
                         <td><a href="{{url('admin/giaovien/editpc/'.$item->id_giaovien)}}">Sửa</a></td>
                         <td><a href="{{url('/deletepc/'.$item->id_giaovien)}}">Xoá</a></td>
                     </tr>

@@ -18,6 +18,7 @@
                 <thead>
                     <th>ID</th>
                     <th>Tên môn</th>
+                    <th>Thời lượng (giờ)</th>
                     <th>Ngành</th>
                     <th>Sửa</th>
                     <th>Xóa</th>
@@ -27,6 +28,7 @@
                     <tr>
                         <td>{{$item->id}}</td>
                         <td>{{$item->name}}</td>
+                        <td>{{$item->thoiluong}}</td>
                         <td>{{$item->nganh}}</td>
                         <td><a href="{{url('admin/mon/editmon/'.$item->id)}}">Sửa</a></td>
                         <td><a href="{{url('/deletemon/'.$item->id)}}">Xoá</a></td>

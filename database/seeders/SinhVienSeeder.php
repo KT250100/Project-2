@@ -19,7 +19,7 @@ class SinhVienSeeder extends Seeder
                 'name'=>'SV '.$i,
                 'phone'=> '012398745619',
                 'email'=>$i.'@gmail.com',
-                'address'=>'HN '.$i,
+                'address'=>'Hà Nội '.$i,
                 'birthday'=>'2000-01-01',
                 'id_lophoc'=>1
             ]);
@@ -29,7 +29,7 @@ class SinhVienSeeder extends Seeder
                 'name'=>'SV '.$i,
                 'phone'=> '012398745619',
                 'email'=>$i.'@gmail.com',
-                'address'=>'SG '.$i,
+                'address'=>'Sài Gòn '.$i,
                 'birthday'=>'2000-01-01',
                 'id_lophoc'=>2
             ]);
@@ -39,7 +39,7 @@ class SinhVienSeeder extends Seeder
                 'name'=>'SV '.$i,
                 'phone'=> '012398745619',
                 'email'=>$i.'@gmail.com',
-                'address'=>'ND '.$i,
+                'address'=>'Nam Định '.$i,
                 'birthday'=>'2000-01-01',
                 'id_lophoc'=>3
             ]);
@@ -49,7 +49,7 @@ class SinhVienSeeder extends Seeder
                 'name'=>'SV '.$i,
                 'phone'=> '012398745619',
                 'email'=>$i.'@gmail.com',
-                'address'=>'ND '.$i,
+                'address'=>'Đà Nẵng '.$i,
                 'birthday'=>'2000-01-01',
                 'id_lophoc'=>4
             ]);
@@ -59,7 +59,7 @@ class SinhVienSeeder extends Seeder
                 'name'=>'SV '.$i,
                 'phone'=> '012398745619',
                 'email'=>$i.'@gmail.com',
-                'address'=>'ND '.$i,
+                'address'=>'Nghệ An '.$i,
                 'birthday'=>'2000-01-01',
                 'id_lophoc'=>5
             ]);
@@ -69,9 +69,19 @@ class SinhVienSeeder extends Seeder
                 'name'=>'SV '.$i,
                 'phone'=> '012398745619',
                 'email'=>$i.'@gmail.com',
-                'address'=>'ND '.$i,
+                'address'=>'Quảng Bình '.$i,
                 'birthday'=>'2000-01-01',
                 'id_lophoc'=>6
+            ]);
+        }
+        for ($i=31; $i < 36; $i++){
+            DB::table('sinhviens')->insert([
+                'name'=>'SV '.$i,
+                'phone'=> '012398745619',
+                'email'=>$i.'@gmail.com',
+                'address'=>'Khánh Hòa '.$i,
+                'birthday'=>'2000-01-01',
+                'id_lophoc'=>7
             ]);
         }
     }

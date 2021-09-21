@@ -439,6 +439,13 @@
        </a>
        <span class="tooltip">Lịch sử điểm danh</span>
      </li>
+     <li>
+       <a href="{{route('thongke')}}">
+         <i class="fas fa-chart-bar"></i>
+         <span class="links_name">Thống kê sinh viên</span>
+       </a>
+       <span class="tooltip">Thống kê sinh viên</span>
+     </li>
      <li class="profile">
          <div class="profile-details">
            <div class="name_job">

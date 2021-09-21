@@ -70,7 +70,7 @@ class AdminController extends Controller
             return redirect("admin/nganh/nganh");
         }
         else{
-            return "Cập nhật thất bại";
+            return redirect()->back()->with('error','Không có thay đổi nào cả');
         }
     }
     function destroynganh($id){
@@ -114,7 +114,7 @@ class AdminController extends Controller
             return redirect("admin/khoa/khoa");
         }
         else{
-            return "Cập nhật thất bại";
+            return redirect()->back()->with('error','Không có thay đổi nào cả');
         }
     }
     function destroykhoa($id){
@@ -174,7 +174,7 @@ class AdminController extends Controller
             return redirect("admin/mon/mon");
         }
         else{
-            return "Cập nhật thất bại";
+            return redirect()->back()->with('error','Không có thay đổi nào cả');
         }
     }
     function destroymon($id){
@@ -239,7 +239,7 @@ class AdminController extends Controller
             return redirect("admin/lop/lop");
         }
         else{
-            return "Cập nhật thất bại";
+            return redirect()->back()->with('error','Không có thay đổi nào cả');
         }
     }
     function destroylop($id){
@@ -295,7 +295,7 @@ class AdminController extends Controller
             return redirect("admin/sinhvien/sinhvien");
         }
         else{
-            return "Cập nhật thất bại";
+            return redirect()->back()->with('error','Không có thay đổi nào cả');
         }
     }
     function destroysv($id){
@@ -306,6 +306,9 @@ class AdminController extends Controller
         else{
             return redirect("admin/sinhvien/sinhvien");
         }
+    }
+    function thongke(Request $req){
+        return view('admin.sinhvien.thongke');
     }
 
     // Lịch sử điểm danh

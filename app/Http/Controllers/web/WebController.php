@@ -59,7 +59,7 @@ class WebController extends Controller
         if($day == 1){
             $frametime = 2;
         }
-        if($day == 2){
+        if($day = 2){
             $frametime = 3;
         }
         if($day == 3){
@@ -74,7 +74,7 @@ class WebController extends Controller
         if($day == 6){
             $frametime = 7;
         }
-        else{
+        if($day == 7){
             $frametime = 'CN';
         }
         $index = DB::table('phancongs')
@@ -85,6 +85,8 @@ class WebController extends Controller
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
             ->where('id_giaovien', Auth::user()->id)
             ->where('ca_day', 'LIKE', '%'.$frametime.'%')
+            ->where('starttime', '<=', $mydate)
+            ->where('endtime', '>=', $mydate)
             ->get();
         return view('web.diemdanh',['index'=>$index]);
     }

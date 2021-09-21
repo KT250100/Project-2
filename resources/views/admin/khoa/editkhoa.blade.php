@@ -2,6 +2,9 @@
 <div class="container">
 <h2 class="text-center" >Cập nhật khóa</h2>
 <form style="margin:auto; text-align:center" method="POST" enctype="multipart/form-data">
+    @if(Session::has('error'))
+        <h3 align="center" style="color: #FF0000">{{Session::get('error')}}</h3>
+    @endif
     @csrf
     <div class="form-group input-group">
 		<div class="input-group-prepend">

@@ -17,7 +17,9 @@ class CreatePhancongsTable extends Migration
             $table->unsignedInteger('id_giaovien')/*->unique()*/;
             $table->unsignedInteger('id_lophoc');
             $table->unsignedInteger('id_monhoc');
-            $table->text('ca_day');
+            $table->text('ca_day')->nullable();
+            $table->time('starttime')->nullable();
+            $table->time('endtime')->nullable();
             $table->primary(['id_giaovien', 'id_lophoc', 'id_monhoc']);
             $table->foreign('id_giaovien')->references('id')->on('giao_viens');
             $table->foreign('id_lophoc')->references('id')->on('lophocs');

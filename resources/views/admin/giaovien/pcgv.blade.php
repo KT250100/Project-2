@@ -92,6 +92,18 @@
             </li>
         </ul>
     </div>
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text">Giờ bắt đầu</span>
+		 </div>
+        <input name="starttime" class="form-control" type="time">
+    </div>
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text">Giờ kết thúc</span>
+		 </div>
+        <input name="endtime" class="form-control" type="time">
+    </div>
     <div class="form-group">
         <button type="submit" class="btn btn-primary btn-block">Thêm</button>
     </div>
