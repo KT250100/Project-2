@@ -32,9 +32,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             SinhVienSeeder::class
         ]);
-        //SinhVien::factory(30)->create();
         $this->call([
             PhanCongSeeder::class
+        ]);
+        $this->call([
+            DiemDanhSeeder::class
         ]);
     }
 }

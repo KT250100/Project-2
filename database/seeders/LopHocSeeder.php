@@ -44,10 +44,5 @@ class LopHocSeeder extends Seeder
             'id_nganhhoc'=>'3',
             'id_khoahoc'=>'3'
         ]);
-        DB::table('lophocs')->insert([
-            'name'=>'TEST CODE',
-            'id_nganhhoc'=>'1',
-            'id_khoahoc'=>'2'
-        ]);
     }
 }

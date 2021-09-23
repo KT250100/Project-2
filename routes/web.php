@@ -5,7 +5,6 @@ use App\Http\Controllers\admin\AdminLoginController;
 use App\Http\Controllers\admin\GiaoVienController;
 use App\Http\Controllers\web\LoginController;
 use App\Http\Controllers\web\WebController;
-use App\Http\Controllers\AttendenceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -74,7 +73,10 @@ Route::post('admin/sinhvien/themsv',[AdminController::class,'storesv']);
 Route::get('admin/sinhvien/editsv/{id}',[AdminController::class,'editsv']);
 Route::post('admin/sinhvien/editsv/{id}',[AdminController::class,'updatesv']);
 Route::get('/deletesv/{id}',[AdminController::class,'destroysv']);
+// Thống kê sinh viên
 Route::get('admin/sinhvien/thongke',[AdminController::class,'thongke'])->name('thongke');
+Route::get('admin/sinhvien/tkdetails/{id}',[AdminController::class,'tkdetails'])->name('tkdetails');
+Route::get('admin/sinhvien/detail/{id_sinhvien}/{id}',[AdminController::class,'detail'])->name('detail');
 // Lịch sử điểm danh
 Route::get('admin/ddhistory/view',[AdminController::class,'view'])->name('view');
 Route::get('admin/ddhistory/details/{ngaydiemdanh}',[AdminController::class,'details'])->name('details');

@@ -30,13 +30,13 @@ class Mon
         }
     }
     static function get($id){
-        return DB::select("SELECT monhocs.id,monhocs.name,nganhhocs.name as 'nganh', monhocs.id_nganhhoc FROM monhocs INNER JOIN nganhhocs ON monhocs.id_nganhhoc = nganhhocs.id WHERE monhocs.id='$id'");
+        return DB::select("SELECT monhocs.*,nganhhocs.name as 'nganh' FROM monhocs INNER JOIN nganhhocs ON monhocs.id_nganhhoc = nganhhocs.id WHERE monhocs.id='$id'");
     }
-    static function save($name,$id_nganh){
-        return DB::insert("INSERT INTO monhocs VALUES(NULL,'$name','$id_nganh')");
+    static function save($name,$thoiluong,$id_nganh){
+        return DB::insert("INSERT INTO monhocs VALUES(NULL,'$name','$thoiluong','$id_nganh')");
     }
-    static function update($id,$name,$id_nganh){
-        $sql = "UPDATE monhocs SET name='$name', id_nganhhoc='$id_nganh' WHERE id='$id'";
+    static function update($id,$name,$thoiluong,$id_nganh){
+        $sql = "UPDATE monhocs SET name='$name', thoiluong='$thoiluong', id_nganhhoc='$id_nganh' WHERE id='$id'";
         return DB::update($sql);
     }
     static function delete($id){

@@ -74,15 +74,5 @@ class SinhVienSeeder extends Seeder
                 'id_lophoc'=>6
             ]);
         }
-        for ($i=31; $i < 36; $i++){
-            DB::table('sinhviens')->insert([
-                'name'=>'SV '.$i,
-                'phone'=> '012398745619',
-                'email'=>$i.'@gmail.com',
-                'address'=>'Khánh Hòa '.$i,
-                'birthday'=>'2000-01-01',
-                'id_lophoc'=>7
-            ]);
-        }
     }
 }

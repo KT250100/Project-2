@@ -13,6 +13,12 @@
         <input name="name" class="form-control" placeholder="Tên môn" required type="text">
     </div>
     <div class="form-group input-group">
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fas fa-desktop"></i> </span>
+		 </div>
+        <input name="thoiluong" class="form-control" placeholder="Thời lượng" required type="number">
+    </div>
+    <div class="form-group input-group">
     	<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fas fa-graduation-cap"></i> </span>
 		</div>

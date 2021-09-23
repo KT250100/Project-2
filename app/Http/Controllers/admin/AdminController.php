@@ -11,6 +11,7 @@ use App\Models\Khoa;
 use App\Models\Mon;
 use App\Models\Lop;
 use App\Models\SinhVien;
+use App\Models\ThongKe;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -140,6 +141,7 @@ class AdminController extends Controller
     }
     function storemon(Request $req){
         $name = $req->input('name');
+        $thoiluong = $req->input('thoiluong');
         $id_nganh = $req->input('id_nganh');
         // Check trong ngành đã có môn này chưa
         $check = DB::table('monhocs')
@@ -152,7 +154,7 @@ class AdminController extends Controller
             return redirect()->back()->with('error','Đã có môn này trong ngành');
         }
         else{
-            $rs = Mon::save($name,$id_nganh);
+            $rs = Mon::save($name,$thoiluong,$id_nganh);
             if($rs == true){
                 return redirect("admin/mon/mon");
             }
@@ -168,8 +170,9 @@ class AdminController extends Controller
     }
     function updatemon(Request $req,$id){
         $name = $req->input('name');
+        $thoiluong = $req->input('thoiluong');
         $id_nganh = $req->input('id_nganh');
-        $rs = Mon::update($id,$name,$id_nganh);
+        $rs = Mon::update($id,$name,$thoiluong,$id_nganh);
         if($rs == true){
             return redirect("admin/mon/mon");
         }
@@ -307,9 +310,6 @@ class AdminController extends Controller
             return redirect("admin/sinhvien/sinhvien");
         }
     }
-    function thongke(Request $req){
-        return view('admin.sinhvien.thongke');
-    }
 
     // Lịch sử điểm danh
     function view(Request $req){
@@ -325,5 +325,32 @@ class AdminController extends Controller
             ->where('diemdanhs.ngaydiemdanh', '=', $ngaydiemdanh)
             ->get();
         return view('admin.ddhistory.details',['ngaydd'=>$ngaydd,'index'=>1]);
+    }
+
+    // Thống kê sinh viên
+    function thongke(Request $req){
+        $keyword = $req->input('keyword','');
+        $sinhviens = ThongKe::getAllSearch($keyword);
+        return view('admin.sinhvien.thongke',['sinhviens'=>$sinhviens]);
+    }
+    function tkdetails($id){
+        $thongkes = ThongKe::get($id);
+        return view('admin.sinhvien.tkdetails')->with(['index'=>1,'thongkes'=>$thongkes,'id_sinhvien'=>$id]);
+    }
+    function detail(Request $req,$id,$id_sinhvien){
+        $id_sinhvien = $req->id_sinhvien;
+        $id = $req->id;
+        $detail = ThongKe::detail($id,$id_sinhvien);
+        $detail2 = ThongKe::detail2($id,$id_sinhvien);
+        $sobuoidihoc = ThongKe::sobuoidihoc($id,$id_sinhvien);
+        $sbdanghi = ThongKe::sbdanghi($id,$id_sinhvien);
+        $sbdimuon = ThongKe::sbdimuon($id,$id_sinhvien);
+        return view('admin.sinhvien.detail',[
+            'detail'=>$detail,
+            'detail2'=>$detail2,
+            'sobuoidihoc'=>$sobuoidihoc,
+            'sbdanghi'=>$sbdanghi,
+            'sbdimuon'=>$sbdimuon
+        ]);
     }
 }

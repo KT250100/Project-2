@@ -36,7 +36,7 @@ class MonHocSeeder extends Seeder
         ]);
         DB::table('monhocs')->insert([
             'name'=>'Photoshop',
-            'thoiluong'=>45,
+            'thoiluong'=>60,
             'id_nganhhoc'=>'3'
         ]);
         DB::table('monhocs')->insert([
@@ -45,8 +45,8 @@ class MonHocSeeder extends Seeder
             'id_nganhhoc'=>'3'
         ]);
         DB::table('monhocs')->insert([
-            'name'=>'TEST CODE',
-            'thoiluong'=>432,
+            'name'=>'HTML',
+            'thoiluong'=>72,
             'id_nganhhoc'=>'1'
         ]);
     }
