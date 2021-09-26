@@ -11,7 +11,6 @@ use App\Models\Khoa;
 use App\Models\Mon;
 use App\Models\Lop;
 use App\Models\SinhVien;
-use App\Models\ThongKe;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -259,7 +258,8 @@ class AdminController extends Controller
     function sinhvien(Request $req){
         //$sinhviens = SinhVien::getAll();
         $keyword = $req->input('keyword','');
-        $sinhviens = SinhVien::getAllSearch($keyword);
+        $keyword2 = $req->input('keyword2','');
+        $sinhviens = SinhVien::getAllSearch($keyword,$keyword2);
         return view('admin.sinhvien.sinhvien',['sinhviens'=>$sinhviens]);
     }
     function createsv(){
@@ -315,7 +315,7 @@ class AdminController extends Controller
     function view(Request $req){
         $keyword = $req->input('keyword','');
         $keyword2 = $req->input('keyword2','');
-        $diemdanhs = DiemDanh::getAllSearch($keyword, $keyword2);
+        $diemdanhs = DiemDanh::getAllSearch($keyword,$keyword2);
         return view('admin.ddhistory.view',['diemdanhs'=>$diemdanhs]);
     }
     function details($ngaydiemdanh){
@@ -325,32 +325,5 @@ class AdminController extends Controller
             ->where('diemdanhs.ngaydiemdanh', '=', $ngaydiemdanh)
             ->get();
         return view('admin.ddhistory.details',['ngaydd'=>$ngaydd,'index'=>1]);
-    }
-
-    // Thống kê sinh viên
-    function thongke(Request $req){
-        $keyword = $req->input('keyword','');
-        $sinhviens = ThongKe::getAllSearch($keyword);
-        return view('admin.sinhvien.thongke',['sinhviens'=>$sinhviens]);
-    }
-    function tkdetails($id){
-        $thongkes = ThongKe::get($id);
-        return view('admin.sinhvien.tkdetails')->with(['index'=>1,'thongkes'=>$thongkes,'id_sinhvien'=>$id]);
-    }
-    function detail(Request $req,$id,$id_sinhvien){
-        $id_sinhvien = $req->id_sinhvien;
-        $id = $req->id;
-        $detail = ThongKe::detail($id,$id_sinhvien);
-        $detail2 = ThongKe::detail2($id,$id_sinhvien);
-        $sobuoidihoc = ThongKe::sobuoidihoc($id,$id_sinhvien);
-        $sbdanghi = ThongKe::sbdanghi($id,$id_sinhvien);
-        $sbdimuon = ThongKe::sbdimuon($id,$id_sinhvien);
-        return view('admin.sinhvien.detail',[
-            'detail'=>$detail,
-            'detail2'=>$detail2,
-            'sobuoidihoc'=>$sobuoidihoc,
-            'sbdanghi'=>$sbdanghi,
-            'sbdimuon'=>$sbdimuon
-        ]);
     }
 }

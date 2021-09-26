@@ -10,7 +10,7 @@
         </div>
         <div class="search">
             <form method="GET">
-                <input type="text" name="keyword" placeholder="Từ khóa ...">
+                <input type="text" name="keyword" placeholder="Giảng viên, lớp, môn ...">
                 <button type="submit" class="btn btn-primary">Tìm</button>
             </form>
         </div>

@@ -17,7 +17,7 @@
                         <td>{{$index++}}</td>
                         <td hidden><input name="id_mon" value="{{$item->id}}"></td>
                         <td>{{$item->mon}}</td>
-                        <td><a href="{{url('admin/sinhvien/detail/'.$id_sinhvien.'/'.$item->id)}}">Xem</a></td>
+                        <td><a href="{{url('admin/thongke/detail/'.$id_sinhvien.'/'.$item->id)}}">Xem</a></td>
                     </tr>
                 @empty
                     <tr><td colspan="3" style="text-align:center">Danh sách rỗng</td></tr>

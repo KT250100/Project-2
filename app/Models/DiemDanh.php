@@ -34,7 +34,21 @@ class DiemDanh
             ->orderByDesc('diemdanhs.id')
             ->paginate(7);
         }
-        else{
+        elseif(empty($keyword) && $keyword2 != null){
+            return DB::table('diemdanhs')
+            ->select('diemdanhs.ngaydiemdanh','lophocs.name as lop','khoahocs.name as khoa','monhocs.name as mon','giao_viens.name as giaovien',DB::raw('CONCAT(lophocs.name,khoahocs.name)'))
+            ->join('sinhviens', 'sinhviens.id', '=', 'diemdanhs.id_sinhvien')
+            ->join('lophocs', 'lophocs.id', '=', 'sinhviens.id_lophoc')
+            ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
+            ->join('monhocs', 'monhocs.id', '=', 'diemdanhs.id_monhoc')
+            ->join('giao_viens', 'giao_viens.id', '=', 'diemdanhs.id_giaovien')
+            ->where(DB::raw('CONCAT(lophocs.name,khoahocs.name)'), 'LIKE', '%'.$keyword2.'%')
+            ->orWhere('monhocs.name', 'LIKE', '%'.$keyword2.'%')
+            ->orWhere('giao_viens.name', 'LIKE', '%'.$keyword2.'%')
+            ->groupBy('diemdanhs.ngaydiemdanh')
+            ->paginate(7);
+        }
+        elseif($keyword != null && empty($keyword2)){
             return DB::table('diemdanhs')
             ->select('diemdanhs.ngaydiemdanh','lophocs.name as lop','khoahocs.name as khoa','monhocs.name as mon','giao_viens.name as giaovien')
             ->join('sinhviens', 'sinhviens.id', '=', 'diemdanhs.id_sinhvien')
@@ -42,7 +56,19 @@ class DiemDanh
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
             ->join('monhocs', 'monhocs.id', '=', 'diemdanhs.id_monhoc')
             ->join('giao_viens', 'giao_viens.id', '=', 'diemdanhs.id_giaovien')
-            ->where([['ngaydiemdanh', 'LIKE', '%'.$keyword.'%'],['lophocs.name', 'LIKE', '%'.$keyword2.'%']])
+            ->where('ngaydiemdanh', 'LIKE', '%'.$keyword.'%')
+            ->groupBy('diemdanhs.ngaydiemdanh')
+            ->paginate(7);
+        }
+        else{
+            return DB::table('diemdanhs')
+            ->select('diemdanhs.ngaydiemdanh','lophocs.name as lop','khoahocs.name as khoa','monhocs.name as mon','giao_viens.name as giaovien',DB::raw('CONCAT(lophocs.name,khoahocs.name)'))
+            ->join('sinhviens', 'sinhviens.id', '=', 'diemdanhs.id_sinhvien')
+            ->join('lophocs', 'lophocs.id', '=', 'sinhviens.id_lophoc')
+            ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
+            ->join('monhocs', 'monhocs.id', '=', 'diemdanhs.id_monhoc')
+            ->join('giao_viens', 'giao_viens.id', '=', 'diemdanhs.id_giaovien')
+            ->where([['ngaydiemdanh', 'LIKE', '%'.$keyword.'%'],[DB::raw('CONCAT(lophocs.name,khoahocs.name)'), 'LIKE', '%'.$keyword2.'%']])
             ->orWhere([['ngaydiemdanh', 'LIKE', '%'.$keyword.'%'],['monhocs.name', 'LIKE', '%'.$keyword2.'%']])
             ->orWhere([['ngaydiemdanh', 'LIKE', '%'.$keyword.'%'],['giao_viens.name', 'LIKE', '%'.$keyword2.'%']])
             ->groupBy('diemdanhs.ngaydiemdanh')

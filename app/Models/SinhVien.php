@@ -18,8 +18,8 @@ class SinhVien
         INNER JOIN lophocs ON sinhviens.id_lophoc = lophocs.id
         INNER JOIN khoahocs ON lophocs.id_khoahoc = khoahocs.id");
     }
-    static function getAllSearch($keyword){
-        if(empty($keyword)){
+    static function getAllSearch($keyword,$keyword2){
+        if(empty($keyword) && empty($keyword2)){
             return DB::table('sinhviens')
             ->select('sinhviens.*', 'lophocs.name as lop','khoahocs.name as khoa')
             ->join('lophocs', 'lophocs.id', '=', 'sinhviens.id_lophoc')
@@ -27,16 +27,32 @@ class SinhVien
             ->orderByDesc('sinhviens.id')
             ->paginate(7);
         }
-        else{
+        elseif(empty($keyword) && $keyword2 != null){
+            return DB::table('sinhviens')
+            ->select('sinhviens.*','lophocs.name as lop','khoahocs.name as khoa',DB::raw('CONCAT(lophocs.name,khoahocs.name)'))
+            ->join('lophocs', 'lophocs.id', '=', 'sinhviens.id_lophoc')
+            ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
+            ->where(DB::raw('CONCAT(lophocs.name,khoahocs.name)'), 'LIKE', '%'.$keyword2.'%')
+            ->orderBy('sinhviens.id')
+            ->paginate(7);
+        }
+        elseif($keyword != null && empty($keyword2)){
             return DB::table('sinhviens')
             ->select('sinhviens.*','lophocs.name as lop','khoahocs.name as khoa')
             ->join('lophocs', 'lophocs.id', '=', 'sinhviens.id_lophoc')
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
             ->where('sinhviens.name', 'LIKE', '%'.$keyword.'%')
-            ->orWhere('phone', 'LIKE', '%'.$keyword.'%')
             ->orWhere('email', 'LIKE', '%'.$keyword.'%')
-            ->orWhere('lophocs.name', 'LIKE', '%'.$keyword.'%')
-            ->orWhere('khoahocs.name', 'LIKE', '%'.$keyword.'%')
+            ->orderBy('sinhviens.id')
+            ->paginate(7);
+        }
+        else{
+            return DB::table('sinhviens')
+            ->select('sinhviens.*','lophocs.name as lop','khoahocs.name as khoa',DB::raw('CONCAT(lophocs.name,khoahocs.name)'))
+            ->join('lophocs', 'lophocs.id', '=', 'sinhviens.id_lophoc')
+            ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
+            ->where([['sinhviens.name', 'LIKE', '%'.$keyword.'%'], [DB::raw('CONCAT(lophocs.name,khoahocs.name)'), 'LIKE', '%'.$keyword2.'%']])
+            ->orWhere([['email', 'LIKE', '%'.$keyword.'%'], [DB::raw('CONCAT(lophocs.name,khoahocs.name)'), 'LIKE', '%'.$keyword2.'%']])
             ->orderBy('sinhviens.id')
             ->paginate(7);
         }

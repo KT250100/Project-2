@@ -6,7 +6,7 @@
         </div>
         <div class="search">
             <form method="GET">
-                <input type="text" name="keyword" placeholder="Từ khóa ...">
+                <input type="text" name="keyword" placeholder="Tên, lớp ...">
                 <button type="submit" class="btn btn-primary">Tìm</button>
             </form>
         </div>
@@ -24,7 +24,7 @@
                         <td>{{$item->id}}</td>
                         <td>{{$item->name}}</td>
                         <td>{{$item->lop}}{{$item->khoa}}</td>
-                        <td><a href="{{url('admin/sinhvien/tkdetails/'.$item->id)}}">Xem</a></td>
+                        <td><a href="{{url('admin/thongke/tkdetails/'.$item->id)}}">Xem</a></td>
                     </tr>
                 @empty
                     <tr><td colspan="4" style="text-align:center">Danh sách rỗng</td></tr>

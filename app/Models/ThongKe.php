@@ -19,12 +19,11 @@ class ThongKe
         }
         else{
             return DB::table('sinhviens')
-            ->select('sinhviens.*','lophocs.name as lop','khoahocs.name as khoa')
+            ->select('sinhviens.*','lophocs.name as lop','khoahocs.name as khoa',DB::raw('CONCAT(lophocs.name,khoahocs.name)'))
             ->join('lophocs', 'lophocs.id', '=', 'sinhviens.id_lophoc')
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
             ->where('sinhviens.name', 'LIKE', '%'.$keyword.'%')
-            ->orWhere('lophocs.name', 'LIKE', '%'.$keyword.'%')
-            ->orWhere('khoahocs.name', 'LIKE', '%'.$keyword.'%')
+            ->orWhere(DB::raw('CONCAT(lophocs.name,khoahocs.name)'), 'LIKE', '%'.$keyword.'%')
             ->orderBy('sinhviens.id')
             ->paginate(7);
         }
@@ -77,5 +76,8 @@ class ThongKe
         INNER JOIN monhocs ON monhocs.id = diemdanhs.id_monhoc
         INNER JOIN sinhviens ON sinhviens.id = diemdanhs.id_sinhvien
         WHERE monhocs.id = '$id' AND sinhviens.id = '$id_sinhvien' AND diemdanhs.status = -1");
+    }
+    static function countchart(){
+        return DB::select("SELECT status as 'tinhtrang', COUNT(id) as 'soluong' FROM diemdanhs GROUP BY status");
     }
 }

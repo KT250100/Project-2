@@ -33,14 +33,13 @@ class PhanCong
         }
         else{
             return DB::table('phancongs')
-            ->select('phancongs.*','lophocs.name as lop','khoahocs.name as khoa','monhocs.name as mon','giao_viens.name as giaovien')
+            ->select('phancongs.*','lophocs.name as lop','khoahocs.name as khoa','monhocs.name as mon','giao_viens.name as giaovien',DB::raw('CONCAT(lophocs.name,khoahocs.name)'))
             ->join('lophocs', 'lophocs.id', '=', 'phancongs.id_lophoc')
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
             ->join('monhocs', 'monhocs.id', '=', 'phancongs.id_monhoc')
             ->join('giao_viens', 'giao_viens.id', '=', 'phancongs.id_giaovien')
             ->where('giao_viens.name', 'LIKE', '%'.$keyword.'%')
-            ->orWhere('lophocs.name', 'LIKE', '%'.$keyword.'%')
-            ->orWhere('khoahocs.name', 'LIKE', '%'.$keyword.'%')
+            ->orWhere(DB::raw('CONCAT(lophocs.name,khoahocs.name)'), 'LIKE', '%'.$keyword.'%')
             ->orWhere('monhocs.name', 'LIKE', '%'.$keyword.'%')
             ->paginate(7);
         }

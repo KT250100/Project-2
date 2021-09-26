@@ -29,12 +29,10 @@ class Lop
         }
         else{
             return DB::table('lophocs')
-            ->select('lophocs.*','khoahocs.name as khoa','nganhhocs.name as nganh')
+            ->select('lophocs.*','khoahocs.name as khoa','nganhhocs.name as nganh',DB::raw('CONCAT(lophocs.name,khoahocs.name)'))
             ->join('nganhhocs', 'nganhhocs.id', '=', 'lophocs.id_nganhhoc')
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
-            ->where('lophocs.name', 'LIKE', '%'.$keyword.'%')
-            ->orWhere('khoahocs.name', 'LIKE', '%'.$keyword.'%')
-            ->orWhere('nganhhocs.name', 'LIKE', '%'.$keyword.'%')
+            ->where(DB::raw('CONCAT(lophocs.name,khoahocs.name)'), 'LIKE', '%'.$keyword.'%')
             ->paginate(7);
         }
     }

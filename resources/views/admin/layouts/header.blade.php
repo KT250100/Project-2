@@ -446,12 +446,19 @@
        </a>
        <span class="tooltip">Thống kê sinh viên</span>
      </li>
+     <li>
+       <a href="{{route('bieudo')}}">
+         <i class="fas fa-chart-pie"></i>
+         <span class="links_name">Biểu đồ</span>
+       </a>
+       <span class="tooltip">Biểu đồ</span>
+     </li>
      <li class="profile">
          <div class="profile-details">
            <div class="name_job">
             @if(Auth::guard('admin')->user() != null)
                 <div class="name">{{Auth::guard('admin')->user()->name}}</div>
-                <a href="{{route('logout')}}"><i class='bx bx-log-out' id="log_out" ></i></a>
+                <a href="{{route('admin.logout')}}"><i class='bx bx-log-out' id="log_out" ></i></a>
                 <span class="tooltip">Logout</span>
             @endif    
            </div>

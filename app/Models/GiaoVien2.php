@@ -23,7 +23,6 @@ class GiaoVien2
             return DB::table('giao_viens')
             ->select('giao_viens.*')
             ->where('name', 'LIKE', '%'.$keyword.'%')
-            ->orWhere('phone', 'LIKE', '%'.$keyword.'%')
             ->orWhere('email', 'LIKE', '%'.$keyword.'%')
             ->paginate(7);
         }
