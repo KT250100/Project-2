@@ -77,8 +77,13 @@ Route::get('/deletesv/{id}',[AdminController::class,'destroysv']);
 // Thống kê sinh viên
 Route::get('admin/thongke/thongke',[ThongKeController::class,'thongke'])->name('thongke');
 Route::get('admin/thongke/tkdetails/{id}',[ThongKeController::class,'tkdetails']);
-Route::get('admin/thongke/detail/{id_sinhvien}/{id}',[ThongKeController::class,'detail']);
+Route::get('admin/thongke/detail/{id_lop}/{id}',[ThongKeController::class,'detail']);
+Route::get('admin/thongke/detail2/{id_lop}/{id_mon}/{id}',[ThongKeController::class,'detail2']);
+Route::get('admin/thongke/detail3/{id_lop}/{id_mon}/{id}',[ThongKeController::class,'detail3']);
+// Biểu đồ
 Route::get('admin/thongke/bieudo',[ThongKeController::class,'bieudo'])->name('bieudo');
+Route::get('admin/thongke/bieudolop/{id}',[ThongKeController::class,'bieudolop']);
+Route::get('admin/thongke/bd_detail/{id_lop}/{id}',[ThongKeController::class,'bd_detail']);
 // Lịch sử điểm danh
 Route::get('admin/ddhistory/view',[AdminController::class,'view'])->name('view');
 Route::get('admin/ddhistory/details/{ngaydiemdanh}',[AdminController::class,'details'])->name('details');

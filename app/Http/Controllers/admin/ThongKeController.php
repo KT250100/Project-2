@@ -5,31 +5,44 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\ThongKe;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ThongKeController extends Controller
 {
     // Thống kê sinh viên
     function thongke(Request $req){
         $keyword = $req->input('keyword','');
-        $sinhviens = ThongKe::getAllSearch($keyword);
-        return view('admin.thongke.thongke',['sinhviens'=>$sinhviens]);
+        $lops = ThongKe::getAllSearch($keyword);
+        return view('admin.thongke.thongke',['lops'=>$lops]);
     }
     function tkdetails($id){
         $thongkes = ThongKe::get($id);
-        return view('admin.thongke.tkdetails')->with(['index'=>1,'thongkes'=>$thongkes,'id_sinhvien'=>$id]);
+        return view('admin.thongke.tkdetails')->with(['index'=>1,'thongkes'=>$thongkes,'id_lop'=>$id]);
     }
-    function detail(Request $req,$id,$id_sinhvien){
-        $id_sinhvien = $req->id_sinhvien;
+    function detail(Request $req,$id,$id_lop){
+        $id_lop = $req->id_lop;
         $id = $req->id;
-        $detail = ThongKe::detail($id,$id_sinhvien);
-        $detail2 = ThongKe::detail2($id,$id_sinhvien);
-        $sobuoidihoc = ThongKe::sobuoidihoc($id,$id_sinhvien);
-        $sbdanghi = ThongKe::sbdanghi($id,$id_sinhvien);
-        $sbdimuon = ThongKe::sbdimuon($id,$id_sinhvien);
-        return view('admin.thongke.detail',[
-            'detail'=>$detail,
-            'detail2'=>$detail2,
+        $detail = ThongKe::detail($id_lop);
+        return view('admin.thongke.detail',['detail'=>$detail,'id_lop'=>$id_lop,'id_mon'=>$id]);
+    }
+    function detail2(Request $req,$id,$id_lop,$id_mon){
+        $id_lop = $req->id_lop;
+        $id_mon = $req->id_mon;
+        $id = $req->id;
+        $detail2 = ThongKe::detail2($id,$id_mon);
+        return view('admin.thongke.detail2',['detail2'=>$detail2]);
+    }
+    function detail3(Request $req,$id,$id_lop,$id_mon){
+        $id_lop = $req->id_lop;
+        $id_mon = $req->id_mon;
+        $id = $req->id;
+        $detail3_1 = ThongKe::detail3_1($id,$id_mon);
+        $detail3_2 = ThongKe::detail3_2($id,$id_mon);
+        $sobuoidihoc = ThongKe::sobuoidihoc($id,$id_mon);
+        $sbdanghi = ThongKe::sbdanghi($id,$id_mon);
+        $sbdimuon = ThongKe::sbdimuon($id,$id_mon);
+        return view('admin.thongke.detail3',[
+            'detail3_1'=>$detail3_1,
+            'detail3_2'=>$detail3_2,
             'sobuoidihoc'=>$sobuoidihoc,
             'sbdanghi'=>$sbdanghi,
             'sbdimuon'=>$sbdimuon
@@ -37,8 +50,20 @@ class ThongKeController extends Controller
     }
     
     // Biểu đồ
-    function bieudo(){
-        $result = ThongKe::countchart();
+    function bieudo(Request $req){
+        $keyword = $req->input('keyword','');
+        $lops = ThongKe::getAllSearch($keyword);
+        return view('admin.thongke.bieudo',['lops'=>$lops]);
+    }
+    function bieudolop($id){
+        $thongkes = ThongKe::get($id);
+        return view('admin.thongke.bieudolop')->with(['index'=>1,'thongkes'=>$thongkes,'id_lop'=>$id]);
+    }
+
+    function bd_detail(Request $req,$id,$id_lop){
+        $id_lop = $req->id_lop;
+        $id_mon = $req->id;
+        $result = ThongKe::countchart2($id_mon);
         $charData = "";
         foreach($result as $list){
             if($list->tinhtrang == 0){
@@ -56,6 +81,6 @@ class ThongKeController extends Controller
             $charData.= "['".$list->tinhtrang."', ".$list->soluong."],";
         }
         $arr['charData']=rtrim($charData,',');
-        return view('admin.thongke.bieudo',$arr);
+        return view('admin.thongke.bd_detail',$arr);
     }
 }

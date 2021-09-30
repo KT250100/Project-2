@@ -2,7 +2,7 @@
 <div class="container">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h2 class="text-center">Thống kê sinh viên</h2>
+            <h2 class="text-center">Thống kê các lớp</h2>
         </div>
         <div class="search">
             <form method="GET">
@@ -14,16 +14,16 @@
             <table border="1px" class="table table-bordered">
                 <thead>
                     <th>ID</th>
-                    <th>Tên</th>
                     <th>Lớp</th>
+                    <th>Ngành</th>
                     <th>Chi tiết thống kê</th>
                 </thead>
                 <tbody>
-                @forelse ($sinhviens as $item)
+                @forelse ($lops as $item)
                     <tr>
                         <td>{{$item->id}}</td>
-                        <td>{{$item->name}}</td>
                         <td>{{$item->lop}}{{$item->khoa}}</td>
+                        <td>{{$item->nganh}}</td>
                         <td><a href="{{url('admin/thongke/tkdetails/'.$item->id)}}">Xem</a></td>
                     </tr>
                 @empty
@@ -34,7 +34,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        {{ $sinhviens->withQueryString()->links() }}
+        {{ $lops->withQueryString()->links() }}
     </div>
 </div>
 @include('admin.layouts.footer')

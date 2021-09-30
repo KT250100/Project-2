@@ -1,23 +1,40 @@
 @include('admin.layouts.header')
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Task', 'Hours per Day'],
-            <?php
-                echo $charData;
-            ?>
-        ]);
-        var options = {
-          title: 'Thống kê tình trạng đi học của sinh viên'
-        };
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-        chart.draw(data, options);
-    }
-</script>
 <div class="container">
-    <div id="piechart" style="width: 100%; height: 82vh;"></div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2 class="text-center">Thống kê các lớp</h2>
+        </div>
+        <div class="search">
+            <form method="GET">
+                <input type="text" name="keyword" placeholder="Tên, lớp ...">
+                <button type="submit" class="btn btn-primary">Tìm</button>
+            </form>
+        </div>
+        <div class="panel-body">
+            <table border="1px" class="table table-bordered">
+                <thead>
+                    <th>ID</th>
+                    <th>Lớp</th>
+                    <th>Ngành</th>
+                    <th>Chi tiết thống kê</th>
+                </thead>
+                <tbody>
+                @forelse ($lops as $item)
+                    <tr>
+                        <td>{{$item->id}}</td>
+                        <td>{{$item->lop}}{{$item->khoa}}</td>
+                        <td>{{$item->nganh}}</td>
+                        <td><a href="{{url('admin/thongke/bieudolop/'.$item->id)}}">Xem</a></td>
+                    </tr>
+                @empty
+                    <tr><td colspan="4" style="text-align:center">Danh sách rỗng</td></tr>
+                @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        {{ $lops->withQueryString()->links() }}
+    </div>
 </div>
 @include('admin.layouts.footer')
