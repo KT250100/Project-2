@@ -4,34 +4,33 @@
         <div class="panel-heading">
             <h2 class="text-center">Chi tiết điểm danh</h2>
         </div>
+        <div class="search">
+            <form method="GET">
+                <input type="date" name="keyword">
+                <button type="submit" class="btn btn-primary">Tìm</button>
+            </form>
+        </div>
         <div class="panel-body">
             <table border="1px" class="table table-bordered">
                 <thead>
-                    <th>STT</th>
-                    <th>Sinh viên</th>
-                    <th>Điểm danh</th>
-                    <th>Note</th>
+                    <th>Ngày điểm danh</th>
+                    <th>Giảng viên</th>
+                    <th>Chi tiết</th>
                 </thead>
                 <tbody>
-                @foreach($ngaydd as $item)
+                @foreach($details as $item)
                     <tr>
-                        <td>{{$index++}}</td>
-                        <td>{{$item->name}}</td>
-                        @if($item->status == 1)
-                        <td>Đi học</td>
-                        @elseif($item->status == 0)
-                        <td>Nghỉ</td>
-                        @elseif($item->status == -1)
-                        <td>Muộn</td>
-                        @else($item->status == 2)
-                        <td>Có phép</td>
-                        @endif
-                        <td>{{$item->note}}</td>
+                        <td>{{$item->ngaydiemdanh}}</td>
+                        <td>{{$item->gv}}</td>
+                        <td><a href="{{url('admin/ddhistory/detail/'.$id_lop.'/'.$id_mon.'/'.$item->ngaydiemdanh)}}">Xem</a></td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        {{ $details->withQueryString()->links() }}
     </div>
 </div>
 @include('admin.layouts.footer')

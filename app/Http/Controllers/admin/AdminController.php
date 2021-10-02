@@ -4,7 +4,6 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin2;
-use App\Models\DiemDanh;
 use Illuminate\Http\Request;
 use App\Models\Nganh;
 use App\Models\Khoa;
@@ -309,21 +308,5 @@ class AdminController extends Controller
         else{
             return redirect("admin/sinhvien/sinhvien");
         }
-    }
-
-    // Lịch sử điểm danh
-    function view(Request $req){
-        $keyword = $req->input('keyword','');
-        $keyword2 = $req->input('keyword2','');
-        $diemdanhs = DiemDanh::getAllSearch($keyword,$keyword2);
-        return view('admin.ddhistory.view',['diemdanhs'=>$diemdanhs]);
-    }
-    function details($ngaydiemdanh){
-        $ngaydd = DB::table('diemdanhs')
-            ->select('diemdanhs.*', 'sinhviens.name as name')
-            ->join('sinhviens', 'sinhviens.id', '=', 'diemdanhs.id_sinhvien')
-            ->where('diemdanhs.ngaydiemdanh', '=', $ngaydiemdanh)
-            ->get();
-        return view('admin.ddhistory.details',['ngaydd'=>$ngaydd,'index'=>1]);
     }
 }

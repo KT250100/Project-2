@@ -2,11 +2,11 @@
 <div class="container">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h2 class="text-center">Thống kê các lớp</h2>
+            <h2 class="text-center">Biểu đồ các lớp</h2>
         </div>
         <div class="search">
             <form method="GET">
-                <input type="text" name="keyword" placeholder="Tên, lớp ...">
+                <input type="text" name="keyword" placeholder="Tên lớp, ngành ...">
                 <button type="submit" class="btn btn-primary">Tìm</button>
             </form>
         </div>
@@ -16,7 +16,7 @@
                     <th>ID</th>
                     <th>Lớp</th>
                     <th>Ngành</th>
-                    <th>Chi tiết thống kê</th>
+                    <th>Chi tiết biểu đồ</th>
                 </thead>
                 <tbody>
                 @forelse ($lops as $item)

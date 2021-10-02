@@ -74,6 +74,11 @@ Route::post('admin/sinhvien/themsv',[AdminController::class,'storesv']);
 Route::get('admin/sinhvien/editsv/{id}',[AdminController::class,'editsv']);
 Route::post('admin/sinhvien/editsv/{id}',[AdminController::class,'updatesv']);
 Route::get('/deletesv/{id}',[AdminController::class,'destroysv']);
+// Lịch sử điểm danh
+Route::get('admin/ddhistory/view',[ThongKeController::class,'view'])->name('view');
+Route::get('admin/ddhistory/viewmon/{id}',[ThongKeController::class,'viewmon']);
+Route::get('admin/ddhistory/details/{id_lop}/{id}',[ThongKeController::class,'details']);
+Route::get('admin/ddhistory/detail/{id_lop}/{id_mon}/{ngaydiemdanh}',[ThongKeController::class,'dddetail']);
 // Thống kê sinh viên
 Route::get('admin/thongke/thongke',[ThongKeController::class,'thongke'])->name('thongke');
 Route::get('admin/thongke/tkdetails/{id}',[ThongKeController::class,'tkdetails']);
@@ -84,9 +89,6 @@ Route::get('admin/thongke/detail3/{id_lop}/{id_mon}/{id}',[ThongKeController::cl
 Route::get('admin/thongke/bieudo',[ThongKeController::class,'bieudo'])->name('bieudo');
 Route::get('admin/thongke/bieudolop/{id}',[ThongKeController::class,'bieudolop']);
 Route::get('admin/thongke/bd_detail/{id_lop}/{id}',[ThongKeController::class,'bd_detail']);
-// Lịch sử điểm danh
-Route::get('admin/ddhistory/view',[AdminController::class,'view'])->name('view');
-Route::get('admin/ddhistory/details/{ngaydiemdanh}',[AdminController::class,'details'])->name('details');
 
 // Người dùng
 Route::get('/',[WebController::class,'index'])->name('home');

@@ -95,8 +95,11 @@ class ThongKe
     static function countchart(){
         return DB::select("SELECT status as 'tinhtrang', COUNT(id) as 'soluong' FROM diemdanhs GROUP BY status");
     }
-    static function countchart2($id_mon){
-        return DB::select("SELECT status as 'tinhtrang', COUNT(id) as 'soluong' 
-        FROM diemdanhs WHERE id_monhoc = '$id_mon' GROUP BY status");
+    static function countchart2($id_mon,$id_lop){
+        return DB::select("SELECT status as 'tinhtrang', COUNT(diemdanhs.id) as 'soluong' 
+        FROM diemdanhs 
+        INNER JOIN sinhviens ON sinhviens.id = diemdanhs.id_sinhvien
+        WHERE diemdanhs.id_monhoc = '$id_mon' AND sinhviens.id_lophoc = '$id_lop'
+        GROUP BY status");
     }
 }

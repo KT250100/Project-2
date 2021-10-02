@@ -2,13 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class DiemDanh
 {
-    use HasFactory;
     static function getAll(){
         return DB::select("SELECT phancongs.id_giaovien,phancongs.id_lophoc,phancongs.id_monhoc,
         giao_viens.name as 'giaovien',
@@ -21,59 +18,34 @@ class DiemDanh
         INNER JOIN monhocs ON phancongs.id_monhoc = monhocs.id
         INNER JOIN khoahocs ON lophocs.id_khoahoc = khoahocs.id");
     }
-    static function getAllSearch($keyword, $keyword2){
-        if(empty($keyword) && empty($keyword2)){
+    static function ddhistory($id_mon,$id_lop,$keyword){
+        if(empty($keyword)){
             return DB::table('diemdanhs')
-            ->select('diemdanhs.ngaydiemdanh','lophocs.name as lop','khoahocs.name as khoa','monhocs.name as mon','giao_viens.name as giaovien')
-            ->join('sinhviens', 'sinhviens.id', '=', 'diemdanhs.id_sinhvien')
-            ->join('lophocs', 'lophocs.id', '=', 'sinhviens.id_lophoc')
-            ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
-            ->join('monhocs', 'monhocs.id', '=', 'diemdanhs.id_monhoc')
+            ->select('diemdanhs.*','giao_viens.name as gv')
             ->join('giao_viens', 'giao_viens.id', '=', 'diemdanhs.id_giaovien')
-            ->groupBy('diemdanhs.ngaydiemdanh')
-            ->orderByDesc('diemdanhs.id')
-            ->paginate(7);
-        }
-        elseif(empty($keyword) && $keyword2 != null){
-            return DB::table('diemdanhs')
-            ->select('diemdanhs.ngaydiemdanh','lophocs.name as lop','khoahocs.name as khoa','monhocs.name as mon','giao_viens.name as giaovien',DB::raw('CONCAT(lophocs.name,khoahocs.name)'))
             ->join('sinhviens', 'sinhviens.id', '=', 'diemdanhs.id_sinhvien')
-            ->join('lophocs', 'lophocs.id', '=', 'sinhviens.id_lophoc')
-            ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
-            ->join('monhocs', 'monhocs.id', '=', 'diemdanhs.id_monhoc')
-            ->join('giao_viens', 'giao_viens.id', '=', 'diemdanhs.id_giaovien')
-            ->where(DB::raw('CONCAT(lophocs.name,khoahocs.name)'), 'LIKE', '%'.$keyword2.'%')
-            ->orWhere('monhocs.name', 'LIKE', '%'.$keyword2.'%')
-            ->orWhere('giao_viens.name', 'LIKE', '%'.$keyword2.'%')
+            ->where('diemdanhs.id_monhoc', '=', $id_mon)
+            ->where('sinhviens.id_lophoc', '=', $id_lop)
             ->groupBy('diemdanhs.ngaydiemdanh')
-            ->paginate(7);
-        }
-        elseif($keyword != null && empty($keyword2)){
-            return DB::table('diemdanhs')
-            ->select('diemdanhs.ngaydiemdanh','lophocs.name as lop','khoahocs.name as khoa','monhocs.name as mon','giao_viens.name as giaovien')
-            ->join('sinhviens', 'sinhviens.id', '=', 'diemdanhs.id_sinhvien')
-            ->join('lophocs', 'lophocs.id', '=', 'sinhviens.id_lophoc')
-            ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
-            ->join('monhocs', 'monhocs.id', '=', 'diemdanhs.id_monhoc')
-            ->join('giao_viens', 'giao_viens.id', '=', 'diemdanhs.id_giaovien')
-            ->where('ngaydiemdanh', 'LIKE', '%'.$keyword.'%')
-            ->groupBy('diemdanhs.ngaydiemdanh')
+            ->orderByDesc('diemdanhs.ngaydiemdanh')
             ->paginate(7);
         }
         else{
             return DB::table('diemdanhs')
-            ->select('diemdanhs.ngaydiemdanh','lophocs.name as lop','khoahocs.name as khoa','monhocs.name as mon','giao_viens.name as giaovien',DB::raw('CONCAT(lophocs.name,khoahocs.name)'))
-            ->join('sinhviens', 'sinhviens.id', '=', 'diemdanhs.id_sinhvien')
-            ->join('lophocs', 'lophocs.id', '=', 'sinhviens.id_lophoc')
-            ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
-            ->join('monhocs', 'monhocs.id', '=', 'diemdanhs.id_monhoc')
+            ->select('diemdanhs.*','giao_viens.name as gv')
             ->join('giao_viens', 'giao_viens.id', '=', 'diemdanhs.id_giaovien')
-            ->where([['ngaydiemdanh', 'LIKE', '%'.$keyword.'%'],[DB::raw('CONCAT(lophocs.name,khoahocs.name)'), 'LIKE', '%'.$keyword2.'%']])
-            ->orWhere([['ngaydiemdanh', 'LIKE', '%'.$keyword.'%'],['monhocs.name', 'LIKE', '%'.$keyword2.'%']])
-            ->orWhere([['ngaydiemdanh', 'LIKE', '%'.$keyword.'%'],['giao_viens.name', 'LIKE', '%'.$keyword2.'%']])
+            ->join('sinhviens', 'sinhviens.id', '=', 'diemdanhs.id_sinhvien')
+            ->where('diemdanhs.id_monhoc', '=', $id_mon)
+            ->where('sinhviens.id_lophoc', '=', $id_lop)
+            ->where('diemdanhs.ngaydiemdanh', 'LIKE', '%'.$keyword.'%')
             ->groupBy('diemdanhs.ngaydiemdanh')
             ->paginate(7);
         }
+    }
+    static function dddetail($id_lop,$id_mon,$ngaydiemdanh){
+        return DB::select("SELECT diemdanhs.*, sinhviens.name as 'sv' FROM diemdanhs
+        INNER JOIN sinhviens ON sinhviens.id = diemdanhs.id_sinhvien
+        WHERE sinhviens.id_lophoc = '$id_lop' AND diemdanhs.id_monhoc = '$id_mon' AND diemdanhs.ngaydiemdanh = '$ngaydiemdanh'");
     }
     static function save($id_monhoc,$id_giaovien,$id_sinhvien,$status,$ngaydiemdanh,$note){
         return DB::insert("INSERT INTO diemdanhs VALUES('$id_monhoc','$id_giaovien','$id_sinhvien','$status','$ngaydiemdanh','$note')");

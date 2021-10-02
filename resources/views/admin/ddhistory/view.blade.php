@@ -6,38 +6,35 @@
         </div>
         <div class="search">
             <form method="GET">
-                <input style="height: 35px;" type="text" name="keyword2" placeholder="Lớp, môn, giảng viên ...">
-                <input type="date" name="keyword">
+                <input type="text" name="keyword" placeholder="Tên lớp, ngành ...">
                 <button type="submit" class="btn btn-primary">Tìm</button>
             </form>
         </div>
         <div class="panel-body">
             <table border="1px" class="table table-bordered">
                 <thead>
-                    <th>Ngày điểm danh</th>
+                    <th>ID</th>
                     <th>Lớp</th>
-                    <th>Môn</th>
-                    <th>Giảng viên</th>
-                    <th>Chi tiết</th>
+                    <th>Ngành</th>
+                    <th>Chi tiết thống kê</th>
                 </thead>
                 <tbody>
-                @forelse ($diemdanhs as $item)
+                @forelse ($lops as $item)
                     <tr>
-                        <td>{{$item->ngaydiemdanh}}</td>
+                        <td>{{$item->id}}</td>
                         <td>{{$item->lop}}{{$item->khoa}}</td>
-                        <td>{{$item->mon}}</td>
-                        <td>{{$item->giaovien}}</td>
-                        <td><a href="{{url('admin/ddhistory/details/'.$item->ngaydiemdanh)}}">Xem</a></td>
+                        <td>{{$item->nganh}}</td>
+                        <td><a href="{{url('admin/ddhistory/viewmon/'.$item->id)}}">Xem</a></td>
                     </tr>
                 @empty
-                    <tr><td colspan="5" style="text-align:center">Danh sách rỗng</td></tr>
+                    <tr><td colspan="4" style="text-align:center">Danh sách rỗng</td></tr>
                 @endforelse
                 </tbody>
             </table>
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        {!! $diemdanhs->links() !!}
+        {{ $lops->withQueryString()->links() }}
     </div>
 </div>
 @include('admin.layouts.footer')

@@ -3,11 +3,43 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\DiemDanh;
 use App\Models\ThongKe;
 use Illuminate\Http\Request;
 
 class ThongKeController extends Controller
 {
+    
+    // Lịch sử điểm danh
+    function view(Request $req){
+        $keyword = $req->input('keyword','');
+        $lops = ThongKe::getAllSearch($keyword);
+        return view('admin.ddhistory.view',['lops'=>$lops]);
+    }
+    function viewmon($id){
+        $thongkes = ThongKe::get($id);
+        return view('admin.ddhistory.viewmon')->with(['index'=>1,'thongkes'=>$thongkes,'id_lop'=>$id]);
+    }
+    function details(Request $req,$id_lop){
+        $id_lop = $req->id_lop;
+        $id_mon = $req->id;
+        $keyword = $req->input('keyword','');
+        $details = DiemDanh::ddhistory($id_mon,$id_lop,$keyword);
+        return view('admin.ddhistory.details',['details'=>$details,'id_lop'=>$id_lop,'id_mon'=>$id_mon]);
+    }
+    function dddetail(Request $req,$id_lop,$id_mon){
+        $id_lop = $req->id_lop;
+        $id_mon = $req->id_mon;
+        $ngaydiemdanh = $req->ngaydiemdanh;
+        $ngaydd = DiemDanh::dddetail($id_lop,$id_mon,$ngaydiemdanh);
+        return view('admin.ddhistory.detail',[
+            'index'=>1,
+            'ngaydd'=>$ngaydd,
+            'id_lop'=>$id_lop,
+            'id_mon'=>$id_mon
+        ]);
+    }
+
     // Thống kê sinh viên
     function thongke(Request $req){
         $keyword = $req->input('keyword','');
@@ -59,11 +91,10 @@ class ThongKeController extends Controller
         $thongkes = ThongKe::get($id);
         return view('admin.thongke.bieudolop')->with(['index'=>1,'thongkes'=>$thongkes,'id_lop'=>$id]);
     }
-
     function bd_detail(Request $req,$id,$id_lop){
         $id_lop = $req->id_lop;
         $id_mon = $req->id;
-        $result = ThongKe::countchart2($id_mon);
+        $result = ThongKe::countchart2($id_mon,$id_lop);
         $charData = "";
         foreach($result as $list){
             if($list->tinhtrang == 0){
