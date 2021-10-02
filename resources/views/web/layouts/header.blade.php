@@ -286,6 +286,20 @@
 .user-container .table th, .table td{
   padding: 10px;
 }
+.search{
+  position: relative;
+  float: right;
+  margin-bottom: 10px;
+}
+.search input{
+  position: relative;
+  height: 36px;
+}
+.search button{
+  position: relative;
+  margin-top: -2px;
+  height: 36px;
+}
    </style>
 <body>
   <div class="sidebar">
@@ -308,6 +322,13 @@
          <span class="links_name">Điểm danh</span>
        </a>
        <span class="tooltip">Điểm danh</span>
+     </li>
+     <li>
+       <a href="{{route('history')}}">
+         <i class="fas fa-history"></i>
+         <span class="links_name">Lịch sử điểm danh</span>
+       </a>
+       <span class="tooltip">Lịch sử điểm danh</span>
      </li>
      <li class="profile">
          <div class="profile-details">

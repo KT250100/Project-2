@@ -20,14 +20,14 @@ class ThongKeController extends Controller
         $thongkes = ThongKe::get($id);
         return view('admin.ddhistory.viewmon')->with(['index'=>1,'thongkes'=>$thongkes,'id_lop'=>$id]);
     }
-    function details(Request $req,$id_lop){
+    function details(Request $req){
         $id_lop = $req->id_lop;
         $id_mon = $req->id;
         $keyword = $req->input('keyword','');
         $details = DiemDanh::ddhistory($id_mon,$id_lop,$keyword);
         return view('admin.ddhistory.details',['details'=>$details,'id_lop'=>$id_lop,'id_mon'=>$id_mon]);
     }
-    function dddetail(Request $req,$id_lop,$id_mon){
+    function dddetail(Request $req){
         $id_lop = $req->id_lop;
         $id_mon = $req->id_mon;
         $ngaydiemdanh = $req->ngaydiemdanh;

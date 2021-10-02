@@ -9,15 +9,6 @@ use Illuminate\Support\Facades\DB;
 class SinhVien
 {
     use HasFactory;
-    static function getAll(){
-        return DB::select("SELECT sinhviens.id,sinhviens.name,sinhviens.phone,sinhviens.email,sinhviens.address,sinhviens.birthday,
-        lophocs.name as 'lop',
-        khoahocs.name as 'khoa',
-        sinhviens.id_lophoc 
-        FROM sinhviens
-        INNER JOIN lophocs ON sinhviens.id_lophoc = lophocs.id
-        INNER JOIN khoahocs ON lophocs.id_khoahoc = khoahocs.id");
-    }
     static function getAllSearch($keyword,$keyword2){
         if(empty($keyword) && empty($keyword2)){
             return DB::table('sinhviens')

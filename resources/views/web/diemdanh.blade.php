@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h2 class="text-center">Điểm danh</h2>
+				<h2 style="padding-top: 35px;" class="text-center">Điểm danh</h2>
 			</div>
 			<div class="panel-body">
                 <table class="table table-bordered">

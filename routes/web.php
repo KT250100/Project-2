@@ -103,4 +103,7 @@ Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 Route::get('/diemdanh',[WebController::class,'diemdanh'])->name('diemdanh');
 Route::get('/createdd',[WebController::class,'createdd'])->name('createdd');
 Route::post('/createdd',[WebController::class,'storedd'])->name('storedd');
+Route::get('/history',[WebController::class,'history'])->name('history');
+Route::get('/detail/{id_lop}/{id_mon}/{ngaydiemdanh}',[WebController::class,'detail']);
+Route::post('/detail/{id_lop}/{id_mon}/{ngaydiemdanh}',[WebController::class,'ddedit'])->name('ddedit');
 

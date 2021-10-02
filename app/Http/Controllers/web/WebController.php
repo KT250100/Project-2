@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
+use App\Models\DiemDanh;
 use App\Models\GiaoVien2;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -17,6 +18,8 @@ class WebController extends Controller
     function index(){
         return view('web.home');
     }
+
+    // Quản lý tài khoản
     function edit(){
         return view('web.edit');
     }
@@ -49,6 +52,8 @@ class WebController extends Controller
             return redirect()->back()->with('error','Mật khẩu mới không trùng khớp');
         }
     }
+
+    // Điểm danh
     function diemdanh(){
         // Kiểm tra đang dùng tài khoản giáo viên nào -> lọc ra lớp đc phân công
         $mydate = new \DateTime();
@@ -171,6 +176,46 @@ class WebController extends Controller
                     ->insert($data);
             }
             return redirect("/diemdanh");
+        }
+    }
+
+    // Lịch sử điểm danh
+    function history(Request $req){
+        $keyword = $req->input('keyword','');
+        $keyword2 = $req->input('keyword2','');
+        $details = DiemDanh::getAllSearch($keyword,$keyword2);
+        return view('web.history',['details'=>$details]);
+    }
+    function detail(Request $req){
+        $id_lop = $req->id_lop;
+        $id_mon = $req->id_mon;
+        $ngaydiemdanh = $req->ngaydiemdanh;
+        $detail = DiemDanh::dddetail($id_lop,$id_mon,$ngaydiemdanh);
+        return view('web.detail',['index'=>1,'detail'=>$detail,'id_lop'=>$id_lop,'id_mon'=>$id_mon,'ngaydiemdanh'=>$ngaydiemdanh]);
+    }
+    function ddedit(Request $req){
+        $id_sinhvien = $req->id_sinhvien;
+        $id_lop = $req->id_lop;
+        $id_mon = $req->id_mon;
+        $status = $req->input('status');
+        $ngaydiemdanh = $req->ngaydiemdanh;
+        $note = $req->input('note');
+        for($i = 0; $i < count($id_sinhvien); $i++){
+            $data = [
+                'id_sinhvien'  => $id_sinhvien[$i],
+                'status'       => $status[$i],
+                'note'         => $note[$i]
+            ];
+            $rs = DB::table('diemdanhs')
+                    ->where('ngaydiemdanh', $ngaydiemdanh)
+                    ->where('id_sinhvien', $id_sinhvien[$i])
+                    ->update($data);
+        }
+        if($rs == true){
+            return redirect()->back()->with('noti','Cập nhật thành công');
+        }
+        else{
+            return redirect()->back()->with('noti','Cập nhật thành công');
         }
     }
 }
