@@ -1,4 +1,0 @@
-- Tạo bảng thì vô VisualStudio mà xài lệnh "php artisan migrate"
-- Gõ "php artisan db:seed" tạo tài khoản đăng nhập cho admin và giảng viên
-- Email như nào vô database mà coi, pass mã hóa ko coi đc thì của admin
-là "bkacad123", của giảng viên là "password"

@@ -90,6 +90,14 @@
                     </div>
                 </label>
             </li>
+            <li>
+                <label>
+                    <input type="checkbox" value="8" name="cn">
+                    <div class="inside-cb">
+                        <span class="cb-content">CN</span>
+                    </div>
+                </label>
+            </li>
         </ul>
     </div>
     <div class="form-group input-group">

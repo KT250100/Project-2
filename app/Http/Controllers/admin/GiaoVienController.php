@@ -87,6 +87,7 @@ class GiaoVienController extends Controller
         $t5 = $req->input('t5');
         $t6 = $req->input('t6');
         $t7 = $req->input('t7');
+        $cn = $req->input('cn');
         if(!empty($t2)){
             $t2 = '2';
         }else{
@@ -137,7 +138,16 @@ class GiaoVienController extends Controller
         else{
             $t7 = '';
         }
-        $ca_day = $t2.$t3.$t4.$t5.$t6.$t7;
+        if(!empty($cn) && empty($t2) && empty($t3) && empty($t4) && empty($t5) && empty($t6) && empty($t7)){
+            $cn = 'CN';
+        }
+        elseif(!empty($cn) && [!empty($t2) || !empty($t3) || !empty($t4) || !empty($t5) || !empty($t6) || !empty($t7)]){
+            $cn = ', CN';
+        }
+        else{
+            $cn = '';
+        }
+        $ca_day = $t2.$t3.$t4.$t5.$t6.$t7.$cn;
         // Check giảng viên đã dạy lớp nào chưa
         $edit = DB::table('phancongs')
             ->join('giao_viens', 'giao_viens.id', '=', 'phancongs.id_giaovien')
@@ -250,9 +260,20 @@ class GiaoVienController extends Controller
         else{
             $t7 = false;
         }
+        $checkcn = DB::table('phancongs')
+            ->select('phancongs.*')
+            ->where('id_giaovien', $id_giaovien)
+            ->where('ca_day', 'LIKE', '%cn%')
+            ->get();
+        if($checkcn != null && count($checkcn) > 0 ){
+            $cn = true;
+        }
+        else{
+            $cn = false;
+        }
         return view('admin.giaovien.editpc',['phancong'=>$phancong,
         'giaoviens'=>$giaoviens,'lops'=>$lops,'mons'=>$mons,'t2'=>$t2,
-        't3'=>$t3,'t4'=>$t4,'t5'=>$t5,'t6'=>$t6,'t7'=>$t7]);
+        't3'=>$t3,'t4'=>$t4,'t5'=>$t5,'t6'=>$t6,'t7'=>$t7,'cn'=>$cn]);
     }
     function updatepc(Request $req,$id_giaovien){
         $id_lophoc = $req->input('id_lophoc');
@@ -265,6 +286,7 @@ class GiaoVienController extends Controller
         $t5 = $req->input('t5');
         $t6 = $req->input('t6');
         $t7 = $req->input('t7');
+        $cn = $req->input('cn');
         if(!empty($t2)){
             $t2 = '2';
         }else{
@@ -315,7 +337,16 @@ class GiaoVienController extends Controller
         else{
             $t7 = '';
         }
-        $ca_day = $t2.$t3.$t4.$t5.$t6.$t7;
+        if(!empty($cn) && empty($t2) && empty($t3) && empty($t4) && empty($t5) && empty($t6) && empty($t7)){
+            $cn = 'CN';
+        }
+        elseif(!empty($cn) && [!empty($t2) || !empty($t3) || !empty($t4) || !empty($t5) || !empty($t6) || !empty($t7)]){
+            $cn = ', CN';
+        }
+        else{
+            $cn = '';
+        }
+        $ca_day = $t2.$t3.$t4.$t5.$t6.$t7.$cn;
         $rs = PhanCong::update($id_giaovien,$id_lophoc,$id_monhoc,$ca_day,$starttime,$endtime);
         if($rs == true){
             return redirect("admin/giaovien/phancong");
