@@ -1,5 +1,6 @@
 @include('admin.layouts.header')
 <div class="container">
+<title>Thêm sinh viên</title>
 <h2 class="text-center" >Thêm sinh viên</h2>
 <form style="margin:auto; text-align:center" method="POST" enctype="multipart/form-data">
     @csrf

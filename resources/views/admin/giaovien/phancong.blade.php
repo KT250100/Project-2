@@ -1,5 +1,6 @@
 @include('admin.layouts.header')
 <div class="container">
+<title>Danh sách phân công</title>
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h2 class="text-center">Danh sách phân công</h2>

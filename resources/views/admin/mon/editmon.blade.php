@@ -1,6 +1,7 @@
 @include('admin.layouts.header')
 <div class="container">
-<h2 class="text-center" >Cập nhật môn</h2>
+<title>Cập nhật môn học</title>
+<h2 class="text-center" >Cập nhật môn học</h2>
 <form style="margin:auto; text-align:center" method="POST" enctype="multipart/form-data">
     @if(Session::has('error'))
         <h3 align="center" style="color: #FF0000">{{Session::get('error')}}</h3>

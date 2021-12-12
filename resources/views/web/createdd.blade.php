@@ -65,8 +65,8 @@
                             <td hidden><input name="id_sinhvien[]" value="{{$item->id}}"></td>
                             <td>{{$index++}}</td>
                             <td>{{$item->name}}</td>
-                            <td><input type="radio" name="status[]_{{$item->id}}" value="1" class="form-control"></input></td>
-                            <td><input type="radio" name="status[]_{{$item->id}}" value="0" class="form-control" checked="true"></input></td>
+                            <td><input type="radio" name="status[]_{{$item->id}}" value="1" class="form-control" checked="true"></input></td>
+                            <td><input type="radio" name="status[]_{{$item->id}}" value="0" class="form-control"></input></td>
                             <td><input type="radio" name="status[]_{{$item->id}}" value="-1" class="form-control"></input></td>
                             <td><input type="radio" name="status[]_{{$item->id}}" value="2" class="form-control"></input></td>
                             <td><input type="text" name="note[]_{{$item->id}}" class="form-control"></td>

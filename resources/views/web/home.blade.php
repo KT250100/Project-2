@@ -1,5 +1,6 @@
 @include('web.layouts.header')
 <div class="user-container">
+    <title>Quản lý tài khoản</title>
     <h2 class="text-center">Quản lý tài khoản</h2>
     <table class="table table-bordered">
         <tr>

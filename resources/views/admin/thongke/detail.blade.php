@@ -1,5 +1,6 @@
 @include('admin.layouts.header')
 <div class="container">
+<title>Thống kê sinh viên</title>
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h2 class="text-center">Thống kê sinh viên</h2>

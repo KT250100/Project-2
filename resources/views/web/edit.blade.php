@@ -1,5 +1,6 @@
 @include('web.layouts.header')
 <div class="user-container">
+<title>Cập nhật thông tin tài khoản</title>
     <h2 class="text-center">Quản lý tài khoản</h2>
     <form style="margin:auto; text-align:center" method="POST" enctype="multipart/form-data">
     @csrf

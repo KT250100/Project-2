@@ -1,5 +1,6 @@
 @include('admin.layouts.header')
 <div class="container">
+<title>Quản lý tài khoản</title>
     <h2 class="text-center">Quản lý tài khoản</h2>
     <table border="1px" class="table table-bordered">
         <tr>

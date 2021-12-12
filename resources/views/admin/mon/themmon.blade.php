@@ -1,6 +1,7 @@
 @include('admin.layouts.header')
 <div class="container">
-<h2 class="text-center" >Thêm môn</h2>
+<title>Thêm môn học</title>
+<h2 class="text-center" >Thêm môn học</h2>
 @if(Session::has('error'))
     <h3 style="color: red; text-align: center;">{{Session::get('error')}}</h3>
 @endif

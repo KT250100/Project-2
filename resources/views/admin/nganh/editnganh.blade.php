@@ -1,5 +1,6 @@
 @include('admin.layouts.header')
 <div class="container">
+<title>Cập nhật ngành</title>
 <h2 class="text-center" >Cập nhật ngành</h2>
 <form style="margin:auto; text-align:center" method="POST" enctype="multipart/form-data">
     @if(Session::has('error'))

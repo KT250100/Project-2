@@ -1,5 +1,6 @@
 @include('admin.layouts.header')
 <div class="container">
+<title>Đổi mật khẩu</title>
     <h2 class="text-center">Đổi mật khẩu</h2>
     <form style="margin:auto; text-align:center" method="POST" enctype="multipart/form-data">
         @csrf
