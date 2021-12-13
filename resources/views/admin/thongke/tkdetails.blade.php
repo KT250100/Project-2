@@ -1,9 +1,20 @@
 @include('admin.layouts.header')
+<style>
+    .lopmon {
+        position: relative;
+        margin-bottom: -8px;
+    }
+</style>
 <div class="container">
 <title>Thống kê các môn</title>
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h2 class="text-center">Thống kê các môn</h2>
+        </div>
+        <div class="lopmon">
+            @foreach ($lop as $item)
+            <div>Lớp: {{$item->lop}}{{$item->khoa}}</div>
+            @endforeach
         </div>
         <div class="panel-body">
             <table border="1px" class="table table-bordered">

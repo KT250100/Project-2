@@ -1,4 +1,10 @@
 @include('admin.layouts.header')
+<style>
+    .dsgv a{
+        position: absolute;
+        margin-top: 8px;
+    }
+</style>
 <div class="container">
 <title>Danh sách phân công</title>
     <div class="panel panel-primary">
@@ -7,7 +13,7 @@
         </div>
         <div>
             <a href="{{url('admin/giaovien/pcgv')}}">Thêm</a>
-            <a style="float:right; margin-top:-3px" href="{{url('admin/giaovien/giaovien')}}">Danh sách giảng viên</a>
+            <div class="dsgv"><a href="{{url('admin/giaovien/giaovien')}}">Danh sách giảng viên</a></div>
         </div>
         <div class="search">
             <form method="GET">
@@ -18,13 +24,14 @@
         <div class="panel-body">
             <table border="1px" class="table table-bordered">
                 <thead>
-                    <th>Giảng viên</th>
-                    <th>Lớp</th>
-                    <th>Môn</th>
-                    <th>Dạy thứ</th>
-                    <th>Giờ dạy</th>
-                    <th>Sửa</th>
-                    <th>Xóa</th>
+                    <th style="width:12.5%">Giảng viên</th>
+                    <th style="width:12%">Lớp</th>
+                    <th style="width:15%">Môn</th>
+                    <th style="width:15.5%">Dạy thứ</th>
+                    <th style="width:19.5%">Giờ dạy</th>
+                    <th style="width:15.5%">Ngày kết thúc</th>
+                    <th style="width:5%">Sửa</th>
+                    <th style="width:5%">Xóa</th>
                 </thead>
                 <tbody>
                 @forelse ($phancongs as $item)
@@ -34,6 +41,7 @@
                         <td>{{$item->mon}}</td>
                         <td>{{$item->ca_day}}</td>
                         <td>{{$item->starttime}} - {{$item->endtime}}</td>
+                        <td>{{$item->enddate}}</td>
                         <td><a href="{{url('admin/giaovien/editpc/'.$item->id_giaovien)}}">Sửa</a></td>
                         <td><a href="{{url('/deletepc/'.$item->id_giaovien)}}">Xoá</a></td>
                     </tr>

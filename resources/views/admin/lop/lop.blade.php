@@ -1,4 +1,10 @@
 @include('admin.layouts.header')
+<style>
+    .sv a{
+        position: absolute;
+        margin-top: 8px;
+    }
+</style>
 <div class="container">
 <title>Quản lý lớp</title>
     <div class="panel panel-primary">
@@ -7,6 +13,7 @@
         </div>
         <div>
             <a href="{{url('admin/lop/themlop')}}">Thêm</a>
+            <div class="sv"><a href="{{url('admin/sinhvien/sinhvien')}}">Quản lý sinh viên</a></div>
         </div>
         <div class="search">
             <form method="GET">
@@ -21,6 +28,7 @@
                     <th>Tên lớp</th>
                     <th>Khóa</th>
                     <th>Ngành</th>
+                    <th>Số sinh viên</th>
                     <th>Sửa</th>
                     <th>Xóa</th>
                 </thead>
@@ -31,6 +39,7 @@
                         <td>{{$item->name}}{{$item->khoa}}</td>
                         <td>{{$item->khoa}}</td>
                         <td>{{$item->nganh}}</td>
+                        <td>{{$item->sosinhvien}}</td>
                         <td><a href="{{url('admin/lop/editlop/'.$item->id)}}">Sửa</a></td>
                         <td><a href="{{url('/deletelop/'.$item->id)}}">Xoá</a></td>
                     </tr>

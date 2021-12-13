@@ -21,18 +21,22 @@ class Lop
     static function getAllSearch($keyword){
         if(empty($keyword)){
             return DB::table('lophocs')
-            ->select('lophocs.*','khoahocs.name as khoa','nganhhocs.name as nganh')
+            ->select('lophocs.*','khoahocs.name as khoa','nganhhocs.name as nganh',DB::raw('COUNT(sinhviens.id) as sosinhvien'))
             ->join('nganhhocs', 'nganhhocs.id', '=', 'lophocs.id_nganhhoc')
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
+            ->join('sinhviens', 'sinhviens.id_lophoc', '=', 'lophocs.id')
+            ->groupBy('lophocs.id')
             ->orderByDesc('lophocs.id')
             ->paginate(7);
         }
         else{
             return DB::table('lophocs')
-            ->select('lophocs.*','khoahocs.name as khoa','nganhhocs.name as nganh',DB::raw('CONCAT(lophocs.name,khoahocs.name)'))
+            ->select('lophocs.*','khoahocs.name as khoa','nganhhocs.name as nganh',DB::raw('CONCAT(lophocs.name,khoahocs.name)'),DB::raw('COUNT(sinhviens.id) as sosinhvien'))
             ->join('nganhhocs', 'nganhhocs.id', '=', 'lophocs.id_nganhhoc')
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
+            ->join('sinhviens', 'sinhviens.id_lophoc', '=', 'lophocs.id')
             ->where(DB::raw('CONCAT(lophocs.name,khoahocs.name)'), 'LIKE', '%'.$keyword.'%')
+            ->groupBy('lophocs.id')
             ->paginate(7);
         }
     }

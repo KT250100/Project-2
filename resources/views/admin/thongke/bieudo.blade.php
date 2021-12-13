@@ -1,9 +1,19 @@
 @include('admin.layouts.header')
+<style>
+    .ddhistory a{
+        position: absolute;
+        margin-top: 8px;
+    }
+</style>
 <div class="container">
 <title>Biểu đồ các lớp</title>
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h2 class="text-center">Biểu đồ các lớp</h2>
+        </div>
+        <div>
+            <a href="{{url('admin/thongke/thongke')}}">Thống kê</a>
+            <div class="ddhistory"><a href="{{url('admin/ddhistory/view')}}">Lịch sử điểm danh</a></div>
         </div>
         <div class="search">
             <form method="GET">

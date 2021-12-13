@@ -11,34 +11,90 @@ class ThongKe
     static function getAllSearch($keyword){
         if(empty($keyword)){
             return DB::table('lophocs')
-            ->select('lophocs.*', 'lophocs.name as lop','khoahocs.name as khoa','nganhhocs.name as nganh')
+            ->select('lophocs.*', 'lophocs.name as lop','khoahocs.name as khoa','nganhhocs.name as nganh',DB::raw('COUNT(sinhviens.id) as sosinhvien'))
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
             ->join('nganhhocs', 'nganhhocs.id', '=', 'lophocs.id_nganhhoc')
+            ->join('sinhviens', 'sinhviens.id_lophoc', '=', 'lophocs.id')
+            ->groupBy('lophocs.id')
             ->orderBy('lophocs.id')
             ->paginate(7);
         }
         else{
             return DB::table('lophocs')
-            ->select('lophocs.*','lophocs.name as lop','khoahocs.name as khoa','nganhhocs.name as nganh',DB::raw('CONCAT(lophocs.name,khoahocs.name)'))
+            ->select('lophocs.*','lophocs.name as lop','khoahocs.name as khoa','nganhhocs.name as nganh',DB::raw('CONCAT(lophocs.name,khoahocs.name)'),DB::raw('COUNT(sinhviens.id) as sosinhvien'))
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
             ->join('nganhhocs', 'nganhhocs.id', '=', 'lophocs.id_nganhhoc')
+            ->join('sinhviens', 'sinhviens.id_lophoc', '=', 'lophocs.id')
             ->where(DB::raw('CONCAT(lophocs.name,khoahocs.name)'), 'LIKE', '%'.$keyword.'%')
             ->orWhere('nganhhocs.name', 'LIKE', '%'.$keyword.'%')
+            ->groupBy('lophocs.id')
             ->orderBy('lophocs.id')
             ->paginate(7);
         }
     }
     static function get($id){
-        return DB::select("SELECT monhocs.id, monhocs.name as 'mon', lophocs.name as 'lop'
+        return DB::select("SELECT monhocs.id, monhocs.name as 'mon', lophocs.name as 'lop', khoahocs.name as 'khoa'
         FROM monhocs
         INNER JOIN nganhhocs ON monhocs.id_nganhhoc = nganhhocs.id
         INNER JOIN lophocs ON lophocs.id_nganhhoc = nganhhocs.id
+        INNER JOIN khoahocs ON khoahocs.id = lophocs.id_khoahoc
         WHERE lophocs.id = '$id'");
     }
     static function detail($id_lop){
         return DB::select("SELECT sinhviens.*, sinhviens.name as 'sv'
         FROM sinhviens
         WHERE sinhviens.id_lophoc = '$id_lop'");
+    }
+    static function detail_2($id_lop,$id){
+        return DB::select("SELECT monhocs.name as 'mon_hoc', monhocs.thoiluong/(TIMEDIFF(phancongs.endtime, phancongs.starttime)*0.0001) as 'sobuoi',
+        FLOOR((monhocs.thoiluong/(TIMEDIFF(phancongs.endtime, phancongs.starttime)*0.0001))*0.3) as 'sobuoinghi', COUNT(diemdanhs.id) AS 'sobuoidahoc'
+        FROM monhocs
+        INNER JOIN nganhhocs ON monhocs.id_nganhhoc = nganhhocs.id
+        INNER JOIN lophocs ON lophocs.id_nganhhoc = nganhhocs.id
+        INNER JOIN phancongs ON phancongs.id_monhoc = monhocs.id
+        INNER JOIN diemdanhs ON diemdanhs.id_monhoc = monhocs.id
+        INNER JOIN sinhviens ON sinhviens.id = diemdanhs.id_sinhvien
+        WHERE lophocs.id = '$id_lop' AND monhocs.id = '$id'
+        GROUP BY sinhviens.id");
+    }
+    static function detail_3($id_lop,$id){
+        return DB::select("SELECT monhocs.name as 'mon_hoc', monhocs.thoiluong/(TIMEDIFF(phancongs.endtime, phancongs.starttime)*0.0001) as 'sobuoi',
+        FLOOR((monhocs.thoiluong/(TIMEDIFF(phancongs.endtime, phancongs.starttime)*0.0001))*0.5) as 'sobuoinghi', COUNT(diemdanhs.id) AS 'sobuoidahoc'
+        FROM monhocs
+        INNER JOIN nganhhocs ON monhocs.id_nganhhoc = nganhhocs.id
+        INNER JOIN lophocs ON lophocs.id_nganhhoc = nganhhocs.id
+        INNER JOIN phancongs ON phancongs.id_monhoc = monhocs.id
+        INNER JOIN diemdanhs ON diemdanhs.id_monhoc = monhocs.id
+        INNER JOIN sinhviens ON sinhviens.id = diemdanhs.id_sinhvien
+        WHERE lophocs.id = '$id_lop' AND monhocs.id = '$id'
+        GROUP BY sinhviens.id");
+    }
+    static function sobuoidihoc2($id_lop,$id){
+        return DB::select("SELECT sinhviens.id ,COUNT(diemdanhs.id) AS 'sbdihoc'
+        FROM diemdanhs
+        INNER JOIN monhocs ON monhocs.id = diemdanhs.id_monhoc
+        INNER JOIN sinhviens ON sinhviens.id = diemdanhs.id_sinhvien
+        INNER JOIN lophocs ON sinhviens.id_lophoc = lophocs.id
+        WHERE lophocs.id = '$id_lop' AND monhocs.id = '$id'
+        GROUP BY sinhviens.id");
+    }
+    static function sobuoidanghi2($id_lop,$id){
+        return DB::select("SELECT sinhviens.id ,COUNT(diemdanhs.id) AS 'sbdanghi'
+        FROM diemdanhs
+        INNER JOIN monhocs ON monhocs.id = diemdanhs.id_monhoc
+        INNER JOIN sinhviens ON sinhviens.id = diemdanhs.id_sinhvien
+        INNER JOIN lophocs ON sinhviens.id_lophoc = lophocs.id
+        WHERE lophocs.id = '$id_lop' AND monhocs.id = '$id' AND diemdanhs.status = 0
+        GROUP BY sinhviens.id");
+    }
+    static function sobuoidimuon2($id_lop,$id){
+        return DB::select("SELECT sinhviens.id ,COUNT(diemdanhs.id) AS 'sbdimuon'
+        FROM diemdanhs
+        INNER JOIN monhocs ON monhocs.id = diemdanhs.id_monhoc
+        INNER JOIN sinhviens ON sinhviens.id = diemdanhs.id_sinhvien
+        INNER JOIN lophocs ON sinhviens.id_lophoc = lophocs.id
+        WHERE lophocs.id = '$id_lop' AND monhocs.id = '$id' AND diemdanhs.status = -1
+        GROUP BY sinhviens.id");
     }
     static function detail2($id,$id_mon){
         return DB::table('diemdanhs')

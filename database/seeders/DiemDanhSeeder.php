@@ -29,7 +29,7 @@ class DiemDanhSeeder extends Seeder
                 'id_monhoc'=>1,
                 'id_giaovien'=>1,
                 'id_sinhvien'=>$i,
-                'status'=>1,
+                'status'=>0,
                 'ngaydiemdanh'=>'2021-09-18 14:00:00',
                 'note'=>''
             ]);
@@ -117,7 +117,7 @@ class DiemDanhSeeder extends Seeder
         for($i = 1; $i < 6; $i++){ 
             DB::table('diemdanhs')->insert([
                 'id_monhoc'=>2,
-                'id_giaovien'=>5,
+                'id_giaovien'=>1,
                 'id_sinhvien'=>$i,
                 'status'=>0,
                 'ngaydiemdanh'=>'2021-09-17 15:00:00',
@@ -127,7 +127,7 @@ class DiemDanhSeeder extends Seeder
         for($i = 1; $i < 6; $i++){ 
             DB::table('diemdanhs')->insert([
                 'id_monhoc'=>2,
-                'id_giaovien'=>5,
+                'id_giaovien'=>1,
                 'id_sinhvien'=>$i,
                 'status'=>0,
                 'ngaydiemdanh'=>'2021-09-18 15:00:00',
@@ -137,7 +137,7 @@ class DiemDanhSeeder extends Seeder
         for($i = 1; $i < 6; $i++){ 
             DB::table('diemdanhs')->insert([
                 'id_monhoc'=>2,
-                'id_giaovien'=>5,
+                'id_giaovien'=>1,
                 'id_sinhvien'=>$i,
                 'status'=>0,
                 'ngaydiemdanh'=>'2021-09-19 15:00:00',
@@ -147,7 +147,7 @@ class DiemDanhSeeder extends Seeder
         for($i = 1; $i < 6; $i++){ 
             DB::table('diemdanhs')->insert([
                 'id_monhoc'=>2,
-                'id_giaovien'=>5,
+                'id_giaovien'=>1,
                 'id_sinhvien'=>$i,
                 'status'=>0,
                 'ngaydiemdanh'=>'2021-09-20 15:00:00',
@@ -157,7 +157,7 @@ class DiemDanhSeeder extends Seeder
         for($i = 1; $i < 6; $i++){ 
             DB::table('diemdanhs')->insert([
                 'id_monhoc'=>2,
-                'id_giaovien'=>5,
+                'id_giaovien'=>1,
                 'id_sinhvien'=>$i,
                 'status'=>0,
                 'ngaydiemdanh'=>'2021-09-21 15:00:00',
@@ -214,67 +214,77 @@ class DiemDanhSeeder extends Seeder
                 'note'=>''
             ]);
         }
-        for($i = 1; $i < 6; $i++){ 
+        for($i = 1; $i < 2; $i++){ 
             DB::table('diemdanhs')->insert([
                 'id_monhoc'=>7,
                 'id_giaovien'=>7,
                 'id_sinhvien'=>$i,
-                'status'=>0,
+                'status'=>1,
                 'ngaydiemdanh'=>'2021-09-11 16:00:00',
                 'note'=>''
             ]);
         }
-        for($i = 1; $i < 6; $i++){ 
+        for($i = 1; $i < 2; $i++){ 
             DB::table('diemdanhs')->insert([
                 'id_monhoc'=>7,
                 'id_giaovien'=>7,
                 'id_sinhvien'=>$i,
-                'status'=>0,
+                'status'=>1,
                 'ngaydiemdanh'=>'2021-09-12 16:00:00',
                 'note'=>''
             ]);
         }
-        for($i = 1; $i < 6; $i++){ 
+        for($i = 1; $i < 2; $i++){ 
             DB::table('diemdanhs')->insert([
                 'id_monhoc'=>7,
                 'id_giaovien'=>7,
                 'id_sinhvien'=>$i,
-                'status'=>0,
+                'status'=>1,
                 'ngaydiemdanh'=>'2021-09-13 16:00:00',
                 'note'=>''
             ]);
         }
-        for($i = 1; $i < 6; $i++){ 
+        for($i = 1; $i < 2; $i++){ 
             DB::table('diemdanhs')->insert([
                 'id_monhoc'=>7,
                 'id_giaovien'=>7,
                 'id_sinhvien'=>$i,
-                'status'=>0,
+                'status'=>1,
                 'ngaydiemdanh'=>'2021-09-14 16:00:00',
                 'note'=>''
             ]);
         }
-        for($i = 1; $i < 6; $i++){ 
+        for($i = 1; $i < 2; $i++){ 
             DB::table('diemdanhs')->insert([
                 'id_monhoc'=>7,
                 'id_giaovien'=>7,
                 'id_sinhvien'=>$i,
-                'status'=>0,
+                'status'=>1,
                 'ngaydiemdanh'=>'2021-09-15 16:00:00',
                 'note'=>''
             ]);
         }
-        for($i = 1; $i < 6; $i++){ 
+        for($i = 1; $i < 2; $i++){ 
             DB::table('diemdanhs')->insert([
                 'id_monhoc'=>7,
                 'id_giaovien'=>7,
                 'id_sinhvien'=>$i,
-                'status'=>0,
+                'status'=>1,
                 'ngaydiemdanh'=>'2021-09-16 16:00:00',
                 'note'=>''
             ]);
         }
-        for($i = 1; $i < 6; $i++){ 
+        for($i = 1; $i < 2; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>1,
+                'ngaydiemdanh'=>'2021-09-17 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 1; $i < 2; $i++){ 
             DB::table('diemdanhs')->insert([
                 'id_monhoc'=>7,
                 'id_giaovien'=>7,
@@ -284,7 +294,7 @@ class DiemDanhSeeder extends Seeder
                 'note'=>''
             ]);
         }
-        for($i = 1; $i < 6; $i++){ 
+        for($i = 1; $i < 2; $i++){ 
             DB::table('diemdanhs')->insert([
                 'id_monhoc'=>7,
                 'id_giaovien'=>7,
@@ -294,12 +304,282 @@ class DiemDanhSeeder extends Seeder
                 'note'=>''
             ]);
         }
-        for($i = 1; $i < 6; $i++){ 
+        for($i = 2; $i < 3; $i++){ 
             DB::table('diemdanhs')->insert([
                 'id_monhoc'=>7,
                 'id_giaovien'=>7,
                 'id_sinhvien'=>$i,
                 'status'=>0,
+                'ngaydiemdanh'=>'2021-09-11 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 2; $i < 3; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>0,
+                'ngaydiemdanh'=>'2021-09-12 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 2; $i < 3; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>0,
+                'ngaydiemdanh'=>'2021-09-13 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 2; $i < 3; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>0,
+                'ngaydiemdanh'=>'2021-09-14 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 2; $i < 3; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>0,
+                'ngaydiemdanh'=>'2021-09-15 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 2; $i < 3; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>1,
+                'ngaydiemdanh'=>'2021-09-16 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 2; $i < 3; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>1,
+                'ngaydiemdanh'=>'2021-09-17 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 2; $i < 3; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>1,
+                'ngaydiemdanh'=>'2021-09-18 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 2; $i < 3; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>1,
+                'ngaydiemdanh'=>'2021-09-19 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 3; $i < 4; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>0,
+                'ngaydiemdanh'=>'2021-09-11 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 3; $i < 4; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>0,
+                'ngaydiemdanh'=>'2021-09-12 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 3; $i < 4; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>0,
+                'ngaydiemdanh'=>'2021-09-13 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 3; $i < 4; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>0,
+                'ngaydiemdanh'=>'2021-09-14 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 3; $i < 4; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>0,
+                'ngaydiemdanh'=>'2021-09-15 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 3; $i < 4; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>0,
+                'ngaydiemdanh'=>'2021-09-16 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 3; $i < 4; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>0,
+                'ngaydiemdanh'=>'2021-09-17 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 3; $i < 4; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>0,
+                'ngaydiemdanh'=>'2021-09-18 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 3; $i < 4; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>0,
+                'ngaydiemdanh'=>'2021-09-19 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 4; $i < 6; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>1,
+                'ngaydiemdanh'=>'2021-09-11 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 4; $i < 6; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>1,
+                'ngaydiemdanh'=>'2021-09-12 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 4; $i < 6; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>1,
+                'ngaydiemdanh'=>'2021-09-13 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 4; $i < 6; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>1,
+                'ngaydiemdanh'=>'2021-09-14 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 4; $i < 6; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>1,
+                'ngaydiemdanh'=>'2021-09-15 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 4; $i < 6; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>1,
+                'ngaydiemdanh'=>'2021-09-16 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 4; $i < 6; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>1,
+                'ngaydiemdanh'=>'2021-09-17 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 4; $i < 6; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>1,
+                'ngaydiemdanh'=>'2021-09-18 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 4; $i < 6; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>1,
+                'ngaydiemdanh'=>'2021-09-19 16:00:00',
+                'note'=>''
+            ]);
+        }
+        for($i = 1; $i < 6; $i++){ 
+            DB::table('diemdanhs')->insert([
+                'id_monhoc'=>7,
+                'id_giaovien'=>7,
+                'id_sinhvien'=>$i,
+                'status'=>1,
                 'ngaydiemdanh'=>'2021-09-20 16:00:00',
                 'note'=>''
             ]);
@@ -349,18 +629,8 @@ class DiemDanhSeeder extends Seeder
                 'id_monhoc'=>7,
                 'id_giaovien'=>7,
                 'id_sinhvien'=>$i,
-                'status'=>1,
-                'ngaydiemdanh'=>'2021-09-25 16:00:00',
-                'note'=>''
-            ]);
-        }
-        for($i = 1; $i < 6; $i++){ 
-            DB::table('diemdanhs')->insert([
-                'id_monhoc'=>7,
-                'id_giaovien'=>7,
-                'id_sinhvien'=>$i,
                 'status'=>-1,
-                'ngaydiemdanh'=>'2021-09-26 16:00:00',
+                'ngaydiemdanh'=>'2021-09-25 16:00:00',
                 'note'=>''
             ]);
         }

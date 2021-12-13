@@ -1,4 +1,10 @@
 @include('admin.layouts.header')
+<style>
+    .nganh a{
+        position: absolute;
+        margin-top: 8px;
+    }
+</style>
 <div class="container">
 <title>Quản lý môn học</title>
     <div class="panel panel-primary">
@@ -7,6 +13,7 @@
         </div>
         <div>
             <a href="{{url('admin/mon/themmon')}}">Thêm</a>
+            <div class="nganh"><a href="{{url('admin/nganh/nganh')}}">Quản lý ngành</a></div>
         </div>
         <div class="search">
             <form method="GET">

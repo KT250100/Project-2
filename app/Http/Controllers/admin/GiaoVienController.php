@@ -81,6 +81,7 @@ class GiaoVienController extends Controller
         $id_mon = $req->input('id_mon');
         $starttime = $req->input('starttime');
         $endtime = $req->input('endtime');
+        $enddate = $req->input('enddate');
         $t2 = $req->input('t2');
         $t3 = $req->input('t3');
         $t4 = $req->input('t4');
@@ -160,7 +161,7 @@ class GiaoVienController extends Controller
         if($edit != null && count($edit) > 0){
             DB::table('phancongs')
                 ->where('id_giaovien', $id_giaovien)
-                ->update(['id_lophoc'=>$id_lop,'id_monhoc'=>$id_mon,'ca_day'=>$ca_day,'starttime'=>$starttime,'endtime'=>$endtime]);
+                ->update(['id_lophoc'=>$id_lop,'id_monhoc'=>$id_mon,'ca_day'=>$ca_day,'starttime'=>$starttime,'endtime'=>$endtime,'enddate'=>$enddate]);
             return redirect("admin/giaovien/phancong");
         }
         // Check lớp + môn đã có giảng viên nào dạy chưa
@@ -177,11 +178,11 @@ class GiaoVienController extends Controller
             DB::table('phancongs')
                 ->where('id_lophoc', $id_lop)
                 ->where('id_monhoc', $id_mon)
-                ->update(['id_giaovien'=>$id_giaovien,'ca_day'=>$ca_day,'starttime'=>$starttime,'endtime'=>$endtime]);
+                ->update(['id_giaovien'=>$id_giaovien,'ca_day'=>$ca_day,'starttime'=>$starttime,'endtime'=>$endtime,'enddate'=>$enddate]);
             return redirect("admin/giaovien/phancong");
         }
         // Thêm bản ghi mới
-        $rs = PhanCong::save($id_giaovien,$id_lop,$id_mon,$ca_day,$starttime,$endtime);
+        $rs = PhanCong::save($id_giaovien,$id_lop,$id_mon,$ca_day,$starttime,$endtime,$enddate);
         if($rs == true){
             return redirect("admin/giaovien/phancong");
         }
@@ -280,6 +281,7 @@ class GiaoVienController extends Controller
         $id_monhoc = $req->input('id_monhoc');
         $starttime = $req->input('starttime');
         $endtime = $req->input('endtime');
+        $enddate = $req->input('enddate');
         $t2 = $req->input('t2');
         $t3 = $req->input('t3');
         $t4 = $req->input('t4');
@@ -347,7 +349,7 @@ class GiaoVienController extends Controller
             $cn = '';
         }
         $ca_day = $t2.$t3.$t4.$t5.$t6.$t7.$cn;
-        $rs = PhanCong::update($id_giaovien,$id_lophoc,$id_monhoc,$ca_day,$starttime,$endtime);
+        $rs = PhanCong::update($id_giaovien,$id_lophoc,$id_monhoc,$ca_day,$starttime,$endtime,$enddate);
         if($rs == true){
             return redirect("admin/giaovien/phancong");
         }

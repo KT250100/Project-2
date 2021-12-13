@@ -1,4 +1,10 @@
 @include('admin.layouts.header')
+<style>
+    .gv a{
+        position: absolute;
+        margin-top: 8px;
+    }
+</style>
 <div class="container">
 <title>Quản lý giảng viên</title>
     <div class="panel panel-primary">
@@ -7,7 +13,7 @@
         </div>
         <div>
             <a href="{{url('admin/giaovien/themgv')}}">Thêm</a>
-            <a style="float:right; margin-top:-3px" href="{{url('admin/giaovien/phancong')}}">Phân công</a>
+            <div class="gv"><a href="{{url('admin/giaovien/phancong')}}">Phân công</a></div>
         </div>
         <div class="search">
             <form method="GET">

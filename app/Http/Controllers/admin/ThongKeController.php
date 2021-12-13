@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DiemDanh;
 use App\Models\ThongKe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ThongKeController extends Controller
 {
@@ -48,13 +49,42 @@ class ThongKeController extends Controller
     }
     function tkdetails($id){
         $thongkes = ThongKe::get($id);
-        return view('admin.thongke.tkdetails')->with(['index'=>1,'thongkes'=>$thongkes,'id_lop'=>$id]);
+        $lop = DB::table('lophocs')
+            ->select('lophocs.name as lop','khoahocs.name as khoa')
+            ->join('khoahocs', 'lophocs.id_khoahoc', '=', 'khoahocs.id')
+            ->where('lophocs.id', '=', $id)
+            ->get();
+        return view('admin.thongke.tkdetails')->with(['index'=>1,'thongkes'=>$thongkes,'lop'=>$lop,'id_lop'=>$id]);
     }
     function detail(Request $req,$id,$id_lop){
         $id_lop = $req->id_lop;
         $id = $req->id;
         $detail = ThongKe::detail($id_lop);
-        return view('admin.thongke.detail',['detail'=>$detail,'id_lop'=>$id_lop,'id_mon'=>$id]);
+        // $detail_2 = ThongKe::detail_2($id_lop,$id);
+        // $detail_3 = ThongKe::detail_3($id_lop,$id);
+        // $sobuoidihoc = ThongKe::sobuoidihoc2($id_lop,$id);
+        // $sbdanghi = ThongKe::sobuoidanghi2($id_lop,$id);
+        // $sbdimuon = ThongKe::sobuoidimuon2($id_lop,$id);
+        $lop = DB::table('lophocs')
+            ->select('lophocs.name as lop','khoahocs.name as khoa')
+            ->join('khoahocs', 'lophocs.id_khoahoc', '=', 'khoahocs.id')
+            ->where('lophocs.id', '=', $id_lop)
+            ->get();
+        $mon = DB::table('monhocs')
+            ->select('monhocs.name as mon')
+            ->where('monhocs.id', '=', $id)
+            ->get();
+        return view('admin.thongke.detail',[
+            'detail'=>$detail,
+            // 'detail_2'=>$detail_2,
+            // 'detail_3'=>$detail_3,
+            // 'sobuoidihoc'=>$sobuoidihoc,
+            // 'sbdanghi'=>$sbdanghi,
+            // 'sbdimuon'=>$sbdimuon,
+            'lop'=>$lop,
+            'id_lop'=>$id_lop,
+            'mon'=>$mon,
+            'id_mon'=>$id]);
     }
     function detail2(Request $req,$id,$id_lop,$id_mon){
         $id_lop = $req->id_lop;

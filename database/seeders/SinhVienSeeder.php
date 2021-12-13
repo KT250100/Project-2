@@ -34,7 +34,7 @@ class SinhVienSeeder extends Seeder
                 'id_lophoc'=>2
             ]);
         }
-        for ($i=11; $i < 16; $i++){ 
+        for ($i=11; $i < 18; $i++){ 
             DB::table('sinhviens')->insert([
                 'name'=>'SV '.$i,
                 'phone'=> '012398745619',
@@ -44,7 +44,7 @@ class SinhVienSeeder extends Seeder
                 'id_lophoc'=>3
             ]);
         }
-        for ($i=16; $i < 21; $i++){ 
+        for ($i=19; $i < 22; $i++){ 
             DB::table('sinhviens')->insert([
                 'name'=>'SV '.$i,
                 'phone'=> '012398745619',
@@ -54,7 +54,7 @@ class SinhVienSeeder extends Seeder
                 'id_lophoc'=>4
             ]);
         }
-        for ($i=21; $i < 26; $i++){ 
+        for ($i=23; $i < 27; $i++){ 
             DB::table('sinhviens')->insert([
                 'name'=>'SV '.$i,
                 'phone'=> '012398745619',
@@ -64,7 +64,7 @@ class SinhVienSeeder extends Seeder
                 'id_lophoc'=>5
             ]);
         }
-        for ($i=26; $i < 31; $i++){
+        for ($i=28; $i < 34; $i++){
             DB::table('sinhviens')->insert([
                 'name'=>'SV '.$i,
                 'phone'=> '012398745619',

@@ -1,9 +1,19 @@
 @include('admin.layouts.header')
+<style>
+    .bd a{
+        position: absolute;
+        margin-top: 8px;
+    }
+</style>
 <div class="container">
 <title>Lịch sử điểm danh</title>
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h2 class="text-center">Lịch sử điểm danh</h2>
+        </div>
+        <div>
+            <a href="{{url('admin/thongke/thongke')}}">Thống kê</a>
+            <div class="bd"><a href="{{url('admin/thongke/bieudo')}}">Biểu đồ</a></div>
         </div>
         <div class="search">
             <form method="GET">

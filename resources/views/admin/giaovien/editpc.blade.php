@@ -108,6 +108,12 @@
 		 </div>
         <input name="endtime" class="form-control" value="{{$phancong->endtime}}" type="time">
     </div>
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text">Ngày kết thúc</span>
+		 </div>
+        <input name="enddate" class="form-control" value="{{$phancong->enddate}}" type="date">
+    </div>
     <div class="form-group">
         <button type="submit" class="btn btn-primary btn-block">Sửa</button>
     </div>

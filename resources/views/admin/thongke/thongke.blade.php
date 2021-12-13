@@ -1,9 +1,19 @@
 @include('admin.layouts.header')
+<style>
+    .ddhistory a{
+        position: absolute;
+        margin-top: 8px;
+    }
+</style>
 <div class="container">
 <title>Thống kê các lớp</title>
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h2 class="text-center">Thống kê các lớp</h2>
+        </div>
+        <div>
+            <a href="{{url('admin/thongke/bieudo')}}">Biểu đồ</a>
+            <div class="ddhistory"><a href="{{url('admin/ddhistory/view')}}">Lịch sử điểm danh</a></div>
         </div>
         <div class="search">
             <form method="GET">
@@ -17,6 +27,7 @@
                     <th>ID</th>
                     <th>Lớp</th>
                     <th>Ngành</th>
+                    <th>Số sinh viên</th>
                     <th>Chi tiết thống kê</th>
                 </thead>
                 <tbody>
@@ -25,6 +36,7 @@
                         <td>{{$item->id}}</td>
                         <td>{{$item->lop}}{{$item->khoa}}</td>
                         <td>{{$item->nganh}}</td>
+                        <td>{{$item->sosinhvien}}</td>
                         <td><a href="{{url('admin/thongke/tkdetails/'.$item->id)}}">Xem</a></td>
                     </tr>
                 @empty

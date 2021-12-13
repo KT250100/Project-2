@@ -55,13 +55,13 @@ class PhanCong
         INNER JOIN monhocs ON phancongs.id_monhoc = monhocs.id 
         WHERE id_giaovien='$id_giaovien'");
     }
-    static function save($id_giaovien,$id_lop,$id_mon,$ca_day,$starttime,$endtime){
+    static function save($id_giaovien,$id_lop,$id_mon,$ca_day,$starttime,$endtime,$enddate){
         return DB::insert("INSERT INTO phancongs 
-        VALUES('$id_giaovien','$id_lop','$id_mon','$ca_day','$starttime','$endtime')");
+        VALUES('$id_giaovien','$id_lop','$id_mon','$ca_day','$starttime','$endtime','$enddate')");
     }
-    static function update($id_giaovien,$id_lophoc,$id_monhoc,$ca_day,$starttime,$endtime){
+    static function update($id_giaovien,$id_lophoc,$id_monhoc,$ca_day,$starttime,$endtime,$enddate){
         $sql = "UPDATE phancongs 
-        SET id_lophoc='$id_lophoc',id_monhoc='$id_monhoc',ca_day='$ca_day',starttime='$starttime',endtime='$endtime' 
+        SET id_lophoc='$id_lophoc',id_monhoc='$id_monhoc',ca_day='$ca_day',starttime='$starttime',endtime='$endtime',enddate='$enddate' 
         WHERE id_giaovien='$id_giaovien'";
         return DB::update($sql);
     }
