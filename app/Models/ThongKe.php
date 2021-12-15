@@ -15,6 +15,7 @@ class ThongKe
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
             ->join('nganhhocs', 'nganhhocs.id', '=', 'lophocs.id_nganhhoc')
             ->join('sinhviens', 'sinhviens.id_lophoc', '=', 'lophocs.id')
+            ->where('lophocs.id', '>', 1)
             ->groupBy('lophocs.id')
             ->orderBy('lophocs.id')
             ->paginate(7);
@@ -25,6 +26,7 @@ class ThongKe
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
             ->join('nganhhocs', 'nganhhocs.id', '=', 'lophocs.id_nganhhoc')
             ->join('sinhviens', 'sinhviens.id_lophoc', '=', 'lophocs.id')
+            ->where('lophocs.id', '>', 1)
             ->where(DB::raw('CONCAT(lophocs.name,khoahocs.name)'), 'LIKE', '%'.$keyword.'%')
             ->orWhere('nganhhocs.name', 'LIKE', '%'.$keyword.'%')
             ->groupBy('lophocs.id')
