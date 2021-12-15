@@ -6,6 +6,9 @@
     @if(Session::has('error'))
         <h3 align="center" style="color: #FF0000">{{Session::get('error')}}</h3>
     @endif
+    @if(Session::has('noti'))
+        <h3 align="center" style="color: green">{{Session::get('noti')}}</h3>
+    @endif
     @csrf
     <div class="form-group input-group">
 		<div class="input-group-prepend">
@@ -48,7 +51,7 @@
 		    <span class="input-group-text"> <i class="fas fa-chalkboard-teacher"></i> </span>
 		</div>
 		<select class="form-control" name="id_lophoc">
-			<option disabled>Chọn lớp</option>
+            <option value="1" selected>Chọn lớp</option>
             @foreach ($lops as $item)
             <option {{$sinhvien->id_lophoc == $item->id?"selected":""}} value="{{$item->id}}">{{$item->name}}{{$item->khoa}}</option>
             @endforeach
@@ -58,5 +61,5 @@
         <button type="submit" class="btn btn-primary btn-block">Sửa</button>
     </div>
 </form>
-</div> 
+</div>
 @include('admin.layouts.footer')

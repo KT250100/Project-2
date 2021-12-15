@@ -24,13 +24,14 @@
         <div class="panel-body">
             <table border="1px" class="table table-bordered">
                 <thead>
-                    <th>ID</th>
-                    <th>Tên lớp</th>
-                    <th>Khóa</th>
-                    <th>Ngành</th>
-                    <th>Số sinh viên</th>
-                    <th>Sửa</th>
-                    <th>Xóa</th>
+                    <th style="width:5%">ID</th>
+                    <th style="width:12.5%">Tên lớp</th>
+                    <th style="width:10%">Khóa</th>
+                    <th style="width:20%">Ngành</th>
+                    <th style="width:15%">Số sinh viên</th>
+                    <th style="width:12.5%">Chi tiết</th>
+                    <th style="width:12.5%">Sửa</th>
+                    <th style="width:12.5%">Xóa</th>
                 </thead>
                 <tbody>
                 @forelse ($lops as $item)
@@ -40,6 +41,7 @@
                         <td>{{$item->khoa}}</td>
                         <td>{{$item->nganh}}</td>
                         <td>{{$item->sosinhvien}}</td>
+                        <td><a href="{{url('admin/lop/view/'.$item->id)}}">Xem</a></td>
                         <td><a href="{{url('admin/lop/editlop/'.$item->id)}}">Sửa</a></td>
                         <td><a href="{{url('/deletelop/'.$item->id)}}">Xoá</a></td>
                     </tr>

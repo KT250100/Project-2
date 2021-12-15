@@ -16,7 +16,17 @@ class Lop
         lophocs.id_nganhhoc,lophocs.id_khoahoc 
         FROM lophocs 
         INNER JOIN nganhhocs ON lophocs.id_nganhhoc = nganhhocs.id 
-        INNER JOIN khoahocs ON lophocs.id_khoahoc = khoahocs.id ORDER BY id DESC");
+        INNER JOIN khoahocs ON lophocs.id_khoahoc = khoahocs.id 
+        WHERE lophocs.id > 1 ORDER BY id DESC");
+    }
+    static function getAllSV($id){
+        return DB::select("SELECT sinhviens.*, 
+        lophocs.name as 'lop', 
+        khoahocs.name as 'khoa' 
+        FROM sinhviens
+        INNER JOIN lophocs ON sinhviens.id_lophoc = lophocs.id
+        INNER JOIN khoahocs ON lophocs.id_khoahoc = khoahocs.id 
+        WHERE lophocs.id = '$id'");
     }
     static function getAllSearch($keyword){
         if(empty($keyword)){
@@ -25,6 +35,7 @@ class Lop
             ->join('nganhhocs', 'nganhhocs.id', '=', 'lophocs.id_nganhhoc')
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
             ->join('sinhviens', 'sinhviens.id_lophoc', '=', 'lophocs.id')
+            ->where('lophocs.id', '>', 1)
             ->groupBy('lophocs.id')
             ->orderByDesc('lophocs.id')
             ->paginate(7);
@@ -49,6 +60,9 @@ class Lop
         INNER JOIN nganhhocs ON lophocs.id_nganhhoc = nganhhocs.id
         INNER JOIN khoahocs ON lophocs.id_khoahoc = khoahocs.id
         WHERE lophocs.id='$id'");
+    }
+    static function themvaolop($id_lop,$id){
+        return DB::delete("UPDATE sinhviens SET id_lophoc = '$id_lop' WHERE id='$id'");
     }
     static function save($name,$id_nganh,$id_khoa){
         return DB::insert("INSERT INTO lophocs VALUES(NULL,'$name','$id_nganh','$id_khoa')");

@@ -20,6 +20,9 @@ class AdminSeeder extends Seeder
             'password'=>bcrypt('bkacad123')
         ]);
         DB::table('khoahocs')->insert([
+            'name'=>'K0'
+        ]);
+        DB::table('khoahocs')->insert([
             'name'=>'K10'
         ]);
         DB::table('khoahocs')->insert([
@@ -27,6 +30,9 @@ class AdminSeeder extends Seeder
         ]);
         DB::table('khoahocs')->insert([
             'name'=>'K12'
+        ]);
+        DB::table('nganhhocs')->insert([
+            'name'=>'Ngành 0'
         ]);
         DB::table('nganhhocs')->insert([
             'name'=>'Lập trình Quốc tế'

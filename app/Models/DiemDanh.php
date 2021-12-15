@@ -11,11 +11,10 @@ class DiemDanh
         if(empty($keyword) && empty($keyword2)){
             return DB::table('diemdanhs')
             ->select('diemdanhs.*','monhocs.name as mon','lophocs.name as lop','khoahocs.name as khoa','monhocs.id as id_mon','lophocs.id as id_lop')
-            ->join('phancongs', 'phancongs.id_giaovien', '=', 'diemdanhs.id_giaovien')
             ->join('monhocs', 'monhocs.id', '=', 'diemdanhs.id_monhoc')
-            ->join('lophocs', 'lophocs.id', '=', 'phancongs.id_lophoc')
+            ->join('lophocs', 'lophocs.id', '=', 'diemdanhs.id_lophoc')
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
-            ->where('phancongs.id_giaovien', '=', Auth::user()->id)
+            ->where('diemdanhs.id_giaovien', '=', Auth::user()->id)
             ->groupBy('diemdanhs.ngaydiemdanh')
             ->orderByDesc('diemdanhs.ngaydiemdanh')
             ->paginate(7);
@@ -23,11 +22,10 @@ class DiemDanh
         elseif(empty($keyword) && $keyword2 != null){
             return DB::table('diemdanhs')
             ->select('diemdanhs.*','monhocs.name as mon','lophocs.name as lop','khoahocs.name as khoa','monhocs.id as id_mon','lophocs.id as id_lop',DB::raw('CONCAT(lophocs.name,khoahocs.name)'))
-            ->join('phancongs', 'phancongs.id_giaovien', '=', 'diemdanhs.id_giaovien')
             ->join('monhocs', 'monhocs.id', '=', 'diemdanhs.id_monhoc')
-            ->join('lophocs', 'lophocs.id', '=', 'phancongs.id_lophoc')
+            ->join('lophocs', 'lophocs.id', '=', 'diemdanhs.id_lophoc')
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
-            ->where('phancongs.id_giaovien', '=', Auth::user()->id)
+            ->where('diemdanhs.id_giaovien', '=', Auth::user()->id)
             ->where(DB::raw('CONCAT(lophocs.name,khoahocs.name)'), 'LIKE', '%'.$keyword2.'%')
             ->orWhere('monhocs.name', 'LIKE', '%'.$keyword2.'%')
             ->groupBy('diemdanhs.ngaydiemdanh')
@@ -37,11 +35,10 @@ class DiemDanh
         elseif($keyword != null && empty($keyword2)){
             return DB::table('diemdanhs')
             ->select('diemdanhs.*','monhocs.name as mon','lophocs.name as lop','khoahocs.name as khoa','monhocs.id as id_mon','lophocs.id as id_lop',DB::raw('CONCAT(lophocs.name,khoahocs.name)'))
-            ->join('phancongs', 'phancongs.id_giaovien', '=', 'diemdanhs.id_giaovien')
             ->join('monhocs', 'monhocs.id', '=', 'diemdanhs.id_monhoc')
-            ->join('lophocs', 'lophocs.id', '=', 'phancongs.id_lophoc')
+            ->join('lophocs', 'lophocs.id', '=', 'diemdanhs.id_lophoc')
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
-            ->where('phancongs.id_giaovien', '=', Auth::user()->id)
+            ->where('diemdanhs.id_giaovien', '=', Auth::user()->id)
             ->where('diemdanhs.ngaydiemdanh', 'LIKE', '%'.$keyword.'%')
             ->groupBy('diemdanhs.ngaydiemdanh')
             ->orderByDesc('diemdanhs.ngaydiemdanh')
@@ -50,11 +47,10 @@ class DiemDanh
         else{
             return DB::table('diemdanhs')
             ->select('diemdanhs.*','monhocs.name as mon','lophocs.name as lop','khoahocs.name as khoa','monhocs.id as id_mon','lophocs.id as id_lop',DB::raw('CONCAT(lophocs.name,khoahocs.name)'))
-            ->join('phancongs', 'phancongs.id_giaovien', '=', 'diemdanhs.id_giaovien')
             ->join('monhocs', 'monhocs.id', '=', 'diemdanhs.id_monhoc')
-            ->join('lophocs', 'lophocs.id', '=', 'phancongs.id_lophoc')
+            ->join('lophocs', 'lophocs.id', '=', 'diemdanhs.id_lophoc')
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
-            ->where('phancongs.id_giaovien', '=', Auth::user()->id)
+            ->where('diemdanhs.id_giaovien', '=', Auth::user()->id)
             ->where([['diemdanhs.ngaydiemdanh', 'LIKE', '%'.$keyword.'%'], [DB::raw('CONCAT(lophocs.name,khoahocs.name)'), 'LIKE', '%'.$keyword2.'%']])
             ->orWhere([['diemdanhs.ngaydiemdanh', 'LIKE', '%'.$keyword.'%'], ['monhocs.name', 'LIKE', '%'.$keyword2.'%']])
             ->groupBy('diemdanhs.ngaydiemdanh')
@@ -91,7 +87,7 @@ class DiemDanh
         INNER JOIN sinhviens ON sinhviens.id = diemdanhs.id_sinhvien
         WHERE sinhviens.id_lophoc = '$id_lop' AND diemdanhs.id_monhoc = '$id_mon' AND diemdanhs.ngaydiemdanh = '$ngaydiemdanh'");
     }
-    static function save($id_monhoc,$id_giaovien,$id_sinhvien,$status,$ngaydiemdanh,$note){
-        return DB::insert("INSERT INTO diemdanhs VALUES('$id_monhoc','$id_giaovien','$id_sinhvien','$status','$ngaydiemdanh','$note')");
+    static function save($id_monhoc,$id_lophoc,$id_giaovien,$id_sinhvien,$status,$ngaydiemdanh,$note){
+        return DB::insert("INSERT INTO diemdanhs VALUES('$id_monhoc','$id_lophoc','$id_giaovien','$id_sinhvien','$status','$ngaydiemdanh','$note')");
     }
 }

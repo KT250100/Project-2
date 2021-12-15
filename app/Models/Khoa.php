@@ -10,12 +10,13 @@ class Khoa
 {
     use HasFactory;
     static function getAll(){
-        return DB::select("SELECT id,name FROM khoahocs ORDER BY id DESC");
+        return DB::select("SELECT id,name FROM khoahocs WHERE id > 1 ORDER BY id DESC");
     }
     static function getAllSearch($keyword){
         if(empty($keyword)){
             return DB::table('khoahocs')
             ->select('khoahocs.*')
+            ->where('id', '>', 1)
             ->orderByDesc('id')
             ->paginate(7);
         }

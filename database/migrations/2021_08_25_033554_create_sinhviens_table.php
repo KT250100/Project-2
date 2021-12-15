@@ -20,7 +20,7 @@ class CreateSinhviensTable extends Migration
             $table->string('email')->unique();
             $table->string('address',250);
             $table->date('birthday');
-            $table->unsignedInteger('id_lophoc');
+            $table->integer('id_lophoc')->nullable()->unsigned();
             $table->foreign('id_lophoc')->references('id')->on('lophocs');
         });
     }

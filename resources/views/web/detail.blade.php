@@ -22,7 +22,7 @@
 				<h2 class="text-center">Update điểm danh</h2>
 			</div>
             @if(Session::has('noti'))
-                <h3 align="center">{{Session::get('noti')}}</h3>
+                <h3 align="center" style="color: green">{{Session::get('noti')}}</h3>
             @endif
 			<div class="panel-body">
             <form style="margin:auto; margin-top:10px" action="{{route('ddedit',[$id_lop,$id_mon,$ngaydiemdanh])}}" method="POST" enctype="multipart/form-data">

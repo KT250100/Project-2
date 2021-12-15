@@ -17,37 +17,37 @@ class MonHocSeeder extends Seeder
         DB::table('monhocs')->insert([
             'name'=>'Database',
             'thoiluong'=>60,
-            'id_nganhhoc'=>'1'
+            'id_nganhhoc'=>'2'
         ]);
         DB::table('monhocs')->insert([
             'name'=>'PHP',
             'thoiluong'=>72,
-            'id_nganhhoc'=>'1'
+            'id_nganhhoc'=>'2'
         ]);
         DB::table('monhocs')->insert([
             'name'=>'Mạng máy tính',
             'thoiluong'=>72,
-            'id_nganhhoc'=>'2'
+            'id_nganhhoc'=>'3'
         ]);
         DB::table('monhocs')->insert([
             'name'=>'Bảo trì máy tính',
             'thoiluong'=>60,
-            'id_nganhhoc'=>'2'
+            'id_nganhhoc'=>'3'
         ]);
         DB::table('monhocs')->insert([
             'name'=>'Photoshop',
             'thoiluong'=>60,
-            'id_nganhhoc'=>'3'
+            'id_nganhhoc'=>'4'
         ]);
         DB::table('monhocs')->insert([
             'name'=>'Quảng cáo',
             'thoiluong'=>60,
-            'id_nganhhoc'=>'3'
+            'id_nganhhoc'=>'4'
         ]);
         DB::table('monhocs')->insert([
             'name'=>'HTML',
             'thoiluong'=>72,
-            'id_nganhhoc'=>'1'
+            'id_nganhhoc'=>'2'
         ]);
     }
 }

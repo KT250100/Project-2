@@ -5,6 +5,11 @@
         <div class="panel-heading">
             <h2 class="text-center">Lịch sử điểm danh các môn</h2>
         </div>
+        <div class="lopmon">
+            @foreach ($lop as $item)
+            <div>Lớp: {{$item->lop}}{{$item->khoa}}</div>
+            @endforeach
+        </div>
         <div class="panel-body">
             <table border="1px" class="table table-bordered">
                 <thead>

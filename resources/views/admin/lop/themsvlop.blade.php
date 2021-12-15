@@ -2,21 +2,25 @@
 <style>
     .lop a{
         position: absolute;
-        margin-top: 8px;
+        margin-top: 23px;
     }
     .locsv{
         height: 36px;
+    }
+    .search{
+        margin-top: 15px;
     }
 </style>
 <div class="container">
 <title>Quản lý sinh viên</title>
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h2 class="text-center">Quản lý sinh viên</h2>
+        @foreach($lop as $item)
+            <h2 class="text-center">Thêm sinh viên vào lớp {{$item->lop}}{{$item->khoa}}</h2>
         </div>
         <div>
-            <a href="{{url('admin/sinhvien/themsv')}}">Thêm</a>
-            <div class="lop"><a href="{{url('admin/lop/lop')}}">Quản lý lớp</a></div>
+            <div class="lop"><a href="{{url('admin/lop/view/'.$item->id)}}">Quay về</a></div>
+        @endforeach
         </div>
         <div class="search">
             <form method="GET">
@@ -40,8 +44,7 @@
                     <th style="width:16%">Địa chỉ</th>
                     <th style="width:14%">Ngày sinh</th>
                     <th style="width:10%">Lớp</th>
-                    <th style="width:5%">Sửa</th>
-                    <th style="width:5%">Xóa</th>
+                    <th style="width:10%">Thêm</th>
                 </thead>
                 <tbody>
                 @forelse ($sinhviens as $item)
@@ -57,8 +60,7 @@
                         @else
                         <td>{{$item->lop}}{{$item->khoa}}</td>
                         @endif
-                        <td><a href="{{url('admin/sinhvien/editsv/'.$item->id)}}">Sửa</a></td>
-                        <td><a href="{{url('/deletesv/'.$item->id)}}">Xóa</a></td>
+                        <td><a href="{{url('/themvaolop/'.$id_lop.'/'.$item->id)}}">Thêm</a></td>
                     </tr>
                 @empty
                     <tr><td colspan="9" style="text-align:center">Danh sách rỗng</td></tr>

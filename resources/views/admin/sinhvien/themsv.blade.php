@@ -39,7 +39,7 @@
 		    <span class="input-group-text"> <i class="fas fa-chalkboard-teacher"></i> </span>
 		</div>
 		<select class="form-control" name="id_lophoc">
-			<option disabled>Chọn lớp</option>
+			<option value="1" selected>Chọn lớp</option>
             @foreach ($lops as $item)
             <option value="{{$item->id}}">{{$item->name}}{{$item->khoa}}</option>
             @endforeach

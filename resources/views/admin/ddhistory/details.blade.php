@@ -1,9 +1,23 @@
 @include('admin.layouts.header')
+<style>
+    .lopmon {
+        position: relative;
+        margin-bottom: -40px;
+    }
+</style>
 <div class="container">
 <title>Chi tiết điểm danh</title>
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h2 class="text-center">Chi tiết điểm danh</h2>
+        </div>
+        <div class="lopmon">
+            @foreach ($lop as $item)
+            <div>Lớp: {{$item->lop}}{{$item->khoa}}</div>
+            @endforeach
+            @foreach ($mon as $item)
+            <div>Môn: {{$item->mon}}</div>
+            @endforeach
         </div>
         <div class="search">
             <form method="GET">

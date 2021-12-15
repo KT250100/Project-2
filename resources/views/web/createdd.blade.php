@@ -21,8 +21,11 @@
 			<div class="panel-heading">
 				<h2 class="text-center">Điểm danh</h2>
 			</div>
+            @if(Session::has('noti'))
+                <h3 align="center" style="margin-bottom:-23px; color:green">{{Session::get('noti')}}</h3>
+            @endif
 			<div class="panel-body">
-            <form style="margin:auto; margin-top:10px" action="{{route('storedd')}}" method="POST" enctype="multipart/form-data">
+            <form style="margin:auto; margin-top:10px" method="POST" enctype="multipart/form-data">
             @csrf
             @foreach($phancong as $item)
                 <input style="background-color:#E4E9F7; border:none; font-size:20px" name="lop" readonly value="Lớp: {{$item->lop}}{{$item->khoa}}">
@@ -31,12 +34,14 @@
                 <br>
                 <input style="background-color:#E4E9F7; border:none; font-size:20px" name="giaovien" readonly value="Giáo viên: {{$item->gv}}" hidden>
                 <input readonly name="id_monhoc" value="{{$item->id_monhoc}}" hidden>
+                <input readonly name="id_lophoc" value="{{$item->id_lophoc}}" hidden>
                 <input readonly name="id_giaovien" value="{{$item->id_giaovien}}" hidden>
             @endforeach
                 <table class="table table-bordered">
                     <thead>
                         <th>STT</th>
                         <th>Sinh viên</th>
+                        <th>Ngày sinh</th>
                         <th>Đi học</th>
                         <th>Nghỉ</th>
                         <th>Đi muộn</th>
@@ -50,6 +55,7 @@
                             <td hidden><input name="id_sinhvien[]" value="{{$item->id}}"></td>
                             <td>{{$index++}}</td>
                             <td>{{$item->name}}</td>
+                            <td>{{$item->birthday}}</td>
                             <td><input type="radio" name="status[]_{{$item->id}}" value="1" class="form-control" {{($item->status == 1)?'checked':''}}></input></td>
                             <td><input type="radio" name="status[]_{{$item->id}}" value="0" class="form-control" {{($item->status == 0)?'checked':''}}></input></td>
                             <td><input type="radio" name="status[]_{{$item->id}}" value="-1" class="form-control" {{($item->status == -1)?'checked':''}}></input></td>
@@ -65,6 +71,7 @@
                             <td hidden><input name="id_sinhvien[]" value="{{$item->id}}"></td>
                             <td>{{$index++}}</td>
                             <td>{{$item->name}}</td>
+                            <td>{{$item->birthday}}</td>
                             <td><input type="radio" name="status[]_{{$item->id}}" value="1" class="form-control" checked="true"></input></td>
                             <td><input type="radio" name="status[]_{{$item->id}}" value="0" class="form-control"></input></td>
                             <td><input type="radio" name="status[]_{{$item->id}}" value="-1" class="form-control"></input></td>

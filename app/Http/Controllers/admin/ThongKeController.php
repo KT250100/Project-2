@@ -19,14 +19,28 @@ class ThongKeController extends Controller
     }
     function viewmon($id){
         $thongkes = ThongKe::get($id);
-        return view('admin.ddhistory.viewmon')->with(['index'=>1,'thongkes'=>$thongkes,'id_lop'=>$id]);
+        $lop = DB::table('lophocs')
+            ->select('lophocs.name as lop','khoahocs.name as khoa')
+            ->join('khoahocs', 'lophocs.id_khoahoc', '=', 'khoahocs.id')
+            ->where('lophocs.id', '=', $id)
+            ->get();
+        return view('admin.ddhistory.viewmon')->with(['index'=>1,'thongkes'=>$thongkes,'lop'=>$lop,'id_lop'=>$id]);
     }
     function details(Request $req){
         $id_lop = $req->id_lop;
         $id_mon = $req->id;
         $keyword = $req->input('keyword','');
         $details = DiemDanh::ddhistory($id_mon,$id_lop,$keyword);
-        return view('admin.ddhistory.details',['details'=>$details,'id_lop'=>$id_lop,'id_mon'=>$id_mon]);
+        $lop = DB::table('lophocs')
+            ->select('lophocs.name as lop','khoahocs.name as khoa')
+            ->join('khoahocs', 'lophocs.id_khoahoc', '=', 'khoahocs.id')
+            ->where('lophocs.id', '=', $id_lop)
+            ->get();
+        $mon = DB::table('monhocs')
+            ->select('monhocs.name as mon')
+            ->where('monhocs.id', '=', $id_mon)
+            ->get();
+        return view('admin.ddhistory.details',['details'=>$details,'id_lop'=>$id_lop,'lop'=>$lop,'mon'=>$mon,'id_mon'=>$id_mon]);
     }
     function dddetail(Request $req){
         $id_lop = $req->id_lop;

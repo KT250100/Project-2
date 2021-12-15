@@ -29,6 +29,7 @@ class PhanCong
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
             ->join('monhocs', 'monhocs.id', '=', 'phancongs.id_monhoc')
             ->join('giao_viens', 'giao_viens.id', '=', 'phancongs.id_giaovien')
+            ->orderByDesc('enddate')
             ->paginate(7);
         }
         else{
@@ -41,10 +42,11 @@ class PhanCong
             ->where('giao_viens.name', 'LIKE', '%'.$keyword.'%')
             ->orWhere(DB::raw('CONCAT(lophocs.name,khoahocs.name)'), 'LIKE', '%'.$keyword.'%')
             ->orWhere('monhocs.name', 'LIKE', '%'.$keyword.'%')
+            ->orderByDesc('enddate')
             ->paginate(7);
         }
     }
-    static function get($id_giaovien){
+    static function get($id_giaovien,$id_lophoc,$id_monhoc){
         return DB::select("SELECT phancongs.*,
         giao_viens.name as 'giaovien',
         lophocs.name as 'lop',
@@ -53,19 +55,19 @@ class PhanCong
         INNER JOIN giao_viens ON phancongs.id_giaovien = giao_viens.id 
         INNER JOIN lophocs ON phancongs.id_lophoc = lophocs.id
         INNER JOIN monhocs ON phancongs.id_monhoc = monhocs.id 
-        WHERE id_giaovien='$id_giaovien'");
+        WHERE id_giaovien='$id_giaovien' AND id_lophoc='$id_lophoc' AND id_monhoc='$id_monhoc'");
     }
     static function save($id_giaovien,$id_lop,$id_mon,$ca_day,$starttime,$endtime,$enddate){
         return DB::insert("INSERT INTO phancongs 
         VALUES('$id_giaovien','$id_lop','$id_mon','$ca_day','$starttime','$endtime','$enddate')");
     }
-    static function update($id_giaovien,$id_lophoc,$id_monhoc,$ca_day,$starttime,$endtime,$enddate){
+    static function update($id_giaovien,$id_lophoc,$id_monhoc,$id_lop,$id_mon,$ca_day,$starttime,$endtime,$enddate){
         $sql = "UPDATE phancongs 
-        SET id_lophoc='$id_lophoc',id_monhoc='$id_monhoc',ca_day='$ca_day',starttime='$starttime',endtime='$endtime',enddate='$enddate' 
-        WHERE id_giaovien='$id_giaovien'";
+        SET id_lophoc='$id_lop',id_monhoc='$id_mon',ca_day='$ca_day',starttime='$starttime',endtime='$endtime',enddate='$enddate' 
+        WHERE id_giaovien='$id_giaovien' AND id_lophoc='$id_lophoc' AND id_monhoc='$id_monhoc'";
         return DB::update($sql);
     }
-    static function delete($id_giaovien){
-        return DB::delete("DELETE FROM phancongs WHERE id_giaovien='$id_giaovien'");
+    static function delete($id_giaovien,$id_lophoc,$id_monhoc){
+        return DB::delete("DELETE FROM phancongs WHERE id_giaovien='$id_giaovien' AND id_lophoc='$id_lophoc' AND id_monhoc='$id_monhoc'");
     }
 }

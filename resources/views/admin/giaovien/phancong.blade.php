@@ -42,8 +42,8 @@
                         <td>{{$item->ca_day}}</td>
                         <td>{{$item->starttime}} - {{$item->endtime}}</td>
                         <td>{{$item->enddate}}</td>
-                        <td><a href="{{url('admin/giaovien/editpc/'.$item->id_giaovien)}}">Sửa</a></td>
-                        <td><a href="{{url('/deletepc/'.$item->id_giaovien)}}">Xoá</a></td>
+                        <td><a href="{{url('admin/giaovien/editpc/'.$item->id_giaovien.'/'.$item->id_lophoc.'/'.$item->id_monhoc)}}">Sửa</a></td>
+                        <td><a href="{{url('/deletepc/'.$item->id_giaovien.'/'.$item->id_lophoc.'/'.$item->id_monhoc)}}">Xoá</a></td>
                     </tr>
                 @empty
                     <tr><td colspan="7" style="text-align:center">Danh sách rỗng</td></tr>

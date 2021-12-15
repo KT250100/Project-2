@@ -40,7 +40,6 @@ class AdminController extends Controller
 
     // Ngành
     function nganh(Request $req){
-        //$nganhs = Nganh::getAll();
         $keyword = $req->input('keyword','');
         $nganhs = Nganh::getAllSearch($keyword);
         return view('admin.nganh.nganh',['nganhs'=>$nganhs]);
@@ -84,7 +83,6 @@ class AdminController extends Controller
 
     // Khóa
     function khoa(Request $req){
-        //$khoas = Khoa::getAll();
         $keyword = $req->input('keyword','');
         $khoas = Khoa::getAllSearch($keyword);
         return view('admin.khoa.khoa',['khoas'=>$khoas]);
@@ -190,10 +188,40 @@ class AdminController extends Controller
 
     // Lớp học
     function lop(Request $req){
-        //$lops = Lop::getAll();
         $keyword = $req->input('keyword','');
         $lops = Lop::getAllSearch($keyword);
         return view('admin.lop.lop',['lops'=>$lops]);
+    }
+    function viewlop($id){
+        $sinhviens = Lop::getAllSV($id);
+        $lop = DB::table('lophocs')
+            ->select('lophocs.id as id_lop','lophocs.name as lop','khoahocs.name as khoa')
+            ->join('khoahocs', 'lophocs.id_khoahoc', '=', 'khoahocs.id')
+            ->where('lophocs.id', '=', $id)
+            ->get();
+        return view('admin.lop.view',['sinhviens'=>$sinhviens,'lop'=>$lop]);
+    }
+    function themsvlop(Request $req,$id_lop){
+        $id_lop = $req->id_lop;
+        $lop = DB::table('lophocs')
+            ->select('lophocs.id as id','lophocs.name as lop','khoahocs.name as khoa')
+            ->join('khoahocs', 'lophocs.id_khoahoc', '=', 'khoahocs.id')
+            ->where('lophocs.id', '=', $id_lop)
+            ->get();
+        $keyword = $req->input('keyword','');
+        $keyword2 = $req->input('keyword2','');
+        $keyword3 = $req->input('keyword3','');
+        $sinhviens = SinhVien::getAllSearch2($keyword,$keyword2,$keyword3,$id_lop);
+        return view('admin.lop.themsvlop',['sinhviens'=>$sinhviens,'id_lop'=>$id_lop,'lop'=>$lop]);
+    }
+    function themvaolop($id,$id_lop){
+        $rs = Lop::themvaolop($id,$id_lop);
+        if($rs == true){
+            return redirect()->back();
+        }
+        else{
+            return "Thêm thất bại";
+        }
     }
     function createlop(){
         $nganhs = Nganh::getAll();
@@ -255,10 +283,10 @@ class AdminController extends Controller
 
     // Sinh viên
     function sinhvien(Request $req){
-        //$sinhviens = SinhVien::getAll();
         $keyword = $req->input('keyword','');
         $keyword2 = $req->input('keyword2','');
-        $sinhviens = SinhVien::getAllSearch($keyword,$keyword2);
+        $keyword3 = $req->input('keyword3','');
+        $sinhviens = SinhVien::getAllSearch($keyword,$keyword2,$keyword3);
         return view('admin.sinhvien.sinhvien',['sinhviens'=>$sinhviens]);
     }
     function createsv(){
@@ -294,7 +322,7 @@ class AdminController extends Controller
         $id_lophoc = $req->input('id_lophoc');
         $rs = SinhVien::update($id,$name,$phone,$email,$address,$birthday,$id_lophoc);
         if($rs == true){
-            return redirect("admin/sinhvien/sinhvien");
+            return redirect()->back()->with('noti','Cập nhật thành công');
         }
         else{
             return redirect()->back()->with('error','Không có thay đổi nào cả');
@@ -307,6 +335,15 @@ class AdminController extends Controller
         }
         else{
             return redirect("admin/sinhvien/sinhvien");
+        }
+    }
+    function destroylopsv($id){
+        $rs = SinhVien::deletelop($id);
+        if($rs == 0){
+            return "Xoá thất bại";
+        }
+        else{
+            return redirect()->back();
         }
     }
 }

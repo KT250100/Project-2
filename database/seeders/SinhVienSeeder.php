@@ -21,7 +21,7 @@ class SinhVienSeeder extends Seeder
                 'email'=>$i.'@gmail.com',
                 'address'=>'Hà Nội '.$i,
                 'birthday'=>'2000-01-01',
-                'id_lophoc'=>1
+                'id_lophoc'=>2
             ]);
         }
         for ($i=6; $i < 11; $i++){ 
@@ -31,7 +31,7 @@ class SinhVienSeeder extends Seeder
                 'email'=>$i.'@gmail.com',
                 'address'=>'Sài Gòn '.$i,
                 'birthday'=>'2000-01-01',
-                'id_lophoc'=>2
+                'id_lophoc'=>3
             ]);
         }
         for ($i=11; $i < 18; $i++){ 
@@ -41,37 +41,47 @@ class SinhVienSeeder extends Seeder
                 'email'=>$i.'@gmail.com',
                 'address'=>'Nam Định '.$i,
                 'birthday'=>'2000-01-01',
-                'id_lophoc'=>3
+                'id_lophoc'=>4
             ]);
         }
-        for ($i=19; $i < 22; $i++){ 
+        for ($i=18; $i < 21; $i++){ 
             DB::table('sinhviens')->insert([
                 'name'=>'SV '.$i,
                 'phone'=> '012398745619',
                 'email'=>$i.'@gmail.com',
                 'address'=>'Đà Nẵng '.$i,
                 'birthday'=>'2000-01-01',
-                'id_lophoc'=>4
+                'id_lophoc'=>5
             ]);
         }
-        for ($i=23; $i < 27; $i++){ 
+        for ($i=21; $i < 25; $i++){ 
             DB::table('sinhviens')->insert([
                 'name'=>'SV '.$i,
                 'phone'=> '012398745619',
                 'email'=>$i.'@gmail.com',
                 'address'=>'Nghệ An '.$i,
                 'birthday'=>'2000-01-01',
-                'id_lophoc'=>5
+                'id_lophoc'=>6
             ]);
         }
-        for ($i=28; $i < 34; $i++){
+        for ($i=25; $i < 31; $i++){
             DB::table('sinhviens')->insert([
                 'name'=>'SV '.$i,
                 'phone'=> '012398745619',
                 'email'=>$i.'@gmail.com',
                 'address'=>'Quảng Bình '.$i,
                 'birthday'=>'2000-01-01',
-                'id_lophoc'=>6
+                'id_lophoc'=>7
+            ]);
+        }
+        for ($i=31; $i < 42; $i++){
+            DB::table('sinhviens')->insert([
+                'name'=>'SV '.$i,
+                'phone'=> '012398745619',
+                'email'=>$i.'@gmail.com',
+                'address'=>'Quảng Bình '.$i,
+                'birthday'=>'2000-01-01',
+                'id_lophoc'=>1
             ]);
         }
     }

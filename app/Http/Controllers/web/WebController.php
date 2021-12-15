@@ -53,9 +53,9 @@ class WebController extends Controller
         }
     }
 
-    // Điểm danh
+    // Lịch dạy và lớp hiện tại đang trong giờ
     function diemdanh(){
-        // Kiểm tra đang dùng tài khoản giáo viên nào -> lọc ra lớp đc phân công
+        // Kiểm tra đang dùng tài khoản giáo viên nào -> lọc ra lịch dạy và lớp đc phân công
         $mydate = new \DateTime();
         $mydate -> modify('+7 hours');
         $day = $mydate->format('N'); // 1 -> thứ 2, 7 -> CN
@@ -80,6 +80,14 @@ class WebController extends Controller
         if($day == 7){
             $frametime = 'CN';
         }
+        $lichday = DB::table('phancongs')
+            ->select('phancongs.*','lophocs.name as lop','monhocs.name as mon','khoahocs.name as khoa')
+            ->join('giao_viens', 'giao_viens.id', '=', 'phancongs.id_giaovien')
+            ->join('lophocs', 'lophocs.id', '=', 'phancongs.id_lophoc')
+            ->join('monhocs', 'monhocs.id', '=', 'phancongs.id_monhoc')
+            ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
+            ->where('id_giaovien', Auth::user()->id)
+            ->get();
         $index = DB::table('phancongs')
             ->select('phancongs.*','lophocs.name as lop','monhocs.name as mon','khoahocs.name as khoa')
             ->join('giao_viens', 'giao_viens.id', '=', 'phancongs.id_giaovien')
@@ -91,17 +99,18 @@ class WebController extends Controller
             ->where('starttime', '<=', $mydate)
             ->where('endtime', '>=', $mydate)
             ->get();
-        return view('web.diemdanh',['index'=>$index]);
+        return view('web.diemdanh',['lichday'=>$lichday,'index'=>$index]);
     }
-    public function createdd(){
+    public function createdd($id_lophoc){
         // Sinh viên trong lớp nào thì chỉ hiện lớp ấy
         $mydate = new \DateTime();
         $mydate -> modify('+7 hours');
         $currentDate = $mydate->format('Y-m-d');
         $sv = DB::table('sinhviens')
-            ->select('sinhviens.id','sinhviens.name')
+            ->select('sinhviens.*')
             ->join('lophocs', 'lophocs.id', '=', 'sinhviens.id_lophoc')
             ->join('phancongs', 'phancongs.id_lophoc', '=', 'lophocs.id')
+            ->where('sinhviens.id_lophoc', '=', $id_lophoc)
             ->where('id_giaovien', Auth::user()->id)
             ->get();
         $phancong = DB::table('phancongs')
@@ -110,12 +119,14 @@ class WebController extends Controller
             ->join('lophocs', 'lophocs.id', '=', 'phancongs.id_lophoc')
             ->join('monhocs', 'monhocs.id', '=', 'phancongs.id_monhoc')
             ->join('khoahocs', 'khoahocs.id', '=', 'lophocs.id_khoahoc')
+            ->where('phancongs.id_lophoc', '=', $id_lophoc)
             ->where('id_giaovien', Auth::user()->id)
             ->get();
-        // Nếu trong ngày đã điểm danh -> điểm danh lại = edit
+        // Nếu trong ngày lớp đã điểm danh -> điểm danh lại = edit
         $edit = DB::table('diemdanhs')
-            ->select('diemdanhs.*', 'sinhviens.name as name', 'sinhviens.id as id')
+            ->select('diemdanhs.*', 'sinhviens.*','sinhviens.name as name', 'sinhviens.id as id')
             ->join('sinhviens', 'sinhviens.id', '=', 'diemdanhs.id_sinhvien')
+            ->where('sinhviens.id_lophoc', '=', $id_lophoc)
             ->where('diemdanhs.ngaydiemdanh', '>=', $currentDate)
             ->where('diemdanhs.id_giaovien', Auth::user()->id)
             ->get();
@@ -126,8 +137,9 @@ class WebController extends Controller
                 'edit'=>$edit
             ]);
     }
-    public function storedd(Request $req){
-        $id_monhoc = $req->input('id_monhoc');
+    public function storedd(Request $req,$id_lophoc){
+        $id_mon = $req->input('id_monhoc');
+        $id_lop = $req->input('id_lophoc');
         $id_giaovien = Auth::user()->id;
         $id_sinhvien = $req->id_sinhvien;
         $status = $req->input('status');
@@ -136,10 +148,11 @@ class WebController extends Controller
         $currentTime = $mydate->format('Y-m-d H:i:s');
         $currentDate = $mydate->format('Y-m-d');
         $note = $req->input('note');
-        // Check xem hôm nay đã điểm danh chưa
+        // Check xem lớp hôm nay đã điểm danh chưa
         $edit = DB::table('diemdanhs')
             ->select('diemdanhs.*', 'sinhviens.name as name', 'sinhviens.id as id')
             ->join('sinhviens', 'sinhviens.id', '=', 'diemdanhs.id_sinhvien')
+            ->where('sinhviens.id_lophoc', '=', $id_lophoc)
             ->where('diemdanhs.ngaydiemdanh', '>=', $currentDate)
             ->where('diemdanhs.id_giaovien', Auth::user()->id)
             ->get();
@@ -147,7 +160,8 @@ class WebController extends Controller
         if($edit != null && count($edit) > 0 ){
             for($i = 0; $i < count($id_sinhvien); $i++){
                 $data = [
-                    'id_monhoc'    => $id_monhoc,
+                    'id_monhoc'    => $id_mon,
+                    'id_lophoc'    => $id_lop,
                     'id_giaovien'  => $id_giaovien,
                     'id_sinhvien'  => $id_sinhvien[$i],
                     'status'       => $status[$i],
@@ -159,13 +173,14 @@ class WebController extends Controller
                     ->where('id_sinhvien', $id_sinhvien[$i])
                     ->update($data);
             }
-            return redirect("/diemdanh");
+            return redirect()->back()->with('noti','Cập nhật điểm danh thành công');
         }
         // Chưa điểm danh thì thêm bản ghi mới
         else{
             for($i = 0; $i < count($id_sinhvien); $i++){
                 $data = [
-                    'id_monhoc'    => $id_monhoc,
+                    'id_monhoc'    => $id_mon,
+                    'id_lophoc'    => $id_lop,
                     'id_giaovien'  => $id_giaovien,
                     'id_sinhvien'  => $id_sinhvien[$i],
                     'status'       => $status[$i],
@@ -175,7 +190,7 @@ class WebController extends Controller
                 DB::table('diemdanhs')
                     ->insert($data);
             }
-            return redirect("/diemdanh");
+            return redirect()->back()->with('noti','Điểm danh thành công');
         }
     }
 

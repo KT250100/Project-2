@@ -49,6 +49,9 @@ Route::post('admin/mon/editmon/{id}',[AdminController::class,'updatemon']);
 Route::get('/deletemon/{id}',[AdminController::class,'destroymon']);
 // Lớp
 Route::get('admin/lop/lop',[AdminController::class,'lop'])->name('lop');
+Route::get('admin/lop/view/{id}',[AdminController::class,'viewlop'])->name('viewlop');
+Route::get('admin/lop/themsvlop/{id_lop}',[AdminController::class,'themsvlop']);
+Route::get('/themvaolop/{id_lop}/{id}',[AdminController::class,'themvaolop']);
 Route::get('admin/lop/themlop',[AdminController::class,'createlop']);
 Route::post('admin/lop/themlop',[AdminController::class,'storelop']);
 Route::get('admin/lop/editlop/{id}',[AdminController::class,'editlop']);
@@ -64,15 +67,16 @@ Route::post('admin/giaovien/editgv/{id}',[GiaoVienController::class,'updategv'])
 Route::get('admin/giaovien/phancong',[GiaoVienController::class,'phancong'])->name('phancong');
 Route::get('admin/giaovien/pcgv',[GiaoVienController::class,'createpc']);
 Route::post('admin/giaovien/pcgv',[GiaoVienController::class,'storepc']);
-Route::get('admin/giaovien/editpc/{id_giaovien}',[GiaoVienController::class,'editpc'])->name('editpc');
-Route::post('admin/giaovien/editpc/{id_giaovien}',[GiaoVienController::class,'updatepc']);
-Route::get('/deletepc/{id_giaovien}',[GiaoVienController::class,'destroypc']);
+Route::get('admin/giaovien/editpc/{id_giaovien}/{id_lophoc}/{id_monhoc}',[GiaoVienController::class,'editpc'])->name('editpc');
+Route::post('admin/giaovien/editpc/{id_giaovien}/{id_lophoc}/{id_monhoc}',[GiaoVienController::class,'updatepc']);
+Route::get('/deletepc/{id_giaovien}/{id_lophoc}/{id_monhoc}',[GiaoVienController::class,'destroypc']);
 // Sinh viên
 Route::get('admin/sinhvien/sinhvien',[AdminController::class,'sinhvien'])->name('sinhvien');
 Route::get('admin/sinhvien/themsv',[AdminController::class,'createsv']);
 Route::post('admin/sinhvien/themsv',[AdminController::class,'storesv']);
 Route::get('admin/sinhvien/editsv/{id}',[AdminController::class,'editsv']);
 Route::post('admin/sinhvien/editsv/{id}',[AdminController::class,'updatesv']);
+Route::get('/deletelopsv/{id}',[AdminController::class,'destroylopsv']);
 Route::get('/deletesv/{id}',[AdminController::class,'destroysv']);
 // Lịch sử điểm danh
 Route::get('admin/ddhistory/view',[ThongKeController::class,'view'])->name('view');
@@ -101,8 +105,8 @@ Route::post('/login',[LoginController::class,'login']);
 Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 // Điểm danh
 Route::get('/diemdanh',[WebController::class,'diemdanh'])->name('diemdanh');
-Route::get('/createdd',[WebController::class,'createdd'])->name('createdd');
-Route::post('/createdd',[WebController::class,'storedd'])->name('storedd');
+Route::get('/createdd/{id_lophoc}',[WebController::class,'createdd'])->name('createdd');
+Route::post('/createdd/{id_lophoc}',[WebController::class,'storedd'])->name('storedd');
 Route::get('/history',[WebController::class,'history'])->name('history');
 Route::get('/detail/{id_lop}/{id_mon}/{ngaydiemdanh}',[WebController::class,'detail']);
 Route::post('/detail/{id_lop}/{id_mon}/{ngaydiemdanh}',[WebController::class,'ddedit'])->name('ddedit');
