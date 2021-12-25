@@ -90,4 +90,10 @@ class DiemDanh
     static function save($id_monhoc,$id_lophoc,$id_giaovien,$id_sinhvien,$status,$ngaydiemdanh,$note){
         return DB::insert("INSERT INTO diemdanhs VALUES('$id_monhoc','$id_lophoc','$id_giaovien','$id_sinhvien','$status','$ngaydiemdanh','$note')");
     }
+    static function deletesv($id){
+        return DB::delete("DELETE FROM diemdanhs WHERE id_sinhvien = '$id'");
+    }
+    static function deletelop($id){
+        return DB::delete("DELETE FROM diemdanhs WHERE id_lophoc = '$id'");
+    }
 }

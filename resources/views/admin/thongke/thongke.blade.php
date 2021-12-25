@@ -40,7 +40,7 @@
                         <td><a href="{{url('admin/thongke/tkdetails/'.$item->id)}}">Xem</a></td>
                     </tr>
                 @empty
-                    <tr><td colspan="4" style="text-align:center">Danh sách rỗng</td></tr>
+                    <tr><td colspan="5" style="text-align:center">Danh sách rỗng</td></tr>
                 @endforelse
                 </tbody>
             </table>

@@ -22,9 +22,9 @@ class CreatePhancongsTable extends Migration
             $table->time('endtime')->nullable();
             $table->date('enddate')->nullable();
             $table->primary(['id_giaovien', 'id_lophoc', 'id_monhoc']);
-            $table->foreign('id_giaovien')->references('id')->on('giao_viens');
-            $table->foreign('id_lophoc')->references('id')->on('lophocs');
-            $table->foreign('id_monhoc')->references('id')->on('monhocs');
+            $table->foreign('id_giaovien')->references('id')->on('giao_viens')->onDelete('cascade');
+            $table->foreign('id_lophoc')->references('id')->on('lophocs')->onDelete('cascade');
+            $table->foreign('id_monhoc')->references('id')->on('monhocs')->onDelete('cascade');
         });
     }
 

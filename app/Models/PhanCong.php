@@ -70,4 +70,7 @@ class PhanCong
     static function delete($id_giaovien,$id_lophoc,$id_monhoc){
         return DB::delete("DELETE FROM phancongs WHERE id_giaovien='$id_giaovien' AND id_lophoc='$id_lophoc' AND id_monhoc='$id_monhoc'");
     }
+    static function deletelop($id){
+        return DB::delete("DELETE FROM phancongs WHERE id_lophoc = '$id'");
+    }
 }

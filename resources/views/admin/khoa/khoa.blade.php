@@ -28,7 +28,7 @@
                         <td>{{$item->id}}</td>
                         <td>{{$item->name}}</td>
                         <td><a href="{{url('admin/khoa/editkhoa/'.$item->id)}}">Sửa</a></td>
-                        <td><a href="{{url('/deletekhoa/'.$item->id)}}">Xoá</a></td>
+                        <td><a onclick="return confirm('Xóa khóa học này sẽ xóa hết lớp học trong khóa\nBạn có thực sự muốn xóa?');" href="{{url('/deletekhoa/'.$item->id)}}">Xoá</a></td>
                     </tr>
                 @empty
                     <tr><td colspan="4" style="text-align:center">Danh sách rỗng</td></tr>

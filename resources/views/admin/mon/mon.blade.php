@@ -42,7 +42,7 @@
                         <td><a href="{{url('/deletemon/'.$item->id)}}">Xoá</a></td>
                     </tr>
                 @empty
-                    <tr><td colspan="5" style="text-align:center">Danh sách rỗng</td></tr>
+                    <tr><td colspan="6" style="text-align:center">Danh sách rỗng</td></tr>
                 @endforelse
                 </tbody>
             </table>

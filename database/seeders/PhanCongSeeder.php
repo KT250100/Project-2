@@ -19,8 +19,8 @@ class PhanCongSeeder extends Seeder
             'id_lophoc'=>'2',
             'id_monhoc'=>'1',
             'ca_day'=> '2, 3, 4, 5, 6, 7, CN',
-            'starttime'=>'13:30:00',
-            'endtime'=>'17:30:00',
+            'starttime'=>'7:30:00',
+            'endtime'=>'11:30:00',
             'enddate'=>'2022-06-30'
         ]);
         DB::table('phancongs')->insert([
@@ -28,8 +28,8 @@ class PhanCongSeeder extends Seeder
             'id_lophoc'=>'3',
             'id_monhoc'=>'2',
             'ca_day'=> '2, 3, 4, 5, 6, 7, CN',
-            'starttime'=>'7:30:00',
-            'endtime'=>'11:30:00',
+            'starttime'=>'13:30:00',
+            'endtime'=>'17:30:00',
             'enddate'=>'2022-06-30'
         ]);
         DB::table('phancongs')->insert([

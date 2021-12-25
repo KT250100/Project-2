@@ -18,7 +18,7 @@ class CreateMonhocsTable extends Migration
             $table->string('name',50);
             $table->float('thoiluong', 8, 2);
             $table->unsignedInteger('id_nganhhoc');
-            $table->foreign('id_nganhhoc')->references('id')->on('nganhhocs');
+            $table->foreign('id_nganhhoc')->references('id')->on('nganhhocs')->onDelete('cascade');
         });
     }
 

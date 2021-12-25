@@ -269,4 +269,7 @@ class SinhVien
     static function deletelop($id){
         return DB::delete("UPDATE sinhviens SET id_lophoc = 1 WHERE id='$id'");
     }
+    static function deletelop2($id){
+        return DB::delete("UPDATE sinhviens SET id_lophoc = 1 WHERE id_lophoc='$id'");
+    }
 }

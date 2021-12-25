@@ -74,4 +74,7 @@ class Lop
     static function delete($id){
         return DB::delete("DELETE FROM lophocs WHERE id='$id'");
     }
+    static function deletekhoa($id){
+        return DB::delete("DELETE FROM lophocs WHERE id_khoahoc='$id'");
+    }
 }

@@ -4,11 +4,13 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin2;
+use App\Models\DiemDanh;
 use Illuminate\Http\Request;
 use App\Models\Nganh;
 use App\Models\Khoa;
 use App\Models\Mon;
 use App\Models\Lop;
+use App\Models\PhanCong;
 use App\Models\SinhVien;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -272,8 +274,11 @@ class AdminController extends Controller
         }
     }
     function destroylop($id){
-        $rs = Lop::delete($id);
-        if($rs == 0){
+        $rs = PhanCong::deletelop($id);
+        $rs2 = SinhVien::deletelop2($id);
+        $rs3 = DiemDanh::deletelop($id);
+        $rs4 = Lop::delete($id);
+        if($rs4 == 0){
             return "Xoá thất bại";
         }
         else{
@@ -329,8 +334,9 @@ class AdminController extends Controller
         }
     }
     function destroysv($id){
-        $rs = SinhVien::delete($id);
-        if($rs == 0){
+        $rs = DiemDanh::deletesv($id);
+        $rs2 = SinhVien::delete($id);
+        if($rs2 == 0){
             return "Xoá thất bại";
         }
         else{

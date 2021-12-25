@@ -21,7 +21,7 @@ class CreateSinhviensTable extends Migration
             $table->string('address',250);
             $table->date('birthday');
             $table->integer('id_lophoc')->nullable()->unsigned();
-            $table->foreign('id_lophoc')->references('id')->on('lophocs');
+            $table->foreign('id_lophoc')->references('id')->on('lophocs')->onDelete('cascade');;
         });
     }
 
